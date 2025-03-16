@@ -5,9 +5,10 @@ export const skillsData = [
         description: "Tecnologías para crear interfaces de usuario modernas y responsivas",
         skills: [
             { name: "JavaScript", level: "Intermediate" },
-            { name: "HTML/CSS", level: "Intermediate" },
             { name: "React", level: "Intermediate" },
-            { name: "Responsive Design", level: "Intermediate" }
+            { name: "HTML5/CSS3", level: "Advanced" },
+            { name: "Responsive Design", level: "Advanced" },
+            { name: "Tailwind CSS", level: "Intermediate" }
         ]
     },
     {
@@ -16,31 +17,33 @@ export const skillsData = [
         description: "Desarrollo de APIs y servicios del lado del servidor",
         skills: [
             { name: "Node.js", level: "Intermediate" },
+            { name: "Express.js", level: "Intermediate" },
             { name: "Java", level: "Intermediate" },
-            { name: "RESTful APIs", level: "Basic" },
-            { name: "Express", level: "Basic" }
+            { name: "C#", level: "Basic" },
+            { name: "RESTful APIs", level: "Intermediate" }
         ]
     },
     {
-        category: "Sistemas Eléctricos",
+        category: "Herramientas & Métodos",
         icon: "code",
-        description: "Conocimientos técnicos en electricidad y automatización",
+        description: "Herramientas y metodologías para desarrollo profesional",
         skills: [
-            { name: "Automatización", level: "Advanced" },
-            { name: "Domótica", level: "Advanced" },
-            { name: "Sistemas de Control", level: "Intermediate" },
-            { name: "PLCs", level: "Intermediate" }
+            { name: "Git & GitHub", level: "Advanced" },
+            { name: "VS Code", level: "Advanced" },
+            { name: "Docker", level: "Basic" },
+            { name: "Scrum & Agile", level: "Intermediate" },
+            { name: "Test Automation", level: "Intermediate" }
         ]
     },
     {
-        category: "Otros",
+        category: "Conocimientos Adicionales",
         icon: "database",
-        description: "Otras habilidades y tecnologías",
+        description: "Habilidades técnicas complementarias",
         skills: [
-            { name: "Gestión de almacenes", level: "Advanced" },
-            { name: "Microsoft Office", level: "Advanced" },
-            { name: "Inglés", level: "Advanced" },
-            { name: "Trabajo en equipo", level: "Advanced" }
+            { name: "Sistemas Electrotécnicos", level: "Advanced" },
+            { name: "Automatización y Domótica", level: "Advanced" },
+            { name: "Gestión de Almacenes", level: "Advanced" },
+            { name: "Inglés B2", level: "Advanced" }
         ]
     }
 ];
@@ -48,38 +51,38 @@ export const skillsData = [
 export const skills = [
     {
         name: "React",
-        level: 90,
-        icon: "react", // Can be used to display specific icons
-        description: "Building modern UI components and applications"
+        level: 80,
+        icon: "react",
+        description: "Desarrollo de interfaces modernas con React"
     },
     {
         name: "JavaScript",
         level: 85,
         icon: "javascript",
-        description: "ES6+, async programming, functional concepts"
-    },
-    {
-        name: "Tailwind CSS",
-        level: 80,
-        icon: "tailwind",
-        description: "Utility-first CSS for rapid UI development"
-    },
-    {
-        name: "Framer Motion",
-        level: 75,
-        icon: "framer",
-        description: "Creating fluid animations and transitions"
+        description: "ES6+, programación asíncrona, conceptos funcionales"
     },
     {
         name: "Node.js",
-        level: 70,
+        level: 75,
         icon: "nodejs",
-        description: "Building backend services and APIs"
+        description: "Construcción de servicios backend y APIs"
     },
     {
-        name: "TypeScript",
+        name: "Desarrollo Frontend",
+        level: 85,
+        icon: "frontend",
+        description: "HTML5, CSS3, diseño responsivo"
+    },
+    {
+        name: "Java",
         level: 65,
-        icon: "typescript",
-        description: "Type-safe code with improved developer experience"
+        icon: "java",
+        description: "Desarrollo de aplicaciones y automatización de pruebas"
+    },
+    {
+        name: "Base de Datos",
+        level: 75,
+        icon: "database",
+        description: "MySQL, MongoDB, diseño y gestión"
     },
 ];

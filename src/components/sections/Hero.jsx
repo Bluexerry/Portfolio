@@ -14,9 +14,16 @@ const Hero = () => {
     // Usa useMemo para evitar recrear el array en cada renderizado
     const texts = useMemo(() => [
         "Desarrollador Web.",
-        "Técnico Electricista.",
-        "Especialista en Frontend.",
-        "Entusiasta de la Domótica."
+        "Node.js.",
+        "React.",
+        "JavaScript & Java.",
+        "MongoDB & MySQL.",
+        "Selenium & Maven.",
+        "Scrum & Agile.",
+        "Git & GitHub.",
+        "Ingles B2.",
+        "Frontend/Backend.",
+        "APIs RESTful."
     ], []);
 
     // Efecto de escritura de texto
@@ -107,9 +114,10 @@ const Hero = () => {
                             className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg"
                             variants={fadeInUp}
                         >
-                            Desarrollador Web con formación en automatización del hogar y sistemas eléctricos, lo que me da
-                            una base técnica sólida y una mentalidad orientada a la resolución de problemas.
-                            Enfocado en crear soluciones innovadoras y eficientes.
+                            Desarrollador Full Stack especializado en crear aplicaciones web modernas y eficientes
+                            con React y Node.js. Mi formación complementaria en sistemas electrotécnicos me aporta
+                            una perspectiva única para resolver problemas complejos y ofrecer soluciones
+                            tecnológicas innovadoras.
                         </motion.p>
 
                         <motion.div
@@ -158,7 +166,7 @@ const Hero = () => {
                             {/* Avatar image */}
                             <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
                                 <img
-                                    src="/assets/avatar.jpg"
+                                    src="/assets/Jesus.jpg"
                                     alt="Profile"
                                     className="w-full h-full object-cover"
                                     onError={(e) => {

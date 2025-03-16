@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Container from '../layout/Container';
 import ProjectCard from '../ui/ProjectCard';
-import ProjectModal from '../ui/ProjectModal'; // Añadido
+import ProjectModal from '../ui/ProjectModal';
 import { projects } from '../../data/projects';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { staggerChildren } from '../../utils/animation';
@@ -11,8 +11,8 @@ const Projects = () => {
     const { ref, inView } = useScrollAnimation();
     const [filter, setFilter] = useState('all');
     const [filteredProjects, setFilteredProjects] = useState([]);
-    const [selectedProject, setSelectedProject] = useState(null); // Añadido
-    const [isModalOpen, setIsModalOpen] = useState(false); // Añadido
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Extract unique categories from projects
     const categories = ['all', ...new Set(projects.flatMap(project =>
@@ -44,7 +44,7 @@ const Projects = () => {
                     transition={{ duration: 0.5 }}
                 >
                     <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-                        Featured Projects
+                        Proyectos Destacados
                     </h2>
 
                     {/* Filter buttons */}
@@ -92,7 +92,7 @@ const Projects = () => {
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.8 }}
                                         transition={{ duration: 0.3 }}
-                                        onClick={() => handleOpenProjectDetails(project)} // Añadido
+                                        onClick={() => handleOpenProjectDetails(project)}
                                         className="cursor-pointer"
                                     >
                                         <ProjectCard
@@ -110,7 +110,7 @@ const Projects = () => {
                                     exit={{ opacity: 0 }}
                                 >
                                     <p className="text-xl text-gray-500 dark:text-gray-400">
-                                        No projects found in this category.
+                                        No se encontraron proyectos en esta categoría.
                                     </p>
                                 </motion.div>
                             )}
@@ -131,7 +131,7 @@ const Projects = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                Show All Projects
+                                Mostrar Todos los Proyectos
                             </motion.button>
                         </motion.div>
                     )}

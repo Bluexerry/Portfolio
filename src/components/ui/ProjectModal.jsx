@@ -1,10 +1,22 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Github, Calendar, Tag } from 'lucide-react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    // Precargar imagen para comprobar si existe
+    useEffect(() => {
+        if (project?.image) {
+            const img = new Image();
+            img.src = project.image;
+            img.onload = () => setImageLoaded(true);
+            img.onerror = () => setImageLoaded(false);
+        }
+    }, [project]);
+
     // Prevent scrolling when modal is open
     useEffect(() => {
         if (isOpen) {
@@ -65,14 +77,24 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                         onClick={e => e.stopPropagation()}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
                     >
-                        {/* Header Image */}
-                        <div
-                            className="w-full h-64 md:h-80 bg-cover bg-center relative"
-                            style={{
-                                backgroundImage: project.image ? `url(${project.image})` : 'none',
-                                backgroundColor: !project.image ? 'rgba(168, 85, 247, 0.1)' : undefined,
-                            }}
-                        >
+                        {/* Header Image - Actualizado para mejor visualización */}
+                        <div className="w-full h-64 md:h-80 bg-gray-100 dark:bg-gray-700 relative flex items-center justify-center">
+                            {project.image && imageLoaded ? (
+                                <div className="w-64 h-64 flex items-center justify-center">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="max-w-full max-h-full object-contain"
+                                    />
+                                </div>
+                            ) : (
+                                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/30 flex items-center justify-center">
+                                    <span className="text-6xl font-bold text-white/80">
+                                        {project.title.charAt(0)}
+                                    </span>
+                                </div>
+                            )}
+
                             {/* Close button */}
                             <button
                                 onClick={onClose}

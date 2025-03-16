@@ -1,9 +1,25 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import PropTypes from 'prop-types';
 
 const ProjectCard = ({ project, index, inView }) => {
     const { title, description, image, tags, demoUrl, repoUrl } = project;
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    // Precargar imagen para comprobar si existe
+    useEffect(() => {
+        if (!image) return;
+
+        const img = new Image();
+        img.src = image;
+        img.onload = () => {
+            setImageLoaded(true);
+        };
+        img.onerror = () => {
+            setImageLoaded(false);
+        };
+    }, [image]);
 
     return (
         <motion.div
@@ -13,13 +29,25 @@ const ProjectCard = ({ project, index, inView }) => {
             whileHover={{ y: -5 }}
             className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all"
         >
-            <div
-                className="h-48 w-full bg-cover bg-center"
-                style={{
-                    backgroundImage: image ? `url(${image})` : 'none',
-                    background: !image ? 'linear-gradient(to bottom right, #C084FC, #EC4899)' : undefined,
-                }}
-            />
+            <div className="h-48 w-full relative bg-gray-100 dark:bg-gray-700 overflow-hidden flex items-center justify-center">
+                {/* Contenedor centrado para la imagen más pequeña */}
+                {imageLoaded && (
+                    <div className="w-32 h-32 flex items-center justify-center">
+                        <img
+                            src={image}
+                            alt={title}
+                            className="max-w-full max-h-full object-contain"
+                        />
+                    </div>
+                )}
+
+                {/* Fallback para cuando la imagen no carga */}
+                {!imageLoaded && (
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/30 flex items-center justify-center">
+                        <span className="text-4xl font-bold text-white/80">{title.charAt(0)}</span>
+                    </div>
+                )}
+            </div>
 
             <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">
@@ -48,6 +76,7 @@ const ProjectCard = ({ project, index, inView }) => {
                             href={demoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             className="flex items-center gap-2 px-4 py-2 bg-purple-600 dark:bg-blue-600 text-white rounded-lg text-sm font-medium"
                         >
                             <ExternalLink size={16} /> Demo
@@ -61,6 +90,7 @@ const ProjectCard = ({ project, index, inView }) => {
                             href={repoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium"
                         >
                             <Github size={16} /> Code

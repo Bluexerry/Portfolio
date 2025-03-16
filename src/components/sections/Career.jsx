@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Briefcase, GraduationCap, Calendar, Building, School } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Briefcase, GraduationCap, Calendar, Building, School, MapPin } from 'lucide-react';
 // Importaciones de Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, EffectCards } from 'swiper/modules';
@@ -39,7 +39,7 @@ const Career = () => {
                     ref={ref}
                     initial="hidden"
                     animate={inView ? "visible" : "hidden"}
-                    className="space-y-16"
+                    className="space-y-12"
                 >
                     {/* Título de la sección */}
                     <motion.div
@@ -48,7 +48,7 @@ const Career = () => {
                     >
                         <h2 className="text-3xl md:text-4xl font-bold">Mi Trayectoria</h2>
                         <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-                            Experiencia profesional y formación académica
+                            Experiencia laboral y formación académica que han formado mi perfil profesional
                         </p>
                     </motion.div>
 
@@ -58,7 +58,7 @@ const Career = () => {
                         className="py-6"
                     >
                         {/* Pestañas */}
-                        <div className="flex justify-center mb-8">
+                        <div className="flex flex-wrap justify-center mb-8 gap-2">
                             <div className="inline-flex bg-white dark:bg-gray-800 p-1 rounded-lg shadow-md">
                                 <button
                                     onClick={() => setActiveTab('experience')}
@@ -87,7 +87,7 @@ const Career = () => {
                         {/* Contenedor con altura mínima fija para evitar saltos */}
                         <div className="relative py-4">
                             <div className="max-w-3xl mx-auto">
-                                <div className="min-h-[400px] md:min-h-[350px]"> {/* Altura mínima para evitar saltos */}
+                                <div className="min-h-[450px] md:min-h-[400px]"> {/* Altura mínima ajustada para contenido más extenso */}
                                     <Swiper
                                         modules={[Navigation, Pagination, EffectCards]}
                                         effect="cards"
@@ -101,9 +101,9 @@ const Career = () => {
                                         onSwiper={setSwiper}
                                         className="mySwiper career-swiper"
                                     >
-                                        {tabContent[activeTab].map((item, index) => (
+                                        {tabContent[activeTab]?.map((item, index) => (
                                             <SwiperSlide key={index}>
-                                                <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 h-full">
+                                                <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 h-full overflow-y-auto">
                                                     <h4 className="text-xl font-bold text-blue-600 dark:text-blue-400">{item.title}</h4>
                                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-2 mb-4 gap-2">
                                                         <div className="flex items-center">
@@ -121,18 +121,45 @@ const Career = () => {
                                                             {item.period}
                                                         </div>
                                                     </div>
-                                                    <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+
+                                                    <div className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+                                                        <MapPin size={14} className="inline mr-1" />
+                                                        {item.location}
+                                                    </div>
+
+                                                    <p className="text-gray-700 dark:text-gray-300 mb-4">{item.description}</p>
+
+                                                    {/* Responsabilidades o detalles en forma de lista */}
+                                                    {(item.responsibilities || item.details) && (
+                                                        <div className="mt-4">
+                                                            <h5 className="font-medium text-gray-800 dark:text-gray-200 mb-2">
+                                                                {activeTab === 'experience' ? 'Responsabilidades' : 'Contenido'}:
+                                                            </h5>
+                                                            <ul className="list-disc pl-5 space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                                                                {(activeTab === 'experience' ? item.responsibilities : item.details)?.map((detail, i) => (
+                                                                    <li key={i}>{detail}</li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </SwiperSlide>
                                         ))}
                                     </Swiper>
                                 </div>
 
+                                {/* Indicador de posición en carrusel */}
+                                <div className="mt-4 text-center">
+                                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                                        Desliza para ver más
+                                    </span>
+                                </div>
+
                                 {/* Botones de navegación personalizados */}
-                                <button className="swiper-button-prev absolute top-1/2 -left-4 z-10 transform -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md">
+                                <button className="swiper-button-prev absolute top-1/2 -left-4 z-10 transform -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <ArrowLeft size={20} className="text-gray-800 dark:text-gray-200" />
                                 </button>
-                                <button className="swiper-button-next absolute top-1/2 -right-4 z-10 transform -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md">
+                                <button className="swiper-button-next absolute top-1/2 -right-4 z-10 transform -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <ArrowRight size={20} className="text-gray-800 dark:text-gray-200" />
                                 </button>
                             </div>

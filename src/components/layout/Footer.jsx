@@ -5,6 +5,7 @@ import SocialLinks from '../ui/SocialLinks';
 import ByteVoltLogo from '../ui/ByteVolt';
 import { fadeInUp, staggerChildren } from '../../utils/animation';
 import CVSelector from '../ui/CVSelector';
+import { getSocialLink, contactInfo } from '../../data/social';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -78,7 +79,7 @@ const Footer = () => {
                             </li>
                             <li>
                                 <a
-                                    href="https://github.com/yourusername"
+                                    href={getSocialLink("GitHub")}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-blue-400 transition-colors flex items-center"
@@ -89,7 +90,7 @@ const Footer = () => {
                             </li>
                             <li>
                                 <a
-                                    href="https://linkedin.com/in/yourprofile"
+                                    href={getSocialLink("LinkedIn")}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-blue-400 transition-colors flex items-center"
@@ -108,12 +109,12 @@ const Footer = () => {
                         </h3>
                         <p className="text-gray-600 dark:text-gray-400 flex items-center">
                             <Mail size={16} className="mr-2" />
-                            <a href="mailto:jesusma33va@gmail.com" className="hover:text-purple-600 dark:hover:text-blue-400">
-                                jesusma33va@gmail.com
+                            <a href={getSocialLink("Email")} className="hover:text-purple-600 dark:hover:text-blue-400">
+                                {contactInfo.email}
                             </a>
                         </p>
                         <p className="text-gray-600 dark:text-gray-400">
-                            Sevilla, España 41019
+                            {contactInfo.location}
                         </p>
                     </motion.div>
                 </motion.div>

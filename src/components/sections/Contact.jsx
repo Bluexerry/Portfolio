@@ -7,6 +7,7 @@ import Button from '../ui/Button';
 import { isValidEmail, debounce } from '../../utils/helpers';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { headingAnimation, fadeInUp } from '../../utils/animation';
+import { contactInfo, getSocialLink } from '../../data/social';
 
 const Contact = () => {
     const { ref, inView } = useScrollAnimation();
@@ -193,10 +194,10 @@ const Contact = () => {
                                     <div>
                                         <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
                                         <a
-                                            href="mailto:jesusma33va@gmail.com"
+                                            href={getSocialLink("Email")}
                                             className="text-gray-800 dark:text-gray-200 hover:text-purple-600 dark:hover:text-blue-400"
                                         >
-                                            jesusma33va@gmail.com
+                                            {contactInfo.email}
                                         </a>
                                     </div>
                                 </div>
@@ -207,7 +208,7 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-500 dark:text-gray-400">Ubicación</p>
-                                        <p className="text-gray-800 dark:text-gray-200">Sevilla, España 41019</p>
+                                        <p className="text-gray-800 dark:text-gray-200">{contactInfo.location}</p>
                                     </div>
                                 </div>
 
@@ -217,7 +218,7 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-500 dark:text-gray-400">Teléfono</p>
-                                        <p className="text-gray-800 dark:text-gray-200">+34 --- --- ---</p>
+                                        <p className="text-gray-800 dark:text-gray-200">{contactInfo.phone}</p>
                                     </div>
                                 </div>
                             </div>

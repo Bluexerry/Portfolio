@@ -16,7 +16,20 @@ export const socialLinks = [
     },
     {
         name: "Email",
-        url: "mailto:contact@example.com",
+        url: "mailto:jesusma33va@gmail.com",
         icon: "mail"
     }
 ];
+
+// Helper para obtener un enlace específico por nombre
+export const getSocialLink = (name) => {
+    const link = socialLinks.find(link => link.name.toLowerCase() === name.toLowerCase());
+    return link ? link.url : '#';
+};
+
+// Información de contacto adicional
+export const contactInfo = {
+    email: "jesusma33va@gmail.com",
+    location: "Sevilla, España 41019",
+    phone: "+34 --- --- ---"
+};

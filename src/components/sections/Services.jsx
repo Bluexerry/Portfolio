@@ -30,12 +30,6 @@ const Services = () => {
                     ref={ref}
                     className="text-center mb-16"
                 >
-                    <motion.span
-                        className="inline-block text-purple-600 dark:text-blue-400 font-medium mb-2"
-                        variants={headingAnimation}
-                    >
-                        Mis Servicios
-                    </motion.span>
                     <motion.h2
                         className="text-3xl md:text-4xl font-bold mb-4"
                         variants={headingAnimation}

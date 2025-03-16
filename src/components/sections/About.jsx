@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Lightbulb, Cpu, Zap } from 'lucide-react';
+import { Lightbulb, Cpu, Zap, Calendar, MapPin, Car, Award, Briefcase } from 'lucide-react';
 import Container from '../layout/Container';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { headingAnimation, fadeInUp } from '../../utils/animation';
@@ -24,7 +24,7 @@ const About = () => {
                     >
                         <h2 className="text-3xl md:text-4xl font-bold">Sobre mí</h2>
                         <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-                            Combinando mis habilidades en desarrollo web con mi formación en sistemas eléctricos
+                            Desarrollador de Aplicaciones Web con sólida formación técnica
                         </p>
                     </motion.div>
 
@@ -35,19 +35,41 @@ const About = () => {
                                 {/* Descripción principal */}
                                 <div className="mb-10 space-y-4">
                                     <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-                                        Un desarrollador con doble perfil técnico
+                                        Desarrollador especializado en tecnologías web
                                     </h3>
                                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        Soy un desarrollador front-end con formación en sistemas electrotécnicos y automatizados,
-                                        lo que me brinda una perspectiva única para crear interfaces web intuitivas y dinámicas con un
-                                        código limpio y eficiente. Mi experiencia combinada en estos campos me permite
-                                        abordar problemas desde múltiples ángulos técnicos.
+                                        Mi nombre es Jesús Manuel Vázquez Herrera, actualmente estudiante de Desarrollo de
+                                        Aplicaciones Web en ADA ITS, Sevilla. Poseo una sólida formación técnica en automatización
+                                        del hogar y sistemas eléctricos, complementada con gestión de almacenes y desarrollo de software.
                                     </p>
                                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        Actualmente, me estoy especializando en el desarrollo de aplicaciones web modernas utilizando
-                                        React y otras tecnologías frontend, mientras aprovecho mi conocimiento previo en sistemas eléctricos
-                                        y automatización para construir soluciones completas.
+                                        Mi pasión por la tecnología y la innovación me impulsa a crear soluciones eficientes y escalables,
+                                        siempre orientadas a la mejora continua y la satisfacción del usuario.
                                     </p>
+                                </div>
+
+                                {/* Información personal */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                                    <div className="flex items-center text-gray-700 dark:text-gray-300">
+                                        <Calendar className="w-5 h-5 text-blue-500 dark:text-blue-400 mr-3" />
+                                        <span className="font-medium mr-2">Fecha de nacimiento:</span> 27/1/1999
+                                    </div>
+                                    <div className="flex items-center text-gray-700 dark:text-gray-300">
+                                        <Car className="w-5 h-5 text-blue-500 dark:text-blue-400 mr-3" />
+                                        <span className="font-medium mr-2">Carnet de conducir:</span> B
+                                    </div>
+                                    <div className="flex items-center text-gray-700 dark:text-gray-300">
+                                        <MapPin className="w-5 h-5 text-blue-500 dark:text-blue-400 mr-3" />
+                                        <span className="font-medium mr-2">Disponibilidad para viajar:</span> Sí
+                                    </div>
+                                    <div className="flex items-center text-gray-700 dark:text-gray-300">
+                                        <Briefcase className="w-5 h-5 text-blue-500 dark:text-blue-400 mr-3" />
+                                        <span className="font-medium mr-2">Experiencia total:</span> +2 años
+                                    </div>
+                                    <div className="flex items-center text-gray-700 dark:text-gray-300">
+                                        <Award className="w-5 h-5 text-blue-500 dark:text-blue-400 mr-3" />
+                                        <span className="font-medium mr-2">Certificados:</span> Conductor de carretilla
+                                    </div>
                                 </div>
 
                                 {/* Tarjetas de fortalezas/habilidades */}
@@ -60,8 +82,8 @@ const About = () => {
                                             <h4 className="ml-3 font-medium">Desarrollo Web</h4>
                                         </div>
                                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                                            Creación de interfaces modernas y responsivas con React, JavaScript y CSS avanzado,
-                                            centradas en la experiencia del usuario.
+                                            Especializado en React, Node.js, JavaScript y otras tecnologías web modernas
+                                            para construir aplicaciones frontend y backend de alto rendimiento.
                                         </p>
                                     </div>
 
@@ -70,11 +92,11 @@ const About = () => {
                                             <div className="p-2 rounded-full bg-purple-100 dark:bg-purple-800">
                                                 <Zap className="text-purple-600 dark:text-purple-400 h-5 w-5" />
                                             </div>
-                                            <h4 className="ml-3 font-medium">Sistemas Eléctricos</h4>
+                                            <h4 className="ml-3 font-medium">Sistemas Técnicos</h4>
                                         </div>
                                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                                            Diseño y mantenimiento de sistemas eléctricos, automatización industrial,
-                                            domótica y energías renovables.
+                                            Formación en sistemas electrotécnicos, telecomunicaciones y automatización
+                                            que complementa mi perfil como desarrollador de software.
                                         </p>
                                     </div>
 
@@ -83,11 +105,11 @@ const About = () => {
                                             <div className="p-2 rounded-full bg-teal-100 dark:bg-teal-800">
                                                 <Lightbulb className="text-teal-600 dark:text-teal-400 h-5 w-5" />
                                             </div>
-                                            <h4 className="ml-3 font-medium">Solución de Problemas</h4>
+                                            <h4 className="ml-3 font-medium">Sectores</h4>
                                         </div>
                                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                                            Capacidad para analizar problemas complejos y encontrar soluciones
-                                            innovadoras combinando conocimientos de diferentes disciplinas técnicas.
+                                            Experiencia en instalaciones eléctricas, telecomunicaciones,
+                                            gestión de almacén y desarrollo de software.
                                         </p>
                                     </div>
                                 </div>

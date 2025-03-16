@@ -10,19 +10,43 @@ const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
 
+    // Lista completa de las secciones en el orden correcto
+    const navItems = [
+        { name: 'Home', href: '#home' },
+        { name: 'About', href: '#about' },
+        { name: 'Career', href: '#career' },
+        { name: 'Skills', href: '#skills' },
+        { name: 'Services', href: '#services' },
+        { name: 'Projects', href: '#projects' },
+        { name: 'Contact', href: '#contact' },
+    ];
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
 
-            // Determinar sección activa por scroll
-            const sections = ['home', 'about', 'skills', 'services', 'projects', 'contact'];
-            let currentSection = 'home';
+            // Extraer los IDs de sección directamente de navItems para mantener sincronizado
+            const sections = navItems.map(item => item.href.substring(1));
+
+            // Determinar qué sección está más visible en la pantalla
+            let currentSection = sections[0]; // Default a home
+            let maxVisibility = 0;
 
             sections.forEach(section => {
                 const element = document.getElementById(section);
                 if (element) {
                     const rect = element.getBoundingClientRect();
-                    if (rect.top <= 100 && rect.bottom >= 100) {
+                    // Calcular cuánto de la sección está visible en la ventana
+                    const visibleHeight = Math.min(rect.bottom, window.innerHeight) -
+                        Math.max(rect.top, 0);
+
+                    // Ajuste para dar prioridad a las secciones en la parte superior
+                    const visibilityScore = visibleHeight > 0 ?
+                        visibleHeight / element.offsetHeight * (1 - rect.top / (window.innerHeight * 2)) :
+                        0;
+
+                    if (visibilityScore > maxVisibility) {
+                        maxVisibility = visibilityScore;
                         currentSection = section;
                     }
                 }
@@ -32,18 +56,12 @@ const Header = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
-    const navItems = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Career', href: '#career' }, // Nueva sección
-        { name: 'Skills', href: '#skills' },
-        { name: 'Services', href: '#services' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Contact', href: '#contact' },
-    ];
+        // Llamar a handleScroll al principio para inicializar correctamente
+        handleScroll();
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [navItems]);
 
     return (
         <header
