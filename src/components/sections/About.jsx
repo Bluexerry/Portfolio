@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, FileText, Briefcase, GraduationCap } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Briefcase, GraduationCap } from 'lucide-react';
 // Corregir las importaciones de Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, EffectCards } from 'swiper/modules';
@@ -10,11 +10,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-cards';
 import Container from '../layout/Container';
-import Button from '../ui/Button';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { headingAnimation, fadeInUp, fadeInRight } from '../../utils/animation';
 // Importar datos desde archivo data/career.js
 import { experienceData, educationData } from '../../data/career';
+import CVSelector from '../ui/CVSelector';
 
 // Asegúrate de crear la carpeta de assets y colocar tus imágenes
 const profileImage = '/src/assets/images/profile.jpg';
@@ -74,14 +74,7 @@ const About = () => {
                             </p>
 
                             <div className="pt-4">
-                                <Button
-                                    href="/tfg.pdf"  // Asegúrate de tener este archivo en la carpeta pública
-                                    target="_blank"
-                                    variant="outline"
-                                    icon={<FileText size={18} />}
-                                >
-                                    Descargar CV
-                                </Button>
+                                <CVSelector variant="outline" />
                             </div>
                         </motion.div>
 

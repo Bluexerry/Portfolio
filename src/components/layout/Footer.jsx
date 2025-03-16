@@ -4,6 +4,7 @@ import Container from './Container';
 import SocialLinks from '../ui/SocialLinks';
 import ByteVoltLogo from '../ui/ByteVolt';
 import { fadeInUp, staggerChildren } from '../../utils/animation';
+import CVSelector from '../ui/CVSelector';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -72,15 +73,7 @@ const Footer = () => {
                         </h3>
                         <ul className="space-y-2">
                             <li>
-                                <a
-                                    href="/cv.pdf"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-blue-400 transition-colors flex items-center"
-                                >
-                                    <span>Mi CV</span>
-                                    <ExternalLink size={14} className="ml-1" />
-                                </a>
+                                <CVSelector buttonVariant="text" buttonSize="sm" className="text-left" />
                             </li>
                             <li>
                                 <a
