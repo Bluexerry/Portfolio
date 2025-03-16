@@ -38,11 +38,13 @@ const Header = () => {
     const navItems = [
         { name: 'Home', href: '#home' },
         { name: 'About', href: '#about' },
+        { name: 'Career', href: '#career' }, // Nueva sección
         { name: 'Skills', href: '#skills' },
         { name: 'Services', href: '#services' },
         { name: 'Projects', href: '#projects' },
         { name: 'Contact', href: '#contact' },
     ];
+
     return (
         <header
             className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled

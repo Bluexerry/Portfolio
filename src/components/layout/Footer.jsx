@@ -19,6 +19,7 @@ const Footer = () => {
     const quickLinks = [
         { name: 'Inicio', href: '#home' },
         { name: 'Sobre mí', href: '#about' },
+        { name: 'Trayectoria', href: '#career' }, // Nuevo enlace
         { name: 'Habilidades', href: '#skills' },
         { name: 'Proyectos', href: '#projects' },
         { name: 'Contacto', href: '#contact' }
