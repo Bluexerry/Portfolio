@@ -97,7 +97,7 @@ const Header = () => {
 
                         {/* TFG Domótica */}
                         <motion.a
-                            href="/tfg_domotica.pdf"
+                            href="/documents/TFG.pdf"
                             download="TFG_Domotica.pdf"
                             aria-label="Descargar TFG Domótica"
                             className="relative group"
@@ -128,7 +128,7 @@ const Header = () => {
 
                     {/* TFG Domótica - Mobile */}
                     <motion.a
-                        href="/tfg_domotica.pdf"
+                        href="/documents/TFG.pdf"
                         download="TFG_Domotica.pdf"
                         aria-label="Descargar TFG Domótica"
                         className="p-2 bg-blue-900/30 rounded-full"

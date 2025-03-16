@@ -13,6 +13,8 @@ import Container from '../layout/Container';
 import Button from '../ui/Button';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { headingAnimation, fadeInUp, fadeInRight } from '../../utils/animation';
+// Importar datos desde archivo data/career.js
+import { experienceData, educationData } from '../../data/career';
 
 // Asegúrate de crear la carpeta de assets y colocar tus imágenes
 const profileImage = '/src/assets/images/profile.jpg';
@@ -28,50 +30,6 @@ const About = () => {
             swiper.update();
         }
     }, [activeTab, swiper]);
-
-    // Datos de experiencia
-    const experienceData = [
-        {
-            title: "Frontend Developer",
-            company: "Tech Innovations Inc.",
-            period: "2022 - Presente",
-            description: "Desarrollo de aplicaciones web con React y optimización de rendimiento. Implementación de interfaces de usuario responsivas y accesibles.",
-        },
-        {
-            title: "UI/UX Designer",
-            company: "Creative Solutions",
-            period: "2020 - 2022",
-            description: "Diseño de experiencias de usuario centradas en el usuario. Creación de prototipos interactivos y realización de pruebas de usabilidad.",
-        },
-        {
-            title: "Web Developer",
-            company: "Digital Agency",
-            period: "2018 - 2020",
-            description: "Desarrollo frontend con JavaScript y CSS. Colaboración con equipos de diseño para implementar interfaces de usuario.",
-        },
-    ];
-
-    // Datos de educación
-    const educationData = [
-        {
-            title: "Máster en Desarrollo Web",
-            institution: "Universidad Tecnológica",
-            period: "2018 - 2020",
-            description: "Especialización en tecnologías web modernas, arquitectura de aplicaciones y experiencia de usuario.",
-        },
-        {
-            title: "Grado en Ingeniería Informática",
-            institution: "Universidad Nacional",
-            period: "2014 - 2018",
-            description: "Fundamentos de programación, algoritmos, estructura de datos y desarrollo de software.",
-        },
-        {
-            title: "Curso Especializado en UX/UI",
-            institution: "Instituto de Diseño Digital",
-            period: "2016",
-            description: "Principios de diseño centrado en el usuario, prototipado y evaluación de usabilidad.",
-        },
-    ];
 
     // Contenido según la pestaña activa
     const tabContent = {
@@ -117,7 +75,7 @@ const About = () => {
 
                             <div className="pt-4">
                                 <Button
-                                    href="/cv.pdf"  // Asegúrate de tener este archivo en la carpeta pública
+                                    href="/tfg.pdf"  // Asegúrate de tener este archivo en la carpeta pública
                                     target="_blank"
                                     variant="outline"
                                     icon={<FileText size={18} />}

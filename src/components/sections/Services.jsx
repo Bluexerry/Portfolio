@@ -4,51 +4,17 @@ import { Monitor, Server, Layout, Code, PenTool, Zap } from 'lucide-react';
 import Container from '../layout/Container';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { headingAnimation, staggerChildren } from '../../utils/animation';
+import { servicesData } from '../../data/services';
 
-const servicesData = [
-    {
-        icon: <Monitor />,
-        title: 'Desarrollo Web Frontend',
-        description: 'Creación de interfaces de usuario modernas, responsivas y de alto rendimiento utilizando React, Next.js y otras tecnologías frontend.',
-        bgColor: 'from-purple-500/10 to-pink-500/10',
-        iconColor: 'text-purple-600 dark:text-purple-400'
-    },
-    {
-        icon: <Layout />,
-        title: 'Diseño UI/UX',
-        description: 'Diseño de experiencias de usuario centradas en el usuario, prototipos interactivos y flujos de usuario que transmiten la identidad de marca.',
-        bgColor: 'from-blue-500/10 to-teal-500/10',
-        iconColor: 'text-blue-600 dark:text-blue-400'
-    },
-    {
-        icon: <Server />,
-        title: 'Desarrollo Backend',
-        description: 'Construcción de APIs RESTful, autenticación, bases de datos y servicios de backend con Node.js, Express y tecnologías relacionadas.',
-        bgColor: 'from-green-500/10 to-emerald-500/10',
-        iconColor: 'text-green-600 dark:text-green-400'
-    },
-    {
-        icon: <Code />,
-        title: 'Optimización Web',
-        description: 'Mejora del rendimiento, SEO y velocidad de carga para sitios web existentes, aumentando las métricas Core Web Vitals.',
-        bgColor: 'from-amber-500/10 to-yellow-500/10',
-        iconColor: 'text-amber-600 dark:text-amber-400'
-    },
-    {
-        icon: <PenTool />,
-        title: 'Animaciones Web',
-        description: 'Creación de animaciones interactivas, transiciones fluidas y micro-interacciones para mejorar la experiencia de usuario.',
-        bgColor: 'from-red-500/10 to-pink-500/10',
-        iconColor: 'text-red-600 dark:text-red-400'
-    },
-    {
-        icon: <Zap />,
-        title: 'Integración de APIs',
-        description: 'Conexión de tu aplicación con servicios externos, pasarelas de pago, CMS headless y otras plataformas de terceros.',
-        bgColor: 'from-indigo-500/10 to-violet-500/10',
-        iconColor: 'text-indigo-600 dark:text-indigo-400'
-    }
-];
+// Mapeo de nombres de iconos a componentes
+const iconComponents = {
+    monitor: <Monitor />,
+    server: <Server />,
+    layout: <Layout />,
+    code: <Code />,
+    penTool: <PenTool />,
+    zap: <Zap />
+};
 
 const Services = () => {
     const { ref, inView } = useScrollAnimation();
@@ -119,7 +85,7 @@ const Services = () => {
                   inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6
                   bg-gray-100 dark:bg-gray-700 ${service.iconColor} text-2xl
                 `}>
-                                    {service.icon}
+                                    {iconComponents[service.iconName]}
                                 </div>
 
                                 <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">
