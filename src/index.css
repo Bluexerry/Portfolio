@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base styling for focus states */
+*:focus-visible {
+  outline: 2px solid theme('colors.blue.400');
+  outline-offset: 2px;
+}
+
+/* Custom selection styling */
+::selection {
+  background-color: theme('colors.blue.800');
+  color: theme('colors.blue.200');
+}
+
+/* Modern gradient text utility */
+@layer utilities {
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r;
+  }
+}
