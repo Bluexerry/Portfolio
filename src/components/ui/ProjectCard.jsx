@@ -60,7 +60,7 @@ const getBorderColor = (tags) => {
     return color.replace('bg-', 'border-');
 };
 
-const ProjectCard = ({ project, index, inView, onClick }) => {
+const ProjectCard = ({ project, index, onClick }) => {
     const { title, description, tags, demoUrl, repoUrl } = project;
 
     // Determinar el color de borde basado en la tecnología principal
@@ -68,23 +68,12 @@ const ProjectCard = ({ project, index, inView, onClick }) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            animate={inView ? { 
-                opacity: 1, 
-                y: 0, 
-                scale: 1,
-                transition: { 
-                    duration: 0.6, 
-                    delay: index * 0.12,
-                    ease: "easeOut" 
-                }
-            } : { opacity: 0, y: 40, scale: 0.95 }}
-            whileHover={{ 
-                y: -8, 
+            whileHover={{
+                y: -8,
                 boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                transition: { 
-                    duration: 0.3, 
-                    ease: [0.25, 0.1, 0.25, 1.0]  // Curva de animación más suave
+                transition: {
+                    duration: 0.3,
+                    ease: [0.25, 0.1, 0.25, 1.0]
                 }
             }}
             whileTap={{ scale: 0.98 }}
@@ -139,10 +128,10 @@ const ProjectCard = ({ project, index, inView, onClick }) => {
                                 key={tag}
                                 className={`${bgColor} px-2.5 py-1 rounded-full text-xs font-medium text-white`}
                                 initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ 
-                                    opacity: 1, 
+                                animate={{
+                                    opacity: 1,
                                     scale: 1,
-                                    transition: { 
+                                    transition: {
                                         delay: (index * 0.12) + 0.3 + (i * 0.07)
                                     }
                                 }}
@@ -153,13 +142,13 @@ const ProjectCard = ({ project, index, inView, onClick }) => {
                         );
                     })}
                     {tags.length > 4 && (
-                        <motion.span 
+                        <motion.span
                             className="px-2.5 py-1 rounded-full text-xs font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
                             initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ 
-                                opacity: 1, 
+                            animate={{
+                                opacity: 1,
                                 scale: 1,
-                                transition: { 
+                                transition: {
                                     delay: (index * 0.12) + 0.3 + (4 * 0.07)
                                 }
                             }}

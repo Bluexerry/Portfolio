@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react'; // Añade useMemo aquí
 import { motion } from 'framer-motion';
 import { Menu, X, Gamepad, FileText } from 'lucide-react';
 import Container from './Container';
@@ -10,8 +10,8 @@ const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
 
-    // Lista completa de las secciones en el orden correcto
-    const navItems = [
+    // Envolver navItems en useMemo para evitar recreaciones innecesarias
+    const navItems = useMemo(() => [
         { name: 'Home', href: '#home' },
         { name: 'About', href: '#about' },
         { name: 'Career', href: '#career' },
@@ -19,7 +19,7 @@ const Header = () => {
         { name: 'Services', href: '#services' },
         { name: 'Projects', href: '#projects' },
         { name: 'Contact', href: '#contact' },
-    ];
+    ], []);
 
     useEffect(() => {
         const handleScroll = () => {
