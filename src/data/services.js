@@ -16,7 +16,7 @@ export const servicesData = [
     },
     {
         iconName: "server",
-        title: 'Desarrollo Backend',
+        title: 'Desarrollo Web Backend',
         description: 'Desarrollo de backend con Node.js y Express, enfocándose en una arquitectura bien estructurada y manejo de node modules.',
         bgColor: 'from-green-500/10 to-emerald-500/10',
         iconColor: 'text-green-600 dark:text-green-400'
@@ -30,7 +30,7 @@ export const servicesData = [
     },
     {
         iconName: "layout",
-        title: 'Aplicación Multiplataforma con .NET MAUI',
+        title: 'Aplicaciónes Multiplataforma con .NET MAUI',
         description: 'Desarrollo de apps multiplataforma con .NET MAUI y .NET 8, sumado a consumición de endpoints de API en C#.',
         bgColor: 'from-blue-500/10 to-teal-500/10',
         iconColor: 'text-blue-600 dark:text-blue-400'

@@ -28,12 +28,6 @@ const Contact = () => {
         name: {
             required: true,
             minLength: 2,
-            // Cambiamos la función de validación para que sea menos estricta
-            validate: (value) => {
-                // Si tiene al menos 2 palabras (cualquier tipo de separación)
-                const words = value.trim().split(/\s+/);
-                return words.length >= 2 || 'Por favor, ingresa nombre y apellido';
-            }
         },
         email: {
             required: true,
@@ -82,9 +76,8 @@ const Contact = () => {
         });
 
         setErrors(newErrors);
-        return isValid;
+        return { isValid, errors: newErrors };
     };
-
     // Handle change with debounced validation
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -106,33 +99,59 @@ const Contact = () => {
         setErrors(prev => ({ ...prev, [id]: error }));
     }, 300);
 
-    // Handle blur for immediate validation
     const handleBlur = (e) => {
         const { id, value } = e.target;
         setTouched(prev => ({ ...prev, [id]: true }));
 
         const error = validateField(id, value);
         setErrors(prev => ({ ...prev, [id]: error }));
+
+        // Validación manual para el campo 'name' si el campo ya está tocado
+        if (id === 'name' && touched.name) {
+            const nameError = validateField('name', value);
+            setErrors(prev => ({ ...prev, name: nameError }));
+        }
     };
 
-    // Form submission handler
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Set all fields as touched
+        // Marcar todos los campos como tocados
         const allTouched = Object.keys(formData).reduce((acc, key) => {
             acc[key] = true;
             return acc;
         }, {});
         setTouched(allTouched);
 
-        // Validate form
-        if (!validateForm()) {
-            // Mostrar errores como toasts específicos
-            if (errors.name) toast.error(`Nombre: ${errors.name}`);
-            if (errors.email) toast.error(`Email: ${errors.email}`);
-            if (errors.subject) toast.error(`Asunto: ${errors.subject}`);
-            if (errors.message) toast.error(`Mensaje: ${errors.message}`);
+        // Usar validateForm mejorado
+        const { isValid, errors: newErrors } = validateForm();
+
+        // Actualizar el estado de errores
+        setErrors(newErrors);
+
+        // Verifica los errores en la consola
+        console.log("Errores de validación:", newErrors);
+        if (!isValid) {
+            // Consolida todos los errores en un solo mensaje
+            const errorMessages = [];
+            if (newErrors.name) errorMessages.push(`• Nombre: ${newErrors.name}`);
+            if (newErrors.email) errorMessages.push(`• Email: ${newErrors.email}`);
+            if (newErrors.subject) errorMessages.push(`• Asunto: ${newErrors.subject}`);
+            if (newErrors.message) errorMessages.push(`• Mensaje: ${newErrors.message}`);
+
+            // Muestra un solo toast con todos los errores
+            toast.error(
+                <div className="space-y-1">
+                    <p className="font-semibold">Por favor, corrige los siguientes errores:</p>
+                    {errorMessages.map((msg, index) => (
+                        <p key={index} className="ml-1">{msg}</p>
+                    ))}
+                </div>,
+                {
+                    duration: 5000, // Más tiempo para leer todos los errores
+                    style: { maxWidth: '380px' }
+                }
+            );
             return;
         }
 
@@ -255,6 +274,8 @@ const Contact = () => {
                             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md" style={{ minHeight: '506px' }}> {/* Altura fija calculada */}
                                 {formSubmitted ? (
                                     <div className="p-6 h-full flex flex-col items-center justify-center">
+                                        {/* Espaciador flex que ocupa el espacio necesario */}
+                                        <div className="flex-grow" style={{ minHeight: '130px' }}></div>
                                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 mb-4">
                                             <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -267,16 +288,6 @@ const Contact = () => {
                                             Gracias por contactarme. Te responderé lo antes posible.
                                         </p>
 
-                                        {/* Espaciador flex que ocupa el espacio necesario */}
-                                        <div className="flex-grow" style={{ minHeight: '238px' }}></div>
-
-                                        <Button
-                                            onClick={() => setFormSubmitted(false)}
-                                            variant="outline"
-                                            fullWidth
-                                        >
-                                            Enviar otro mensaje
-                                        </Button>
                                     </div>
                                 ) : (
                                     <form onSubmit={handleSubmit} className="p-6 space-y-5">

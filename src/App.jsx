@@ -16,7 +16,7 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Career /> {/* Nuevo componente */}
+        <Career />
         <Skills />
         <Services />
         <Projects />

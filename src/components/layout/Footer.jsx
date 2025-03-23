@@ -20,10 +20,11 @@ const Footer = () => {
     const quickLinks = [
         { name: 'Inicio', href: '#home' },
         { name: 'Sobre mí', href: '#about' },
-        { name: 'Trayectoria', href: '#career' }, // Nuevo enlace
+        { name: 'Formación', href: '#career' },
         { name: 'Habilidades', href: '#skills' },
+        { name: 'Servicios', href: '#services' },
         { name: 'Proyectos', href: '#projects' },
-        { name: 'Contacto', href: '#contact' }
+        { name: 'Contacto', href: '#contact' },
     ];
 
     return (

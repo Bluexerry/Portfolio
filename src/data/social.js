@@ -1,18 +1,13 @@
 export const socialLinks = [
     {
         name: "GitHub",
-        url: "https://github.com/yourusername",
+        url: "https://github.com/Bluexerry?tab=repositories",
         icon: "github"
     },
     {
         name: "LinkedIn",
-        url: "https://linkedin.com/in/yourprofile",
+        url: "https://www.linkedin.com/in/jes%C3%BAs-manuel-v%C3%A1zquez-herrera-8191462a3/",
         icon: "linkedin"
-    },
-    {
-        name: "Twitter",
-        url: "https://twitter.com/yourhandle",
-        icon: "twitter"
     },
     {
         name: "Email",

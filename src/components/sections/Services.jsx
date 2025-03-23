@@ -34,7 +34,7 @@ const Services = () => {
                         className="text-3xl md:text-4xl font-bold mb-4"
                         variants={headingAnimation}
                     >
-                        Lo que ofrezco
+                        Servicios
                     </motion.h2>
                     <motion.p
                         className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"

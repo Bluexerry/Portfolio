@@ -1,0 +1,20 @@
+export const heroTexts = [
+    "Desarrollador Web.",
+    "Node.js.",
+    "React Native & Vite",
+    "JavaScript & TypeScript.",
+    "Java & JavaSwing",
+    "MongoDB & MySQL.",
+    "Express & API REST.",
+    "Tailwind CSS",
+    "Framer Motion.",
+    "Jest & Testing Library.",
+    "Selenium, Maven & Cypress",
+    "Scrum & Agile.",
+    "Git & GitHub Actions.",
+    "Docker",
+    "RESTful APIs.",
+    "Inglés B2.",
+    "Frontend/Backend.",
+    "Full Stack Developer."
+];

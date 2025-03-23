@@ -5,6 +5,7 @@ import Container from '../layout/Container';
 import SocialLinks from '../ui/SocialLinks';
 import Button from '../ui/Button';
 import { fadeInUp, staggerChildren } from '../../utils/animation';
+import { heroTexts } from '../../utils/heroTexts';
 
 const Hero = () => {
     const [typedText, setTypedText] = useState("");
@@ -12,19 +13,7 @@ const Hero = () => {
     const [isTyping, setIsTyping] = useState(true);
 
     // Usa useMemo para evitar recrear el array en cada renderizado
-    const texts = useMemo(() => [
-        "Desarrollador Web.",
-        "Node.js.",
-        "React.",
-        "JavaScript & Java.",
-        "MongoDB & MySQL.",
-        "Selenium & Maven.",
-        "Scrum & Agile.",
-        "Git & GitHub.",
-        "Ingles B2.",
-        "Frontend/Backend.",
-        "APIs RESTful."
-    ], []);
+    const texts = useMemo(() => heroTexts, []);
 
     // Efecto de escritura de texto
     useEffect(() => {
@@ -114,10 +103,7 @@ const Hero = () => {
                             className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg"
                             variants={fadeInUp}
                         >
-                            Desarrollador Full Stack especializado en crear aplicaciones web modernas y eficientes
-                            con React y Node.js. Mi formación complementaria en sistemas electrotécnicos me aporta
-                            una perspectiva única para resolver problemas complejos y ofrecer soluciones
-                            tecnológicas innovadoras.
+                            Desarrollador Full Stack con experiencia en la creación de aplicaciones web modernas y eficientes con React y Node.js, con formación en sistemas electrotécnicos y telecomunicaciones y capacidad para abordar los problemas desde una perspectiva amplia, buscando siempre soluciones tecnológicas, prácticas e innovadoras.
                         </motion.p>
 
                         <motion.div
@@ -194,7 +180,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2 }}
-                className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+                className="hidden lg:block absolute bottom-10 left-1/2 transform -translate-x-1/2"
             >
                 <motion.div
                     animate={{ y: [0, 8, 0] }}

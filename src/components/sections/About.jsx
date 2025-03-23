@@ -31,20 +31,23 @@ const About = () => {
                     {/* Bio con tarjetas de fortalezas */}
                     <motion.div variants={fadeInUp}>
                         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
-                            <div className="max-w-4xl mx-auto">
+                            <div className="max-w-7xl mx-auto">
                                 {/* Descripción principal */}
                                 <div className="mb-6 space-y-3">
                                     <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
                                         Desarrollador especializado en tecnologías web
                                     </h3>
                                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        Mi nombre es Jesús Manuel Vázquez Herrera, actualmente estudiante de Desarrollo de
-                                        Aplicaciones Web en ADA ITS, Sevilla. Poseo una sólida formación técnica en automatización
-                                        del hogar y sistemas eléctricos, complementada con gestión de almacenes y desarrollo de software.
+                                        Actualmente estudiante de Desarrollo de Aplicaciones Web en ADA ITS, Sevilla. Poseo una sólida formación técnica en automatización
+                                        del hogar, sistemas eléctricos y instalaciones de telecomunicaciones complementada con gestión de almacenes y desarrollo de software.
                                     </p>
                                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                                         Mi pasión por la tecnología y la innovación me impulsa a crear soluciones eficientes y escalables,
                                         siempre orientadas a la mejora continua y la satisfacción del usuario.
+                                    </p>
+                                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        Actualmente dessarrollando aplicaciones web con React, Node.js y otras tecnologías modernas
+                                        para construir productos digitales de alto rendimiento y calidad, siempre en constante aprendizaje y evolución.
                                     </p>
                                 </div>
 

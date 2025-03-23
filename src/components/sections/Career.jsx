@@ -46,7 +46,7 @@ const Career = () => {
                         variants={headingAnimation}
                         className="text-center space-y-4"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold">Mi Trayectoria</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold">Formación</h2>
                         <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                             Experiencia laboral y formación académica que han formado mi perfil profesional
                         </p>
@@ -155,12 +155,24 @@ const Career = () => {
                                     </span>
                                 </div>
 
-                                {/* Botones de navegación personalizados */}
-                                <button className="swiper-button-prev absolute top-1/2 -left-4 z-10 transform -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <ArrowLeft size={20} className="text-gray-800 dark:text-gray-200" />
+                                {/* Botones de navegación con efecto neón real */}
+                                <button
+                                    className="swiper-button-prev absolute top-1/2 -left-2 md:left-0 z-10 transform -translate-y-1/2 p-2.5 transition-all duration-300"
+                                    aria-label="Anterior"
+                                >
+                                    <ArrowLeft
+                                        size={20}
+                                        className="text-blue-500 dark:text-blue-400 transition-all duration-300 hover:text-blue-400 dark:hover:text-blue-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.9)] dark:hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.9)]"
+                                    />
                                 </button>
-                                <button className="swiper-button-next absolute top-1/2 -right-4 z-10 transform -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <ArrowRight size={20} className="text-gray-800 dark:text-gray-200" />
+                                <button
+                                    className="swiper-button-next absolute top-1/2 -right-2 md:right-0 z-10 transform -translate-y-1/2 p-2.5 transition-all duration-300"
+                                    aria-label="Siguiente"
+                                >
+                                    <ArrowRight
+                                        size={20}
+                                        className="text-blue-500 dark:text-blue-400 transition-all duration-300 hover:text-blue-400 dark:hover:text-blue-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.9)] dark:hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.9)]"
+                                    />
                                 </button>
                             </div>
                         </div>

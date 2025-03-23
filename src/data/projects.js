@@ -1,134 +1,130 @@
 export const projects = [
     {
-        id: "portfolio",
         title: "Portfolio Personal",
         description: "Mi portfolio personal desarrollado con React y Tailwind CSS.",
-        longDescription: "Portfolio personal desarrollado con React, Tailwind CSS y Framer Motion para mostrar mis proyectos y experiencia profesional de manera interactiva y visualmente atractiva. Diseñado con enfoque en accesibilidad y responsive design.",
-        image: "https://images.unsplash.com/photo-1603468620905-8de7d86b781e?q=80&w=600&auto=format&fit=crop",
-        tags: ["React", "Tailwind CSS", "Framer Motion"],
-        demoUrl: "https://github.com/Bluexerry/Portfolio",
-        repoUrl: "https://github.com/Bluexerry/Portfolio",
-        featured: true
-    },
-    {
-        id: "tfg-backend",
-        title: "TFG Backend - Sistema de Domótica",
-        description: "Backend del proyecto para control domótico usando Laravel y WebSockets.",
-        longDescription: "Backend desarrollado en Laravel para un sistema de domótica que permite el control remoto de dispositivos del hogar. Implementa WebSockets para comunicación en tiempo real, gestión de usuarios con diferentes niveles de acceso y APIs RESTful.",
-        image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=600&auto=format&fit=crop",
-        tags: ["Laravel", "PHP", "WebSockets", "API"],
+        longDescription: "El proyecto Portfolio Personal es un sitio web desarrollado con React, Tailwind CSS y Framer Motion para mostrar proyectos, habilidades y experiencia profesional de manera interactiva y visualmente atractiva. Incluye secciones como Sobre mí, Trayectoria, Habilidades, Servicios, Proyectos y Contacto. El diseño es completamente responsivo, con animaciones fluidas y un enfoque en accesibilidad. Utiliza herramientas modernas como Vite para el desarrollo rápido, ESLint para garantizar la calidad del código y i18next para soporte multilingüe. Es ideal para destacar el perfil profesional de un desarrollador, ofreciendo una experiencia de usuario optimizada y moderna.",
+        tags: ["React", "Tailwind CSS", "Framer Motion", "Portfolio", "Responsive Design", "Frontend", "UI/UX"],
         demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/TFG-Backend",
-        featured: true
+        repoUrl: "https://github.com/Bluexerry/Portfolio"
     },
     {
-        id: "tfg-frontend",
-        title: "TFG Frontend - Sistema de Domótica",
-        description: "Frontend del proyecto para control domótico usando Vue.js.",
-        longDescription: "Interfaz de usuario desarrollada en Vue.js para sistema de domótica, permitiendo el control remoto de dispositivos del hogar. Incluye dashboard interactivo, notificaciones en tiempo real y visualización del estado de los dispositivos.",
-        image: "https://images.unsplash.com/photo-1585076641399-5c06d1b3365f?q=80&w=600&auto=format&fit=crop",
-        tags: ["Vue.js", "JavaScript", "Vuex", "WebSockets"],
+        title: "TFG Backend",
+        description: "",
+        longDescription: "",
+        tags: ["Node.js", "Express", "Backend", "API REST"],
         demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/TFG-Frontend",
-        featured: true
+        repoUrl: null
     },
     {
-        id: "proyecto-automatizacion",
+        title: "TFG Frontend",
+        description: "",
+        longDescription: "",
+        tags: ["React", "Frontend", "Responsive Design"],
+        demoUrl: null,
+        repoUrl: null
+    },
+    {
+        title: "PCSS (CV previo)",
+        description: "Proyecto de CV previo con CSS puro y diseño responsive.",
+        longDescription: "El proyecto Currículum Vitae y Portafolio Digital es una aplicación web de una sola página desarrollada con HTML, CSS y JavaScript. Presenta de manera profesional mi trayectoria, destacando perfil, habilidades, experiencia laboral, formación y proyectos. Incluye un diseño moderno y responsivo, con un fondo animado mediante Particles.js, validación de formularios con JavaScript, y navegación interactiva. La estructura modular del código facilita la escalabilidad y el mantenimiento. Además, incorpora enlaces a redes sociales y un formulario de contacto funcional. Es ideal para mostrar habilidades técnicas y experiencia profesional de forma atractiva.",
+        tags: ["HTML", "CSS", "JavaScript", "Responsive Design", "Portfolio", "Particles.js", "Web Development", "UI/UX"],
+        demoUrl: "https://pcss-jesus-manuel-vazquez-herrera.vercel.app/",
+        repoUrl: "https://github.com/Bluexerry/PCSS-JesusManuelVazquezHerrera"
+    },
+    {
+        title: "Practicando Tailwind CSS",
+        description: "Proyecto de práctica de Tailwind CSS con ejemplos y componentes.",
+        longDescription: "El proyecto Practicando-Tailwind es un repositorio educativo que contiene ejemplos prácticos de diseño de interfaces web utilizando Tailwind CSS. Incluye ejercicios como la creación de botones estilizados, barras de navegación, formularios modernos y componentes visuales interactivos. Cada ejemplo está diseñado para demostrar el uso eficiente de las clases de Tailwind CSS, con un enfoque en la responsividad y la estética. Los ejercicios están organizados en carpetas, cada una con su propio archivo HTML y recursos adicionales. Este proyecto es ideal para aprender y practicar el diseño web moderno con Tailwind CSS, mejorando habilidades en desarrollo frontend.",
+        tags: ["Tailwind CSS", "Frontend", "Web Design", "Responsive Design", "UI/UX", "HTML", "Educational"],
+        demoUrl: null,
+        repoUrl: "https://github.com/Bluexerry/Practicando-Tailwind"
+    },
+    {
+        title: "Tarea Docker",
+        description: "Proyecto de Docker con una aplicación web de ejemplo.",
+        longDescription: "El proyecto Docker Web API Project combina una API REST en Node.js y un servidor web con NGINX, ambos contenedorizados mediante Docker Compose. La API, desarrollada con Express, ofrece endpoints como /api, /api/details, /api/info y /api/users, devolviendo datos en formato JSON con timestamps en español. El servidor NGINX sirve una interfaz web estática diseñada con Tailwind CSS, que incluye botones interactivos para consumir la API. NGINX también actúa como proxy inverso para enrutar solicitudes a la API. Este proyecto demuestra una arquitectura moderna, con comunicación interna mediante redes Docker y despliegue simplificado.",
+        tags: ["Docker", "Node.js", "Express", "NGINX", "API REST", "Tailwind CSS", "Proxy Inverso", "Docker Compose", "Web Development"],
+        demoUrl: null,
+        repoUrl: "https://github.com/Bluexerry/Tarea-docker"
+    },
+    {
+        title: "EC",
+        description: "Repositorio personal de ejercicio y proyectos de la asignatura de Entorno cliente.",
+        longDescription: "Serie de proyectos actualizados de React en base a las peticiones dadas consecutivamente en la asignatura de Entorno Cliente. Incluye ejercicios de React, React Router, Redux, Axios, entre otros. Cada proyecto es una mejora del anterior, añadiendo nuevas funcionalidades y mejorando la estructura del código. Se enfoca en la creación de aplicaciones web interactivas y dinámicas, con un diseño moderno y responsivo. Los proyectos están organizados por carpetas y versiones, con instrucciones claras y comentarios detallados. Es ideal para estudiantes y desarrolladores que buscan mejorar sus habilidades en React y frontend development.",
+        tags: ["React", "React Router", "Axios", "Frontend", "Web Development", "Responsive Design"],
+        demoUrl: null,
+        repoUrl: "https://github.com/Bluexerry/EC-JesusManuelVazquezHerrera"
+    },
+    {
         title: "Proyecto de Automatización",
         description: "Framework de pruebas automatizadas con Selenium y Java.",
-        longDescription: "Framework de automatización desarrollado con Selenium WebDriver y Java para realizar pruebas en aplicaciones web. Incluye configuración de reportes, manejo de excepciones, y patrones de diseño como Page Object Model.",
-        image: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=600&auto=format&fit=crop",
-        tags: ["Java", "Selenium", "TestNG", "Maven"],
+        longDescription: "Marco de automatización de pruebas desarrollado en Java con Selenium WebDriver, TestNG y gestionado mediante Maven. Diseñado para pruebas funcionales en aplicaciones web, permite validar contenidos, interactuar con elementos web y realizar pruebas parametrizadas. Su estructura modular organiza las pruebas por funcionalidades, facilitando el mantenimiento y escalabilidad. Integra Allure para generar reportes detallados y utiliza configuraciones avanzadas como XPaths dinámicos y manejo de condiciones. Es ideal para entornos educativos y profesionales, ofreciendo una solución robusta para la automatización de pruebas con soporte para ejecución continua y reportes visuales.",
+        tags: ["Java", "Selenium", "TestNG", "Maven", "Allure", "Automation", "Web Testing", "XPath", "Modular Design", "Reporting"],
         demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/ProyectoAutomatizacion",
-        featured: true
+        repoUrl: "https://github.com/Bluexerry/ProyectoAutomatizacion"
     },
     {
-        id: "api",
         title: "API REST con .NET",
         description: "API RESTful desarrollada con .NET 8 y C#.",
-        longDescription: "API desarrollada en C# con .NET 8 que proporciona endpoints para consumir datos de distintas fuentes. Implementa autenticación JWT, documentación con Swagger y patrones repositorio para acceso a datos.",
-        image: "https://images.unsplash.com/photo-1623282033815-40b05d96c903?q=80&w=600&auto=format&fit=crop",
-        tags: ["C#", ".NET", "API REST", "Swagger"],
+        longDescription: "API REST con .NET es una API desarrollada en C# con .NET 8 que proporciona endpoints para consumir datos de frases de Los Simpson. Implementa controladores para obtener frases aleatorias, buscar por personaje y limitar el número de resultados. Utiliza Swagger para la documentación interactiva, HttpClient para consumir APIs externas y CORS para permitir solicitudes desde diferentes orígenes. La arquitectura incluye servicios y modelos bien definidos, con configuraciones para entornos de desarrollo y producción. Es ideal para integrarse con aplicaciones frontend modernas, ofreciendo una solución escalable y segura para el consumo de datos.",
+        tags: ["C#", ".NET 8", "API REST", "Swagger", "HttpClient", "Backend", "Web API", "Simpsons Quotes"],
         demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/API",
-        featured: true
+        repoUrl: "https://github.com/Bluexerry/API"
     },
     {
-        id: "mini-tfg-backend",
         title: "Mini TFG Backend",
         description: "Backend para aplicación de gestión desarrollado con Node.js y Express.",
-        longDescription: "Backend desarrollado en Node.js con Express para una aplicación de gestión. Implementa autenticación de usuarios, operaciones CRUD y conexión a base de datos MongoDB.",
-        image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=600&auto=format&fit=crop",
-        tags: ["Node.js", "Express", "MongoDB", "JavaScript"],
-        demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/Backend-MiniTFG",
-        featured: true
+        longDescription: "API RESTful desarrollada con Node.js, Express y MongoDB para gestionar entrenamientos y rutinas. Permite consultar, crear y eliminar rutinas diarias, ejercicios y comentarios asociados. La arquitectura modular separa controladores, servicios, modelos y rutas, facilitando el mantenimiento y la escalabilidad. Incluye validaciones de datos, manejo de errores y un logger basado en Winston para monitorización. La configuración utiliza variables de entorno para flexibilidad entre entornos. Los endpoints soportan filtros avanzados mediante query parameters. Es ideal para integrarse con frontends modernos y admite futuras extensiones como autenticación o análisis de rendimiento.",
+        tags: ["Node.js", "Express", "MongoDB", "API REST", "Backend", "CRUD", "Logger", "Modular Architecture"],
+        demoUrl: "https://backend-minitfg.onrender.com/",
+        repoUrl: "https://github.com/Bluexerry/Backend-MiniTFG"
     },
     {
-        id: "mini-tfg-frontend",
         title: "Mini TFG Frontend",
         description: "Frontend para aplicación de gestión desarrollado con React.",
-        longDescription: "Frontend desarrollado en React para una aplicación de gestión. Incluye múltiples vistas, gestión de estado con Redux y formularios para operaciones CRUD.",
-        image: "https://images.unsplash.com/photo-1579403124614-197f69d8187b?q=80&w=600&auto=format&fit=crop",
-        tags: ["React", "JavaScript", "Redux", "CSS"],
-        demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/Frontend-MiniTFG",
-        featured: true
+        longDescription: "El proyecto Frontend-MiniTFG es una aplicación web desarrollada con React, Vite y Tailwind CSS. Diseñada para gestionar rutinas de entrenamiento, incluye funcionalidades como creación, visualización y comentarios en rutinas, además de un catálogo de ejercicios interactivo. Utiliza React Router para la navegación, React Icons para enriquecer la interfaz y realiza peticiones asíncronas al backend para gestionar datos. La aplicación es responsiva, con animaciones personalizadas y un diseño moderno. Herramientas como ESLint y PostCSS garantizan la calidad del código y los estilos. Es ideal para usuarios que buscan personalizar y optimizar su experiencia de entrenamiento.",
+        tags: ["React", "Vite", "Tailwind CSS", "JavaScript", "Frontend", "Responsive Design", "Fitness", "CRUD", "React Router", "ESLint"],
+        demoUrl: "https://frontend-mini-tfg.vercel.app/",
+        repoUrl: "https://github.com/Bluexerry/Frontend-MiniTFG"
     },
     {
-        id: "proyecto-pokemon",
         title: "Proyecto Pokémon",
         description: "Aplicación web que consume la API de Pokémon.",
-        longDescription: "Aplicación web desarrollada en JavaScript que consume la PokeAPI para mostrar información detallada sobre diferentes Pokémon. Incluye búsqueda, filtrado y visualización de estadísticas.",
-        image: "https://images.unsplash.com/photo-1542779283-429940ce8336?q=80&w=600&auto=format&fit=crop",
-        tags: ["JavaScript", "HTML", "CSS", "API"],
+        longDescription: "Aplicación de escritorio desarrollada en Java Swing con NetBeans, diseñada para gestionar información de Pokémon y usuarios. Incluye funcionalidades como registro, edición, eliminación y visualización de datos, además de un sistema de inicio de sesión con niveles de acceso. La aplicación interactúa con una base de datos MySQL para almacenar información sobre Pokémon (géneros, naturalezas, tipos) y usuarios. También integra música, efectos de sonido y elementos visuales interactivos. Su estructura modular incluye controladores, modelos, vistas y servicios para facilitar la gestión de datos y la interacción con la interfaz de usuario.",
+        tags: ["Java", "JavaSwing", "NetBeans", "MySQL", "Xampp", "Desktop Application"],
         demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/ProyectoPokemon",
-        featured: true
+        repoUrl: "https://github.com/Bluexerry/ProyectoPokemon"
     },
     {
-        id: "proyecto-empresa",
         title: "Proyecto Empresa",
-        description: "Sistema de gestión empresarial desarrollado con tecnologías web.",
-        longDescription: "Sistema de gestión empresarial que permite administrar clientes, productos y pedidos. Desarrollado con tecnologías web modernas y enfocado en la usabilidad y eficiencia.",
-        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop",
-        tags: ["JavaScript", "PHP", "MySQL", "Bootstrap"],
+        description: "Proyecto HTML y CSS para una empresa ficticia.",
+        longDescription: "Proyecto de un sitio web inmobiliario llamado 'Inmobiliaria Vázquez' que ofrece servicios de compra, alquiler y asesoramiento en bienes raíces. Incluye páginas para listar propiedades, detalles de cada inmueble, un blog con consejos, una sección de preguntas frecuentes (FAQ), y una página de contacto con formulario. El diseño es responsivo, con navegación clara y elementos visuales como imágenes y mapas. También cuenta con una página de error 404 personalizada. El sitio utiliza HTML y CSS para su estructura y estilo, con un enfoque en la experiencia del usuario y la presentación profesional de la información inmobiliaria.",
+        tags: ["HTML", "CSS", "Responsive Design", "Web Design", "Real Estate", "User Experience"],
         demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/ProyectoEmpresa",
-        featured: false
+        repoUrl: "https://github.com/Bluexerry/ProyectoEmpresa"
     },
     {
-        id: "dwes",
         title: "Desarrollo Web en Entorno Servidor",
         description: "Proyectos y ejercicios de Desarrollo Web en Entorno Servidor.",
-        longDescription: "Colección de proyectos y ejercicios del módulo de Desarrollo Web en Entorno Servidor. Incluye aplicaciones PHP, conexiones a bases de datos, y patrones MVC.",
-        image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=600&auto=format&fit=crop",
-        tags: ["PHP", "MySQL", "MVC", "Backend"],
+        longDescription: "Repositorio el cual contiene prácticas y ejemplos del curso de Desarrollo Web en Entorno Servidor (DWES), centrado en tecnologías como Node.js, Express, Docker y GitHub. Incluye configuraciones de entorno, desarrollo con Express, despliegue con Docker Compose, integración con Node-RED y NGrok, documentación con Markdown, control de versiones con Git y GitHub, y despliegue de aplicaciones. La estructura está organizada por módulos con ejemplos prácticos y documentación detallada. Para usarlo, se recomienda tener Node.js, Docker y VSCode. Se puede clonar, instalar dependencias y ejecutar servicios con Docker. También permite contribuciones mediante ramas en GitHub.",
+        tags: ["ExpressJS", "Node.js", "Backend", "APIs REST", "MVC", "JavaScript", "Postman", "CRUD", "Base de datos", "JWT", "CORS", "Git/GitHub"],
         demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/DWES",
-        featured: false
+        repoUrl: "https://github.com/Bluexerry/DWES"
     },
     {
-        id: "fuentes-iot",
-        title: "Fuentes IoT",
-        description: "Proyecto de Internet of Things para el control de fuentes de agua.",
-        longDescription: "Sistema IoT para monitorización y control de fuentes de agua. Utiliza sensores y actuadores conectados a una plataforma web para la gestión remota de las instalaciones.",
-        image: "https://images.unsplash.com/photo-1633259584604-afdc243122ea?q=80&w=600&auto=format&fit=crop",
-        tags: ["IoT", "Arduino", "JavaScript", "Sensores"],
-        demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/FuentesIoT",
-        featured: false
-    },
-    {
-        id: "mi-app",
         title: "Mi App",
         description: "Aplicación móvil desarrollada con tecnologías multiplataforma.",
-        longDescription: "Aplicación móvil desarrollada con framework multiplataforma que permite su ejecución en dispositivos Android e iOS. Incluye diferentes funcionalidades como autenticación, gestión de perfil y visualización de datos.",
-        image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=600&auto=format&fit=crop",
-        tags: ["React Native", "JavaScript", "Mobile"],
+        longDescription: "Aplicación multiplataforma desarrollada con .NET MAUI y .NET 8, compatible con Android, iOS, Mac Catalyst y Windows. Su arquitectura aprovecha las mejoras en rendimiento y seguridad de .NET, incluyendo compatibilidad con múltiples plataformas en un solo proyecto. La aplicación consume una API externa para mostrar frases de Los Simpson y reproduce su introducción al iniciar. Utiliza colecciones observables, controles de MAUI y reproducción de audio con Plugin.Maui.Audio. Se siguen buenas prácticas de seguridad y manejo de errores en el consumo de APIs. MiApp representa un desarrollo moderno, escalable y con una interfaz interactiva y optimizada.",
+        tags: [".NET MAUI", ".NET 8", "C#", "Mobile", "Multiplatform", "API Consumption", "NuGet", "UI/UX"],
         demoUrl: null,
-        repoUrl: "https://github.com/Bluexerry/MiApp",
-        featured: false
+        repoUrl: "https://github.com/Bluexerry/MiApp"
+    },
+    {
+        title: "Fuentes IoT",
+        description: "Proyecto de Internet of Things (IoT) con links a recursos educativos y desarrollo de soluciones IoT.",
+        longDescription: "Proyecto web que proporciona una introducción detallada al Internet de las Cosas (IoT), abordando su impacto, aplicaciones y desafíos en seguridad y privacidad. Incluye enlaces a recursos educativos, artículos y videos sobre IoT en diversos sectores como la domótica, la agricultura inteligente y la salud. Además, presenta una sección dedicada al desarrollo de soluciones IoT con Node.js y TypeScript, con acceso a repositorios y entornos de prueba. La plataforma está diseñada con HTML, CSS y JavaScript, ofreciendo una navegación intuitiva y accesible para quienes buscan aprender sobre IoT y sus aplicaciones en el mundo real.",
+        tags: ["HTML", "IoT", "JavaScript", "Responsive Design", "Node.js", "Educational"],
+        demoUrl: null,
+        repoUrl: "https://github.com/Bluexerry/FuentesIoT"
     }
 ];

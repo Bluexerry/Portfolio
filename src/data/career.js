@@ -203,25 +203,3 @@ export const certificationsData = [
         description: "El carnet de conducción de carretilla certifica que una persona está capacitada para operar carretillas elevadoras de forma segura. Incluye datos del titular, fecha de emisión, caducidad (si aplica), tipo de carretilla autorizada y centro de formación. Se obtiene tras completar un curso teórico-práctico y aprobar una evaluación. Es obligatorio en muchos entornos laborales para garantizar la seguridad."
     }
 ];
-
-export const personalData = {
-    name: "Jesús Manuel Vázquez Herrera",
-    title: "Técnico electricista/Desarrollador Web",
-    location: "Sevilla 41019",
-    email: "jesusma33va@gmail.com",
-    phone: "652235643",
-    bio: "Mi nombre es Jesús Manuel Vázquez Herrera y actualmente estoy estudiando Desarrollo de Aplicaciones Web. Antes de esto, completé un programa en automatización del hogar y sistemas eléctricos, lo que me dio una base técnica sólida y una mentalidad orientada a la resolución de problemas. Mi transición al desarrollo web fue impulsada por mi pasión por la tecnología y el deseo de ampliar mis habilidades en el ámbito digital, creando soluciones innovadoras y eficientes.",
-    experience: "Tengo más de 2 años de experiencia profesional, incluyendo cinco meses en BMW en Alemania, donde trabajé en el mantenimiento técnico de vehículos, y un año en gestión de almacenes, lo que me permitió mejorar mis habilidades organizativas y de liderazgo. Estas experiencias me han enseñado a adaptarme, trabajar bajo presión y colaborar con equipos diversos.",
-    skills: "En el desarrollo web, he trabajado con tecnologías como JavaScript, Node.js e integraciones de API, ganando experiencia práctica en el despliegue de aplicaciones en entornos virtualizados. Considero que tengo capacidad de trabajar en equipos y tengo muchas ganas de contribuir en proyectos significativos, además de seguir creciendo profesionalmente.",
-    additional: {
-        relocate: "Dispuesto a trasladarse a: cualquier parte",
-        currentlyWorking: "No",
-        driversLicense: "B",
-        workPermit: "España",
-        willing_to_travel: "Sí",
-        birthdate: "1999-01-27",
-        education_level: "FP Grado superior",
-        industry_type: "Almacén, Desarrollo de software, Ingeniería eléctrica, Instalación y mantenimiento, Otra",
-        total_experience: "4"
-    }
-};

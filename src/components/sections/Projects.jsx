@@ -1,107 +1,77 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Container from '../layout/Container';
 import ProjectCard from '../ui/ProjectCard';
 import ProjectModal from '../ui/ProjectModal';
+import DropdownProjects from '../ui/DropdownProjects';
 import { projects } from '../../data/projects';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { staggerChildren, headingAnimation } from '../../utils/animation';
 
 const Projects = () => {
-    const { ref, inView } = useScrollAnimation();
-    const [filter, setFilter] = useState('all');
+    // Configuración mejorada para el threshold
+    const { ref, inView } = useScrollAnimation({ threshold: 0.05 });
+    const [filter, setFilter] = useState('Todos');
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [selectedProject, setSelectedProject] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [skipExitAnimation, setSkipExitAnimation] = useState(false);
 
     // Extraer categorías únicas de las etiquetas de proyectos
-    const categories = ['all', ...new Set(projects.flatMap(project =>
+    const TodosCategories = ['Todos', ...new Set(projects.flatMap(project =>
         project.tags.map(tag => tag.toLowerCase())
     ))].sort();
 
-    // Obtener hasta 5 categorías principales para mostrar siempre (las más usadas)
-    const getCategoryCount = () => {
-        const counts = {};
-        projects.forEach(project => {
-            project.tags.forEach(tag => {
-                const lowerTag = tag.toLowerCase();
-                counts[lowerTag] = (counts[lowerTag] || 0) + 1;
-            });
-        });
-        return counts;
-    };
+    // Contar proyectos por categoría
+    const categoryCounts = TodosCategories.reduce((acc, category) => {
+        if (category === 'Todos') {
+            acc[category] = projects.length;
+        } else {
+            acc[category] = projects.filter(project =>
+                project.tags.some(tag => tag.toLowerCase() === category)
+            ).length;
+        }
+        return acc;
+    }, {});
 
-    const categoryRef = useRef(null);
-    const [showAllCategories, setShowAllCategories] = useState(false);
+    // Ordenar categorías por popularidad (cantidad de proyectos)
+    const popularCategories = [...TodosCategories].sort((a, b) => {
+        if (a === 'Todos') return -1;
+        if (b === 'Todos') return 1;
+        return categoryCounts[b] - categoryCounts[a];
+    });
+
+    const hasMoreCategories = popularCategories.length > 6;
+    const mainCategories = popularCategories.slice(0, 6);
+    const extraCategories = popularCategories.slice(6);
 
     // Filtrar proyectos cuando cambia el filtro
     useEffect(() => {
-        const filtered = filter === 'all'
+        const filtered = filter === 'Todos'
             ? projects
             : projects.filter(project =>
                 project.tags.some(tag => tag.toLowerCase() === filter)
             );
-        setFilteredProjects(filtered);
+
+        setSkipExitAnimation(true);
+        setTimeout(() => {
+            setFilteredProjects(filtered);
+            setSkipExitAnimation(false);
+        }, 50);
     }, [filter]);
 
-    // Manejar apertura del modal de detalles
+    // Manejar apertura del modal de detTodoses
     const handleOpenProjectDetails = (project) => {
         setSelectedProject(project);
         setIsModalOpen(true);
     };
 
-    // Ordenar las categorías por popularidad
-    const categoryCounts = getCategoryCount();
-    const popularCategories = [...categories].sort((a, b) => {
-        if (a === 'all') return -1;
-        if (b === 'all') return 1;
-        return (categoryCounts[b] || 0) - (categoryCounts[a] || 0);
-    });
-
-    const displayCategories = showAllCategories ?
-        popularCategories :
-        popularCategories.slice(0, Math.min(6, popularCategories.length));
-
-    const hasMoreCategories = popularCategories.length > 6;
-
-    // Variantes de animación para elementos de categoría
-    const categoryVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: i => ({
-            opacity: 1,
-            y: 0,
-            transition: {
-                delay: i * 0.05,
-                duration: 0.4,
-                ease: [0.25, 0.1, 0.25, 1.0]
-            }
-        }),
-        exit: {
-            opacity: 0,
-            y: 10,
-            transition: { duration: 0.2 }
-        }
-    };
-
-    // Variantes de animación para la cuadrícula de proyectos
-    const projectsGridVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                duration: 0.6,
-                ease: "easeOut"
-            }
-        },
-        exit: {
-            opacity: 0,
-            transition: { duration: 0.3 }
-        }
-    };
-
     return (
-        <section id="projects" className="py-20">
+        <section
+            id="projects"
+            className="py-20"
+            ref={ref}
+        >
             <Container>
                 <motion.div
                     initial="hidden"
@@ -109,218 +79,95 @@ const Projects = () => {
                     variants={staggerChildren(0.1)}
                     className="space-y-12"
                 >
-                    {/* Título de la sección */}
                     <motion.div
                         variants={headingAnimation}
-                        className="text-center space-y-4"
+                        className="text-center"
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold">Proyectos Destacados</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-3">Proyectos</h2>
                         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                            Una selección de proyectos recientes que destacan mis habilidades y
-                            expertise en diferentes tecnologías.
+                            Explora mi portfolio de proyectos en diversas áreas y tecnologías, donde aplico diferentes enfoques para resolver desafíos de manera eficiente.
                         </p>
                     </motion.div>
 
-                    {/* Filtros de categorías con animaciones mejoradas */}
-                    <div className="relative">
-                        <motion.div
-                            ref={categoryRef}
-                            className="flex flex-wrap justify-center gap-3 mb-10"
-                            initial="hidden"
-                            animate="visible"
-                            variants={projectsGridVariants}
-                        >
-                            {/* Cambiamos el modo de AnimatePresence para una transición más fluida */}
-                            <AnimatePresence mode="sync">
-                                {displayCategories.map((category, index) => (
-                                    <motion.button
-                                        key={category}
-                                        custom={index}
-                                        variants={categoryVariants}
-                                        onClick={() => setFilter(category)}
-                                        className={`px-4 py-2 rounded-full capitalize transition-colors ${filter === category
-                                            ? 'bg-blue-600 text-white shadow-md'
-                                            : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-                                            }`}
-                                        whileHover={{ y: -2, transition: { duration: 0.2 } }}
-                                        whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
-                                        // Añadimos animación específica para la layout transition
-                                        layout
-                                        layoutId={`category-${category}`}
-                                        transition={{
-                                            layout: { type: "spring", duration: 0.5, bounce: 0.25 }
-                                        }}
-                                    >
-                                        {category}
-                                        {category !== 'all' && (
-                                            <span className="ml-1.5 bg-white dark:bg-gray-700 text-xs py-0.5 px-1.5 rounded-full text-blue-600 dark:text-blue-400">
-                                                {categoryCounts[category] || 0}
-                                            </span>
-                                        )}
-                                    </motion.button>
-                                ))}
+                    {/* CATEGORÍAS CON COMPONENTE DROPDOWN */}
+                    <div className="mb-10">
+                        {/* Categorías principales visibles */}
+                        <div className="flex flex-wrap justify-center gap-3 mb-4">
+                            {mainCategories.map((category) => (
+                                <motion.button
+                                    key={category}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4 }}
+                                    onClick={() => setFilter(category)}
+                                    className={`px-4 py-2 rounded-full capitalize transition-colors ${filter === category
+                                        ? 'bg-blue-600 text-white shadow-md'
+                                        : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                                        }`}
+                                    whileHover={{ y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    {category}
+                                    {category !== 'Todos' && (
+                                        <span className="ml-1.5 bg-white dark:bg-gray-700 text-xs py-0.5 px-1.5 rounded-full text-blue-600 dark:text-blue-400">
+                                            {categoryCounts[category] || 0}
+                                        </span>
+                                    )}
+                                </motion.button>
+                            ))}
+                        </div>
 
-                                {/* Botón Mostrar más/menos con animaciones mejoradas */}
-                                {hasMoreCategories && (
-                                    <motion.button
-                                        onClick={() => setShowAllCategories(!showAllCategories)}
-                                        className="px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors"
-                                        layout
-                                        layoutId="show-more-button"
-                                        transition={{
-                                            layout: { type: "spring", duration: 0.5, bounce: 0.25 }
-                                        }}
-                                        whileHover={{
-                                            y: -2,
-                                            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-                                            transition: { duration: 0.2 }
-                                        }}
-                                        whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
-                                    >
-                                        <AnimatePresence mode="wait" initial={false}>
-                                            {showAllCategories ? (
-                                                <motion.span
-                                                    key="less"
-                                                    initial={{ opacity: 0, y: 10 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -10 }}
-                                                    transition={{ duration: 0.2 }}
-                                                >
-                                                    Mostrar menos
-                                                </motion.span>
-                                            ) : (
-                                                <motion.span
-                                                    key="more"
-                                                    initial={{ opacity: 0, y: 10 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -10 }}
-                                                    transition={{ duration: 0.2 }}
-                                                >
-                                                    Mostrar más
-                                                </motion.span>
-                                            )}
-                                        </AnimatePresence>
-                                    </motion.button>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
+                        {/* Dropdown para categorías adicionales */}
+                        {hasMoreCategories && (
+                            <div className="flex justify-center">
+                                <DropdownProjects
+                                    items={extraCategories}
+                                    selectedItem={filter}
+                                    onItemSelected={setFilter}
+                                    countMap={categoryCounts}
+                                    buttonText={`Ver ${extraCategories.length} categorías más`}
+                                />
+                            </div>
+                        )}
                     </div>
 
-                    {/* Grid de proyectos con animaciones mejoradas */}
-                    <div ref={ref} className="relative">
-                        <AnimatePresence mode="wait">
-                            {filteredProjects.length === 0 ? (
-                                <motion.div
-                                    key="no-results"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{
-                                        opacity: { duration: 0.4 },
-                                        y: { type: "spring", stiffness: 300, damping: 30 }
-                                    }}
-                                    className="py-16 text-center bg-gray-50 dark:bg-gray-800/50 rounded-xl"
-                                >
-                                    <p className="text-xl text-gray-500 dark:text-gray-400">
-                                        No se encontraron proyectos para esta categoría.
-                                    </p>
-                                    <motion.button
-                                        onClick={() => setFilter('all')}
-                                        className="mt-4 px-6 py-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        Ver todos los proyectos
-                                    </motion.button>
-                                </motion.div>
-
-                            ) : (
-                                // Aquí está la clave - asignar una key basada en el filtro actual
-                                <motion.div
-                                    key={`projects-grid-${filter}`}
-                                    initial="hidden"
-                                    animate="visible"
-                                    exit="exit"
-                                    variants={{
-                                        hidden: { opacity: 0 },
-                                        visible: {
-                                            opacity: 1,
-                                            transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-                                        },
-                                        exit: {
-                                            opacity: 0,
-                                            transition: {
-                                                duration: 0.2,
-                                                when: "beforeChildren",
-                                                staggerChildren: 0.05,
-                                                staggerDirection: -1
-                                            }
-                                        }
-                                    }}
-                                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-                                >
-                                    {filteredProjects.map((project, index) => (
-                                        <motion.div
+                    {/* GRID DE PROYECTOS */}
+                    <div className="relative">
+                        <AnimatePresence mode="wait" initial={false}>
+                            <motion.div
+                                key={filter}
+                                initial={skipExitAnimation ? { opacity: 1 } : { opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={skipExitAnimation ? { opacity: 1 } : { opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                            >
+                                {filteredProjects.length > 0 ? (
+                                    filteredProjects.map(project => (
+                                        <ProjectCard
                                             key={project.id}
-                                            variants={{
-                                                hidden: { opacity: 0, y: 20 },
-                                                visible: {
-                                                    opacity: 1,
-                                                    y: 0,
-                                                    transition: {
-                                                        duration: 0.5,
-                                                        ease: "easeOut"
-                                                    }
-                                                },
-                                                exit: {
-                                                    opacity: 0,
-                                                    y: -10,
-                                                    scale: 0.98,
-                                                    transition: { duration: 0.2 }
-                                                }
-                                            }}
-                                        >
-                                            <ProjectCard
-                                                project={project}
-                                                index={index}
-                                                inView={inView}
-                                                onClick={() => handleOpenProjectDetails(project)}
-                                            />
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        {/* Botón para mostrar todos los proyectos si se está filtrando */}
-                        <AnimatePresence>
-                            {filter !== 'all' && filteredProjects.length > 0 && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="mt-10 text-center"
-                                >
-                                    <motion.button
-                                        onClick={() => setFilter('all')}
-                                        className="px-6 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                                        whileHover={{
-                                            scale: 1.03,
-                                            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
-                                        }}
-                                        whileTap={{ scale: 0.97 }}
+                                            project={project}
+                                            onClick={() => handleOpenProjectDetails(project)}
+                                        />
+                                    ))
+                                ) : (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="col-span-full text-center py-16"
                                     >
-                                        Ver todos los proyectos
-                                    </motion.button>
-                                </motion.div>
-                            )}
+                                        <p className="text-gray-500 dark:text-gray-400 text-lg">
+                                            No se encontraron proyectos en esta categoría.
+                                        </p>
+                                    </motion.div>
+                                )}
+                            </motion.div>
                         </AnimatePresence>
                     </div>
                 </motion.div>
             </Container>
 
-            {/* Modal de detalles del proyecto */}
+            {/* Modal de detTodoses del proyecto */}
             <ProjectModal
                 project={selectedProject}
                 isOpen={isModalOpen}

@@ -19,24 +19,26 @@ const Button = ({
     ...props
 }) => {
     // Estilos base para todos los botones
-    const baseStyles = "font-medium rounded-lg transition-all duration-300 flex items-center justify-center";
+    const baseStyles = "relative font-medium rounded-lg transition-all duration-300 flex items-center justify-center";
 
-    // Variantes de botones
+    // Variantes mejoradas de botones con mejor contraste y efectos visuales
     const variants = {
-        primary: "bg-gradient-to-r from-purple-600 to-pink-600 dark:from-blue-600 dark:to-teal-600 text-white shadow-md hover:shadow-lg border-0",
-        secondary: "border-2 border-purple-600 dark:border-blue-500 text-purple-600 dark:text-blue-400 hover:bg-purple-50 dark:hover:bg-gray-800/50",
-        outline: "border border-gray-300 dark:border-gray-600 hover:border-purple-400 dark:hover:border-blue-400 text-gray-800 dark:text-gray-200",
-        text: "bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-purple-600 dark:text-blue-400",
+        primary: "bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-600 dark:to-violet-600 text-white shadow-md hover:shadow-lg hover:translate-y-[-1px] border-0",
+        secondary: "border-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-sm",
+        outline: "border border-gray-400 dark:border-gray-500 bg-white dark:bg-gray-800 hover:border-blue-400 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700",
+        text: "bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400",
         danger: "bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg",
+        // Nueva variante para el botón de cierre del modal que no se camufla con el fondo
+        close: "border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 shadow-sm hover:shadow",
     };
 
-    // Tamaños de botones
+    // Tamaños de botones con mejor espaciado para los iconos
     const sizes = {
-        xs: "text-xs px-2 py-1",
-        sm: "text-sm px-3 py-1.5",
-        md: "px-5 py-2.5",
-        lg: "text-lg px-6 py-3",
-        xl: "text-xl px-8 py-4",
+        xs: "text-xs px-2.5 py-1.5 gap-1.5",
+        sm: "text-sm px-3.5 py-1.5 gap-2",
+        md: "px-5 py-2.5 gap-2",
+        lg: "text-lg px-6 py-3 gap-2.5",
+        xl: "text-xl px-8 py-4 gap-3",
     };
 
     // Estilos para los estados disabled
@@ -62,11 +64,11 @@ const Button = ({
     const content = (
         <>
             {icon && iconPosition === 'left' && (
-                <span className="mr-2">{icon}</span>
+                <span className="flex items-center">{icon}</span>
             )}
             {children}
             {icon && iconPosition === 'right' && (
-                <span className="ml-2">{icon}</span>
+                <span className="flex items-center">{icon}</span>
             )}
         </>
     );
@@ -102,7 +104,7 @@ const Button = ({
 
 Button.propTypes = {
     children: PropTypes.node.isRequired,
-    variant: PropTypes.oneOf(['primary', 'secondary', 'outline', 'text', 'danger']),
+    variant: PropTypes.oneOf(['primary', 'secondary', 'outline', 'text', 'danger', 'close']),
     size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
     className: PropTypes.string,
     href: PropTypes.string,
