@@ -20,19 +20,14 @@ import {
 } from 'lucide-react';
 
 const MobileMenu = ({ isOpen, setIsOpen, navItems, activeSection }) => {
-    // Estado para altura de ventana
-    const [windowHeight, setWindowHeight] = useState(0);
     // Estado para el dropdown del CV
     const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
     const cvDropdownRef = useRef(null);
+    // Capturar la altura inicial una sola vez al montar el componente
+    const [initialHeight] = useState(window.innerHeight);
 
-    // Actualizar altura en montaje y resize
-    useEffect(() => {
-        const updateHeight = () => setWindowHeight(window.innerHeight);
-        updateHeight();
-        window.addEventListener('resize', updateHeight);
-        return () => window.removeEventListener('resize', updateHeight);
-    }, []);
+    // Eliminamos el efecto que actualiza la altura durante el uso
+    // y solo usamos la altura inicial
 
     // Cerrar CV dropdown al hacer click fuera
     useEffect(() => {
@@ -133,8 +128,7 @@ const MobileMenu = ({ isOpen, setIsOpen, navItems, activeSection }) => {
         }
     ];
 
-    // Layout para tamaños grandes
-    const isLargeScreen = windowHeight > 750;
+    const isLargeScreen = initialHeight > 750;
 
     return createPortal(
         <AnimatePresence>
@@ -159,7 +153,9 @@ const MobileMenu = ({ isOpen, setIsOpen, navItems, activeSection }) => {
                             exit={{ x: '100%', opacity: 0 }}
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                             className={`bg-gray-900 shadow-xl flex flex-col rounded-2xl
-                                ${isLargeScreen ? 'max-h-[85vh] w-72' : 'h-[92vh] w-[85%] max-w-[280px]'}`}
+                                ${isLargeScreen
+                                    ? 'max-h-[85vh] w-72'
+                                    : 'h-[85vh] max-h-[600px] w-[85%] max-w-[280px]'}`}
                         >
                             {/* Header del menú */}
                             <div className="flex justify-between items-center p-4 border-b border-gray-700">
