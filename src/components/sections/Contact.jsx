@@ -8,6 +8,7 @@ import { isValidEmail, debounce } from '../../utils/helpers';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { headingAnimation, fadeInUp } from '../../utils/animation';
 import { contactInfo, getSocialLink } from '../../data/social';
+import { sendContactForm } from '../../utils/contactApi';
 
 const Contact = () => {
     const { ref, inView } = useScrollAnimation();
@@ -160,7 +161,7 @@ const Contact = () => {
 
         try {
             // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            await sendContactForm(formData);
 
             toast.success('¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.');
             setFormData({ name: '', email: '', subject: '', message: '' });
