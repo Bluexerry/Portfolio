@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Container from '../layout/Container';
 import ProjectCard from '../ui/ProjectCard';
 import ProjectModal from '../ui/ProjectModal';
-import DropdownProjects from '../ui/DropdownProjects';
+import ProjectDropdown from '../ui/ProjectDropdown';
 import ProjectButton from '../ui/ProjectButton';
 import { projects } from '../../data/projects';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
@@ -123,7 +123,7 @@ const Projects = () => {
                             {/* Dropdown para categorías adicionales */}
                             {hasMoreCategories && (
                                 <div className="flex justify-center">
-                                    <DropdownProjects
+                                    <ProjectDropdown
                                         items={extraCategories}
                                         selectedItem={filter}
                                         onItemSelected={setFilter}
