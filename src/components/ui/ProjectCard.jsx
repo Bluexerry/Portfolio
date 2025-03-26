@@ -210,8 +210,8 @@ const ProjectCard = ({ project, index, onClick }) => {
                         transition: { duration: 0.2, ease: "easeOut", repeat: 1, repeatType: "reverse" }
                     }}
                     className={`text-gray-400 dark:text-gray-500 group-hover:text-${colorName}-500 
-                        dark:group-hover:text-${colorName}-400 transition-colors duration-300 relative z-10
-                        translate-x-0 group-hover:translate-x-1 transition-transform duration-300`}
+                    dark:group-hover:text-${colorName}-400 relative z-10
+                    translate-x-0 group-hover:translate-x-1 transition-all duration-300`}
                 >
                     <div className={`absolute inset-0 rounded-full bg-${colorName}-100/0 group-hover:bg-${colorName}-100/50 
                         dark:group-hover:bg-${colorName}-900/30 scale-0 group-hover:scale-100 transition-transform duration-300`} />

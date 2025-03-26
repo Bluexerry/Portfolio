@@ -2,14 +2,14 @@
  * Servicio para enviar mensajes del formulario de contacto
  */
 
-// Cambia esto para que coincida con tu configuración CORS
-const API_URL = 'http://localhost:3000/api/contact';
+// Usar la variable de entorno para la URL de la API en producción
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export const sendContactForm = async (formData) => {
     try {
         console.log('Enviando formulario:', formData); // Log para depuración
 
-        const response = await fetch(API_URL, {
+        const response = await fetch(`${API_URL}/api/contact`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
