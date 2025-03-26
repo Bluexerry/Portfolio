@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { Loader2, Send, Mail, MapPin, Phone, Clock } from 'lucide-react';
 import Container from '../layout/Container';
@@ -23,6 +23,16 @@ const Contact = () => {
     const [touched, setTouched] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+    const [showConfetti, setShowConfetti] = useState(false);
+    const formValues = useRef(null);
+
+    // Guardar los valores del formulario para restaurarlos después
+    useEffect(() => {
+        if (isSubmitting) {
+            formValues.current = { ...formData };
+        }
+    }, [isSubmitting, formData]);
 
     // Validation rules
     const validationRules = {
@@ -79,6 +89,7 @@ const Contact = () => {
         setErrors(newErrors);
         return { isValid, errors: newErrors };
     };
+
     // Handle change with debounced validation
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -164,14 +175,22 @@ const Contact = () => {
             await sendContactForm(formData);
 
             toast.success('¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.');
-            setFormData({ name: '', email: '', subject: '', message: '' });
-            setTouched({});
+
+            // Mantener los valores para la animación
+            setShowConfetti(true);
             setFormSubmitted(true);
 
             // Reset form success message after 5 seconds
             setTimeout(() => {
-                setFormSubmitted(false);
-            }, 5000);
+                setIsAnimatingOut(true);
+                setTimeout(() => {
+                    setFormData({ name: '', email: '', subject: '', message: '' });
+                    setTouched({});
+                    setFormSubmitted(false);
+                    setIsAnimatingOut(false);
+                    setShowConfetti(false);
+                }, 500); // Duración de la animación de salida
+            }, 4500);
         } catch (error) {
             console.error('Error submitting form:', error);
             toast.error('No se pudo enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
@@ -179,6 +198,19 @@ const Contact = () => {
             setIsSubmitting(false);
         }
     };
+
+    // Partículas para el efecto de confeti
+    const confettiParticles = Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 3 + Math.random() * 5,
+        color: [
+            'bg-blue-500', 'bg-green-500', 'bg-purple-500',
+            'bg-yellow-400', 'bg-pink-500', 'bg-indigo-500'
+        ][Math.floor(Math.random() * 6)],
+        delay: Math.random() * 0.8
+    }));
 
     return (
         <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900">
@@ -257,11 +289,19 @@ const Contact = () => {
                                 <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                                     <li className="flex items-start text-sm">
                                         <span className="min-w-[4px] h-4 bg-purple-400 dark:bg-purple-500 rounded-full mr-2 mt-1"></span>
-                                        <span>Respuesta en menos de 48 horas</span>
+                                        <span>Respuesta garantizada en menos de 48 horas</span>
                                     </li>
                                     <li className="flex items-start text-sm">
                                         <span className="min-w-[4px] h-4 bg-purple-400 dark:bg-purple-500 rounded-full mr-2 mt-1"></span>
-                                        <span>Disponible para proyectos a partir de Junio 2025</span>
+                                        <span>Disponible para nuevos proyectos a partir de Junio 2025</span>
+                                    </li>
+                                    <li className="flex items-start text-sm">
+                                        <span className="min-w-[4px] h-4 bg-purple-400 dark:bg-purple-500 rounded-full mr-2 mt-1"></span>
+                                        <span>Consultas iniciales sin compromiso</span>
+                                    </li>
+                                    <li className="flex items-start text-sm">
+                                        <span className="min-w-[4px] h-4 bg-purple-400 dark:bg-purple-500 rounded-full mr-2 mt-1"></span>
+                                        <span>Abierto a colaboraciones y proyectos remotos</span>
                                     </li>
                                 </ul>
                             </div>
@@ -272,107 +312,232 @@ const Contact = () => {
                             variants={fadeInUp}
                             className="md:col-span-3"
                         >
-                            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md" style={{ minHeight: '506px' }}> {/* Altura fija calculada */}
-                                {formSubmitted ? (
-                                    <div className="p-6 h-full flex flex-col items-center justify-center">
-                                        {/* Espaciador flex que ocupa el espacio necesario */}
-                                        <div className="flex-grow" style={{ minHeight: '130px' }}></div>
-                                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 mb-4">
-                                            <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">
-                                            ¡Mensaje enviado!
-                                        </h3>
-                                        <p className="text-gray-600 dark:text-gray-400">
-                                            Gracias por contactarme. Te responderé lo antes posible.
-                                        </p>
-
-                                    </div>
-                                ) : (
-                                    <form onSubmit={handleSubmit} className="p-6 space-y-5">
-                                        <div className="grid grid-cols-2 gap-5">
-                                            <div>
-                                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                                    Nombre completo
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    id="name"
-                                                    value={formData.name}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.name && errors.name
-                                                        ? 'border-red-500 dark:border-red-500'
-                                                        : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
-                                                        } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
-                                                    placeholder="Juan Pérez"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                                    Email
-                                                </label>
-                                                <input
-                                                    type="email"
-                                                    id="email"
-                                                    value={formData.email}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.email && errors.email
-                                                        ? 'border-red-500 dark:border-red-500'
-                                                        : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
-                                                        } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
-                                                    placeholder="juan@ejemplo.com"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                                Asunto
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="subject"
-                                                value={formData.subject}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.subject && errors.subject
-                                                    ? 'border-red-500 dark:border-red-500'
-                                                    : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
-                                                    } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
-                                                placeholder="Asunto del mensaje"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                                Mensaje
-                                            </label>
-                                            <textarea
-                                                id="message"
-                                                value={formData.message}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                rows={5}
-                                                className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.message && errors.message
-                                                    ? 'border-red-500 dark:border-red-500'
-                                                    : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
-                                                    } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
-                                                placeholder="Tu mensaje..."
-                                            />
-                                        </div>
-
-                                        <Button
-                                            type="submit"
-                                            disabled={isSubmitting}
-                                            fullWidth
-                                            icon={isSubmitting ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
+                            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md relative overflow-hidden" style={{ minHeight: '506px' }}>
+                                <AnimatePresence mode="wait">
+                                    {formSubmitted ? (
+                                        <motion.div
+                                            key="success"
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: isAnimatingOut ? 0 : 1, scale: isAnimatingOut ? 0.9 : 1 }}
+                                            exit={{ opacity: 0, scale: 0.9 }}
+                                            transition={{
+                                                type: "spring",
+                                                damping: 20,
+                                                stiffness: 100
+                                            }}
+                                            className="p-6 absolute inset-0 flex flex-col items-center justify-center" // Cambiar esta línea
                                         >
-                                            {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
-                                        </Button>
-                                    </form>
-                                )}
+                                            {/* Efecto de confeti */}
+                                            {showConfetti && (
+                                                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                                                    {confettiParticles.map(particle => (
+                                                        <motion.div
+                                                            key={`confetti-${particle.id}`}
+                                                            className={`absolute rounded-sm ${particle.color}`}
+                                                            style={{
+                                                                width: `${particle.size}px`,
+                                                                height: `${particle.size}px`,
+                                                                left: `${particle.x}%`,
+                                                                top: 0,
+                                                                opacity: 0
+                                                            }}
+                                                            animate={{
+                                                                y: ["0%", "100%"],
+                                                                opacity: [0, 1, 0],
+                                                                rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)]
+                                                            }}
+                                                            transition={{
+                                                                duration: 2.5 + Math.random() * 2,
+                                                                ease: [0.4, 0, 0.2, 1],
+                                                                delay: particle.delay,
+                                                            }}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {/* Círculo verde con animación */}
+                                            <motion.div
+                                                className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-50 dark:bg-green-900/20 mb-6"
+                                                initial={{ scale: 0.5, opacity: 0 }}
+                                                animate={{ scale: 1, opacity: 1 }}
+                                                transition={{
+                                                    type: "spring",
+                                                    damping: 15,
+                                                    stiffness: 200,
+                                                    delay: 0.2
+                                                }}
+                                            >
+                                                {/* Ondas expansivas */}
+                                                <motion.div
+                                                    className="absolute inset-0 rounded-full border-2 border-green-400"
+                                                    initial={{ scale: 0.8, opacity: 0.8 }}
+                                                    animate={{ scale: 1.6, opacity: 0 }}
+                                                    transition={{
+                                                        duration: 1.5,
+                                                        ease: "easeOut",
+                                                        repeat: 2,
+                                                        repeatDelay: 1
+                                                    }}
+                                                />
+
+                                                {/* Check mark animation */}
+                                                <motion.svg
+                                                    className="w-10 h-10 text-green-500"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    initial={{ pathLength: 0, opacity: 0 }}
+                                                    animate={{ pathLength: 1, opacity: 1 }}
+                                                    transition={{ duration: 0.8, delay: 0.3 }}
+                                                >
+                                                    <motion.path
+                                                        d="M5 13l4 4L19 7"
+                                                        stroke="currentColor"
+                                                        strokeWidth="3"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        initial={{ pathLength: 0 }}
+                                                        animate={{ pathLength: 1 }}
+                                                        transition={{ duration: 0.8, delay: 0.3 }}
+                                                    />
+                                                </motion.svg>
+                                            </motion.div>
+
+                                            <motion.h3
+                                                className="text-2xl font-semibold mb-3 text-gray-800 dark:text-gray-200"
+                                                initial={{ y: 20, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{ delay: 0.5 }}
+                                            >
+                                                ¡Mensaje enviado!
+                                            </motion.h3>
+
+                                            <motion.p
+                                                className="text-gray-600 dark:text-gray-400 text-center max-w-md"
+                                                initial={{ y: 20, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{ delay: 0.7 }}
+                                            >
+                                                Gracias por contactarme. Te responderé lo antes posible.
+                                                <br />¡Que tengas un excelente día!
+                                            </motion.p>
+
+                                            <motion.div
+                                                className="mt-8 text-sm text-gray-500 dark:text-gray-400 flex items-center"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 1.2 }}
+                                            >
+                                                <Clock size={14} className="mr-1" />
+                                                <span>El formulario se reiniciará en unos segundos...</span>
+                                            </motion.div>
+                                        </motion.div>
+                                    ) : (
+                                        <motion.form
+                                            key="form"
+                                            onSubmit={handleSubmit}
+                                            className="p-6 space-y-5"
+                                            initial={{ opacity: 0, x: formSubmitted ? -20 : 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -20 }}
+                                            transition={{ duration: 0.5 }}
+                                        >
+                                            <div className="grid grid-cols-2 gap-5">
+                                                <div>
+                                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                                        Nombre completo
+                                                    </label>
+                                                    <motion.input
+                                                        whileFocus={{ scale: 1.01 }}
+                                                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                                        type="text"
+                                                        id="name"
+                                                        value={formData.name}
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.name && errors.name
+                                                            ? 'border-red-500 dark:border-red-500'
+                                                            : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
+                                                            } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
+                                                        placeholder="Juan Pérez"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                                        Email
+                                                    </label>
+                                                    <motion.input
+                                                        whileFocus={{ scale: 1.01 }}
+                                                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                                        type="email"
+                                                        id="email"
+                                                        value={formData.email}
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.email && errors.email
+                                                            ? 'border-red-500 dark:border-red-500'
+                                                            : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
+                                                            } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
+                                                        placeholder="juan@ejemplo.com"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                                    Asunto
+                                                </label>
+                                                <motion.input
+                                                    whileFocus={{ scale: 1.01 }}
+                                                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                                    type="text"
+                                                    id="subject"
+                                                    value={formData.subject}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.subject && errors.subject
+                                                        ? 'border-red-500 dark:border-red-500'
+                                                        : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
+                                                        } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
+                                                    placeholder="Asunto del mensaje"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                                    Mensaje
+                                                </label>
+                                                <motion.textarea
+                                                    whileFocus={{ scale: 1.01 }}
+                                                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                                    id="message"
+                                                    value={formData.message}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    rows={5}
+                                                    className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.message && errors.message
+                                                        ? 'border-red-500 dark:border-red-500'
+                                                        : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
+                                                        } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
+                                                    placeholder="Tu mensaje..."
+                                                />
+                                            </div>
+
+                                            <motion.div
+                                                whileHover={{ scale: 1.02 }}
+                                                whileTap={{ scale: 0.98 }}
+                                                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                            >
+                                                <Button
+                                                    type="submit"
+                                                    disabled={isSubmitting}
+                                                    fullWidth
+                                                    icon={isSubmitting ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
+                                                >
+                                                    {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
+                                                </Button>
+                                            </motion.div>
+                                        </motion.form>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </motion.div>
                     </div>

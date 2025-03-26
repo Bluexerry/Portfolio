@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, ChevronRight } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import PropTypes from 'prop-types';
-import { techColorMap } from '../../utils/techColorMap'; // Usar el import externo
+import { techColorMap } from '../../utils/techColorMap';
 
 // Función para determinar el color de borde principal basado en la tecnología dominante
 const getBorderColor = (tags) => {
@@ -15,120 +15,222 @@ const ProjectCard = ({ project, index, onClick }) => {
 
     // Determinar el color de borde basado en la tecnología principal
     const borderColor = getBorderColor(tags);
+    const baseColor = borderColor.replace('border-', '');
+    const colorName = baseColor.split('-')[0];
 
     return (
         <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                    duration: 0.5,
+                    delay: index * 0.1
+                }
+            }}
             whileHover={{
-                y: -8,
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                y: -5,
                 transition: {
                     duration: 0.3,
                     ease: [0.25, 0.1, 0.25, 1.0]
                 }
             }}
-            whileTap={{ scale: 0.98 }}
-            className={`bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl border-l-4 ${borderColor} flex flex-col h-full`}
+            className={`group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md 
+                border-l-4 ${borderColor} flex flex-col h-full transition-all duration-300`}
         >
-            <div className="p-6 flex-grow">
+            {/* Efectos de fondo */}
+            <div className="absolute inset-0 z-0">
+                {/* Fondo de cuadrícula técnica refinada */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 dark:group-hover:opacity-5 transition-opacity duration-700"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+                            linear-gradient(to bottom, #f0f0f0 1px, transparent 1px)
+                        `,
+                        backgroundSize: '20px 20px',
+                        mask: 'radial-gradient(circle at center, black 60%, transparent 100%)'
+                    }}
+                />
+
+                {/* Puntos decorativos mejorados */}
+                <div className="absolute right-0 bottom-0 w-28 h-28 opacity-0 group-hover:opacity-20 transition-opacity duration-700 rotate-12"
+                    style={{
+                        backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
+                        backgroundSize: '10px 10px',
+                        color: `var(--${colorName}-400)`,
+                        maskImage: 'linear-gradient(to bottom left, black, transparent)'
+                    }}
+                />
+
+                {/* Degradado sutil mejorado */}
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-700 bg-gradient-to-br 
+                    from-${colorName}-200/10 to-${colorName}-400/5 dark:from-${colorName}-900/10 dark:to-${colorName}-700/5`}
+                />
+
+                {/* Elemento decorativo adicional */}
+                <div className="absolute -right-20 -top-20 w-40 h-40 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700"
+                    style={{
+                        background: `radial-gradient(circle, var(--${colorName}-300), transparent 70%)`,
+                    }}
+                />
+            </div>
+
+            {/* Contenido */}
+            <div className="p-6 flex-grow relative z-10">
                 <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 leading-tight">
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 relative">
                         {title}
+                        <div className={`h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-${colorName}-500 to-${colorName}-300 
+                            transition-all duration-700 mt-1 opacity-70`} />
                     </h3>
+
                     <div className="flex space-x-2">
                         {repoUrl && (
-                            <motion.a
-                                whileHover={{ scale: 1.2, rotate: 5 }}
-                                whileTap={{ scale: 0.9, rotate: 0 }}
+                            <a
                                 href={repoUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
-                                aria-label="View code on GitHub"
+                                className="relative p-1.5 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300"
                             >
-                                <Github size={18} />
-                            </motion.a>
+                                <span className={`absolute inset-0 opacity-0 group-hover:opacity-20 
+                                    bg-gradient-to-br from-${colorName}-100 to-${colorName}-200 dark:from-${colorName}-900 dark:to-${colorName}-800 
+                                    rounded-full scale-0 group-hover:scale-100 transition-all duration-300`} />
+                                <Github
+                                    size={18}
+                                    className={`relative z-10 text-gray-600 dark:text-gray-400 group-hover:text-${colorName}-500
+                                        dark:group-hover:text-${colorName}-400 transition-colors duration-300`}
+                                />
+                            </a>
                         )}
+
                         {demoUrl && (
-                            <motion.a
-                                whileHover={{ scale: 1.2, rotate: -5 }}
-                                whileTap={{ scale: 0.9, rotate: 0 }}
+                            <a
                                 href={demoUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
-                                aria-label="View live demo"
+                                className="relative p-1.5 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300"
                             >
-                                <ExternalLink size={18} />
-                            </motion.a>
+                                <span className={`absolute inset-0 opacity-0 group-hover:opacity-20 
+                                    bg-gradient-to-br from-${colorName}-100 to-${colorName}-200 dark:from-${colorName}-900 dark:to-${colorName}-800
+                                    rounded-full scale-0 group-hover:scale-100 transition-all duration-300`} />
+                                <ExternalLink
+                                    size={18}
+                                    className={`relative z-10 text-gray-600 dark:text-gray-400 group-hover:text-${colorName}-500
+                                        dark:group-hover:text-${colorName}-400 transition-colors duration-300`}
+                                />
+                            </a>
                         )}
                     </div>
                 </div>
 
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300">
                     {description}
                 </p>
 
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                    {tags.slice(0, 4).map((tag, i) => {
+                <div className="flex flex-wrap gap-1.5">
+                    {tags.map((tag, i) => {
                         const bgColor = techColorMap[tag] || 'bg-gray-200 dark:bg-gray-700';
                         return (
                             <motion.span
                                 key={tag}
-                                className={`${bgColor} px-2.5 py-1 rounded-full text-xs font-medium text-white`}
-                                initial={{ opacity: 0, scale: 0.8 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 animate={{
                                     opacity: 1,
-                                    scale: 1,
+                                    y: 0,
                                     transition: {
-                                        delay: (index * 0.12) + 0.3 + (i * 0.07)
+                                        delay: (index * 0.1) + 0.1 + (i * 0.05)
                                     }
                                 }}
                                 whileHover={{ y: -2 }}
+                                className={`${bgColor} px-2.5 py-1 rounded-full text-xs font-medium text-white 
+                                    relative overflow-hidden group-hover:shadow-sm transition-all duration-300 
+                                    transform-gpu`}
                             >
+                                {/* Efecto de brillo mejorado */}
+                                <span className="absolute inset-0 w-full bg-gradient-to-r from-transparent via-white/20 to-transparent
+                                    -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                                 {tag}
                             </motion.span>
                         );
                     })}
-                    {tags.length > 4 && (
-                        <motion.span
-                            className="px-2.5 py-1 rounded-full text-xs font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{
-                                opacity: 1,
-                                scale: 1,
-                                transition: {
-                                    delay: (index * 0.12) + 0.3 + (4 * 0.07)
-                                }
-                            }}
-                            whileHover={{ y: -2 }}
-                        >
-                            +{tags.length - 4}
-                        </motion.span>
-                    )}
                 </div>
             </div>
 
-            <motion.div
+            {/* Botón de detalle - SIGNIFICATIVAMENTE MEJORADO */}
+            <div
                 onClick={onClick}
-                className="mt-auto px-6 py-3 bg-gray-50 dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center cursor-pointer group hover:bg-gray-100 dark:hover:bg-gray-750 transition-colors"
-                whileHover={{ backgroundColor: "rgb(51, 67, 99)" }}
-                whileTap={{ backgroundColor: "rgba(229, 231, 235, 1)" }}
-                transition={{ duration: 0.2 }}
+                className={`group-button group-even:bg-gray-50 group-odd:bg-white dark:group-even:bg-gray-800/50 dark:group-odd:bg-gray-800 
+                    mt-auto px-6 py-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center 
+                    cursor-pointer relative overflow-hidden`}
             >
-                <span className="text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-200 transition-colors">
-                    Ver detalles
-                </span>
+                {/* Línea animada que conecta el texto con la flecha */}
+                <div className={`absolute bottom-0 left-6 right-6 h-[2px] bg-gradient-to-r from-${colorName}-500/0 via-${colorName}-500/70 to-${colorName}-500/0
+                    translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500`} />
+
+                {/* Efecto de iluminación al hover mejorado */}
+                <div className={`absolute inset-0 bg-gradient-to-r from-${colorName}-50/50 to-white/30 
+                    dark:from-${colorName}-900/30 dark:to-gray-800/30 opacity-0 group-hover:opacity-100 
+                    transition-opacity duration-500`} />
+
+                {/* Efecto de rastro al hover */}
+                <div className="absolute inset-0 w-full h-full pointer-events-none">
+                    <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full
+                        group-hover:w-[200%] group-hover:h-40 bg-gradient-to-r from-${colorName}-400/0 via-${colorName}-400/5 to-${colorName}-400/0
+                        transition-all duration-1000 ease-out opacity-0 group-hover:opacity-100`} />
+                </div>
+
+                {/* Texto con animación */}
+                <div className="flex items-center relative z-10 overflow-hidden">
+                    <span className={`text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-${colorName}-600 
+                        dark:group-hover:text-${colorName}-400 transition-colors duration-300 relative`}>
+                        Ver detalles
+
+                        {/* Línea de subrayado animada */}
+                        <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-${colorName}-500/70 
+                            group-hover:w-full transition-all duration-500 delay-100`} />
+                    </span>
+
+                    {/* Partículas decorativas */}
+                    <div className="absolute left-full top-1/2 -translate-y-1/2 flex space-x-0.5 opacity-0 
+                        group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out">
+                        <div className={`w-1 h-1 rounded-full bg-${colorName}-500/50`} style={{ animationDelay: '0.1s' }} />
+                        <div className={`w-0.5 h-0.5 rounded-full bg-${colorName}-500/40`} style={{ animationDelay: '0.2s' }} />
+                        <div className={`w-0.5 h-0.5 rounded-full bg-${colorName}-500/30`} style={{ animationDelay: '0.3s' }} />
+                    </div>
+                </div>
+
+                {/* Flecha con animación mejorada */}
                 <motion.div
-                    className="text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors"
                     initial={{ x: 0 }}
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    whileHover={{
+                        x: 5,
+                        transition: { duration: 0.2, ease: "easeOut", repeat: 1, repeatType: "reverse" }
+                    }}
+                    className={`text-gray-400 dark:text-gray-500 group-hover:text-${colorName}-500 
+                        dark:group-hover:text-${colorName}-400 transition-colors duration-300 relative z-10
+                        translate-x-0 group-hover:translate-x-1 transition-transform duration-300`}
                 >
-                    <ChevronRight size={18} />
+                    <div className={`absolute inset-0 rounded-full bg-${colorName}-100/0 group-hover:bg-${colorName}-100/50 
+                        dark:group-hover:bg-${colorName}-900/30 scale-0 group-hover:scale-100 transition-transform duration-300`} />
+                    <ArrowRight size={18} className="relative z-10" />
                 </motion.div>
-            </motion.div>
+            </div>
+
+            {/* Efecto de sombra mejorado con degradado */}
+            <div className="absolute -z-10 inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                    boxShadow: `0 15px 30px -10px rgba(var(--${colorName}-500-rgb), 0.15), 
+                               0 10px 10px -5px rgba(var(--${colorName}-500-rgb), 0.08)`
+                }}
+            />
+
+            {/* Contorno sutil en hover */}
+            <div className={`absolute inset-0 rounded-xl border border-${colorName}-500/0 
+                group-hover:border-${colorName}-500/20 dark:group-hover:border-${colorName}-500/10 
+                transition-colors duration-500 pointer-events-none`} />
         </motion.div>
     );
 };
@@ -143,7 +245,7 @@ ProjectCard.propTypes = {
         repoUrl: PropTypes.string,
     }).isRequired,
     index: PropTypes.number.isRequired,
-    inView: PropTypes.bool.isRequired,
+    inView: PropTypes.bool,
     onClick: PropTypes.func.isRequired
 };
 

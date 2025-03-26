@@ -36,7 +36,7 @@ const DropdownProjects = ({
     return (
         <motion.div
             ref={dropdownRef}
-            className="relative inline-block"
+            className="relative inline-block z-30" // Aumentado el z-index del contenedor
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -60,7 +60,7 @@ const DropdownProjects = ({
                 </motion.span>
             </motion.button>
 
-            {/* Menú desplegable con scroll vertical invisible */}
+            {/* Menú desplegable con z-index mejorado */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -78,14 +78,15 @@ const DropdownProjects = ({
                             transition: { duration: 0.2 }
                         }}
                         className="absolute left-1/2 transform -translate-x-1/2 mt-2 p-3 
-                            bg-white dark:bg-gray-800 rounded-xl shadow-lg z-10
+                            bg-white dark:bg-gray-800 rounded-xl shadow-xl z-50 
                             overflow-hidden"
                         style={{
                             minWidth: maxWidth,
-                            maxHeight: '60vh'
+                            maxHeight: '60vh',
+                            boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
                         }}
                     >
-                        {/* Contenedor interno con scroll oculto */}
+                        {/* Resto del código del dropdown sin cambios */}
                         <div
                             className="overflow-y-auto"
                             style={{

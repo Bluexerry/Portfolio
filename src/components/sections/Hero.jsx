@@ -103,8 +103,7 @@ const Hero = () => {
                             className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg"
                             variants={fadeInUp}
                         >
-                            Desarrollador Full Stack con experiencia en la creación de aplicaciones web modernas y eficientes con React y Node.js, con formación en sistemas electrotécnicos y telecomunicaciones y capacidad para abordar los problemas desde una perspectiva amplia, buscando siempre soluciones tecnológicas, prácticas e innovadoras.
-                        </motion.p>
+                            Desarrollador Full Stack especializado en crear aplicaciones web modernas y eficientes con React, Node.js y tecnologías JavaScript avanzadas. Me apasiona construir interfaces intuitivas y arquitecturas backend robustas, siempre buscando el equilibrio perfecto entre rendimiento, escalabilidad y experiencia de usuario excepcional.                        </motion.p>
 
                         <motion.div
                             className="flex flex-wrap gap-4 mb-10"

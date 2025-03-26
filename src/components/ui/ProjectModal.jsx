@@ -1,49 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Github, Tag, Calendar, Clock } from 'lucide-react';
+import { X, ExternalLink, Github, Tag, Calendar, Clock, Code } from 'lucide-react';
 import PropTypes from 'prop-types';
 import Button from './Button';
+import { techColorMap } from '../../utils/techColorMap';
 
-// Mapa de colores por tecnología (reutilizando el del ProjectCard)
-const techColorMap = {
-    'React': 'bg-blue-500',
-    'Vue.js': 'bg-green-500',
-    'JavaScript': 'bg-yellow-500',
-    'TypeScript': 'bg-blue-600',
-    'Node.js': 'bg-green-600',
-    'Express': 'bg-gray-600',
-    'PHP': 'bg-purple-600',
-    'Laravel': 'bg-red-600',
-    'C#': 'bg-purple-700',
-    '.NET': 'bg-purple-600',
-    'Java': 'bg-red-700',
-    'Selenium': 'bg-green-700',
-    'MongoDB': 'bg-green-600',
-    'MySQL': 'bg-blue-700',
-    'API': 'bg-indigo-600',
-    'API REST': 'bg-indigo-600',
-    'WebSockets': 'bg-purple-500',
-    'CSS': 'bg-blue-400',
-    'HTML': 'bg-orange-600',
-    'Tailwind CSS': 'bg-teal-500',
-    'Bootstrap': 'bg-purple-600',
-    'Redux': 'bg-purple-600',
-    'Framer Motion': 'bg-purple-500',
-    'Mobile': 'bg-blue-600',
-    'React Native': 'bg-blue-500',
-    'TestNG': 'bg-yellow-600',
-    'Maven': 'bg-red-600',
-    'MVC': 'bg-gray-600',
-    'Backend': 'bg-gray-700',
-    'Swagger': 'bg-green-600',
-    'Vuex': 'bg-green-600',
-    'IoT': 'bg-blue-600',
-    'Arduino': 'bg-teal-600',
-    'Sensores': 'bg-yellow-600',
-};
-
-// Función para obtener gradiente (mantenida igual)
+// Función para obtener gradiente (mejorada con efectos de dirección y opacidad)
 const getBackgroundGradient = (tags) => {
     if (!tags || tags.length === 0) return 'bg-gradient-to-r from-gray-700 to-gray-900';
 
@@ -54,10 +17,10 @@ const getBackgroundGradient = (tags) => {
     });
 
     if (colors.length === 1) {
-        return `bg-gradient-to-r from-${colors[0]} to-${colors[0]}/70`;
+        return `bg-gradient-to-br from-${colors[0]} via-${colors[0]}/85 to-${colors[0]}/70`;
     }
 
-    return `bg-gradient-to-r from-${colors[0]} to-${colors[1]}`;
+    return `bg-gradient-to-br from-${colors[0]} via-${colors[0]}/85 to-${colors[1]}`;
 };
 
 // Componente ModalPortal - renderiza el modal fuera del DOM principal
@@ -75,6 +38,8 @@ function ModalPortal({ children }) {
 }
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
+    const [activeTab, setActiveTab] = useState('about');
+
     // Solución de scroll con React Portal
     useEffect(() => {
         if (isOpen) {
@@ -129,6 +94,11 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
     const headerBgStyle = getBackgroundGradient(project.tags);
     const year = project.year || "2023";
 
+    // Características ordenadas en dos columnas cuando es posible
+    const features = project.features || [];
+    const firstColFeatures = features.slice(0, Math.ceil(features.length / 2));
+    const secondColFeatures = features.slice(Math.ceil(features.length / 2));
+
     // Renderizar el modal a través del portal
     return (
         <ModalPortal>
@@ -156,15 +126,47 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 {/* Header con gradiente mejorado */}
-                                <div className={`w-full py-10 px-8 relative text-white ${headerBgStyle} overflow-hidden`}>
-                                    {/* Patrones decorativos */}
+                                <div className={`w-full py-12 px-8 relative text-white ${headerBgStyle} overflow-hidden`}>
+                                    {/* Patrones decorativos y efecto visual */}
                                     <div className="absolute inset-0 opacity-10 pointer-events-none">
+                                        {/* Patrón de puntos */}
                                         <div className="absolute top-0 left-0 w-full h-40"
                                             style={{
                                                 background: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)',
                                                 backgroundSize: '20px 20px'
                                             }}>
                                         </div>
+
+                                        {/* Líneas zigzag */}
+                                        <svg className="absolute inset-0 w-full h-full">
+                                            <motion.path
+                                                d="M0,30 L40,60 L80,30 L120,60 L160,30 L200,60 L240,30 L280,60 L320,30"
+                                                stroke="white"
+                                                strokeWidth="1"
+                                                fill="none"
+                                                initial={{ pathLength: 0, opacity: 0.2 }}
+                                                animate={{ pathLength: 1, opacity: 0.5 }}
+                                                transition={{ duration: 2.5, ease: "easeInOut" }}
+                                            />
+                                        </svg>
+
+                                        {/* Círculos decorativos */}
+                                        <motion.div
+                                            className="absolute bottom-0 right-0 w-64 h-64 rounded-full"
+                                            style={{
+                                                background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+                                                transform: 'translate(30%, 30%)'
+                                            }}
+                                            animate={{
+                                                scale: [1, 1.1, 1],
+                                                opacity: [0.1, 0.15, 0.1]
+                                            }}
+                                            transition={{
+                                                duration: 4,
+                                                repeat: Infinity,
+                                                repeatType: "reverse"
+                                            }}
+                                        />
                                     </div>
 
                                     <motion.h2
@@ -195,6 +197,29 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                     >
                                         <X size={20} />
                                     </motion.button>
+                                </div>
+
+                                {/* Pestañas de navegación */}
+                                <div className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
+                                    <div className="flex overflow-x-auto scrollbar-hide">
+                                        {project.features && project.features.length > 0 && (
+                                            <button
+                                                onClick={() => setActiveTab('features')}
+                                                className={`px-6 py-3 text-sm font-medium relative ${activeTab === 'features'
+                                                    ? 'text-blue-600 dark:text-blue-400'
+                                                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+                                                    }`}
+                                            >
+                                                Características
+                                                {activeTab === 'features' && (
+                                                    <motion.div
+                                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400"
+                                                        layoutId="activeTab"
+                                                    />
+                                                )}
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Contenido del proyecto */}
@@ -233,9 +258,10 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                     variant="primary"
                                                     size="sm"
                                                     icon={<ExternalLink size={16} />}
-                                                    className="shadow-md hover:shadow-lg transition-shadow"
+                                                    className="shadow-md hover:shadow-lg transition-shadow relative overflow-hidden group"
                                                 >
-                                                    Ver Demo
+                                                    <span className="relative z-10">Ver Demo</span>
+                                                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
                                                 </Button>
                                             )}
                                             {project.repoUrl && (
@@ -261,6 +287,8 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                         >
                                             {project.tags?.map((tag, i) => {
                                                 const bgColor = techColorMap[tag] || 'bg-gray-200 dark:bg-gray-600';
+                                                // Eliminar esta línea: const baseColor = bgColor.replace('bg-', '');
+
                                                 return (
                                                     <motion.div
                                                         key={tag}
@@ -271,69 +299,162 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                             scale: 1,
                                                             transition: { delay: 0.4 + (i * 0.05) }
                                                         }}
+                                                        whileHover={{
+                                                            y: -3,
+                                                            boxShadow: `0 3px 10px rgba(0,0,0,0.2)`,
+                                                            transition: { duration: 0.2 }
+                                                        }}
                                                     >
-                                                        <span className={`${bgColor} flex items-center px-3 py-1 rounded-full text-sm text-white shadow-sm`}>
+                                                        <span className={`${bgColor} flex items-center px-3 py-1.5 rounded-full text-sm text-white shadow-sm relative overflow-hidden group`}>
                                                             <Tag size={12} className="mr-1.5 opacity-80" />
                                                             {tag}
+                                                            {/* Efecto de brillo */}
+                                                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:animate-shimmer" />
                                                         </span>
                                                     </motion.div>
                                                 );
                                             })}
                                         </motion.div>
 
-                                        {/* Descripción completa mejorada */}
-                                        <motion.div
-                                            className="prose dark:prose-invert max-w-none mb-10"
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.5 }}
-                                        >
-                                            <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100 flex items-center">
-                                                <span className="inline-block w-2 h-8 bg-blue-500 rounded-full mr-3"></span>
-                                                Acerca del proyecto
-                                            </h3>
-                                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                                {project.longDescription || project.description}
-                                            </p>
-                                        </motion.div>
+                                        {/* Contenido basado en pestañas */}
+                                        <AnimatePresence mode="wait">
+                                            {activeTab === 'about' && (
+                                                <motion.div
+                                                    key="about-content"
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: -10 }}
+                                                    transition={{ duration: 0.3 }}
+                                                    className="prose dark:prose-invert max-w-none mb-10"
+                                                >
+                                                    <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100 flex items-center">
+                                                        <span className="inline-block w-2 h-8 bg-blue-500 rounded-full mr-3"></span>
+                                                        Acerca del proyecto
+                                                    </h3>
 
-                                        {/* Características mejoradas */}
-                                        {project.features && (
-                                            <motion.div
-                                                className="mb-8"
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{ delay: 0.6 }}
-                                            >
-                                                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100 flex items-center">
-                                                    <span className="inline-block w-2 h-8 bg-green-500 rounded-full mr-3"></span>
-                                                    Características principales
-                                                </h3>
-                                                <div className="grid sm:grid-cols-2 gap-4">
-                                                    {project.features.map((feature, index) => (
-                                                        <motion.div
-                                                            key={index}
-                                                            className="flex items-start bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300"
-                                                            initial={{ opacity: 0, x: -10 }}
-                                                            animate={{
-                                                                opacity: 1,
-                                                                x: 0,
-                                                                transition: { delay: 0.6 + (index * 0.1) }
-                                                            }}
-                                                        >
-                                                            <div className="min-w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30 mr-3 mt-0.5">
-                                                                <span className="text-blue-600 dark:text-blue-400 text-xs font-bold">
-                                                                    {index + 1}
-                                                                </span>
+                                                    <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800/30 mb-6 relative overflow-hidden">
+                                                        {/* Patrón decorativo */}
+                                                        <div className="absolute top-0 right-0 w-24 h-24 opacity-20 pointer-events-none">
+                                                            <Code className="w-full h-full text-blue-500" />
+                                                        </div>
+
+                                                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed relative z-10">
+                                                            {project.longDescription || project.description}
+                                                        </p>
+                                                    </div>
+                                                </motion.div>
+                                            )}
+
+                                            {activeTab === 'features' && (
+                                                <motion.div
+                                                    key="features-content"
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: -10 }}
+                                                    transition={{ duration: 0.3 }}
+                                                    className="mb-8"
+                                                >
+                                                    <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100 flex items-center">
+                                                        <span className="inline-block w-2 h-8 bg-green-500 rounded-full mr-3"></span>
+                                                        Características principales
+                                                    </h3>
+
+                                                    {/* Versión mejorada para desktop: dos columnas con conectores */}
+                                                    <div className="hidden md:block">
+                                                        <div className="flex gap-6">
+                                                            {/* Primera columna */}
+                                                            <div className="w-1/2 space-y-4">
+                                                                {firstColFeatures.map((feature, index) => (
+                                                                    <motion.div
+                                                                        key={index}
+                                                                        className="flex items-start bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden group"
+                                                                        initial={{ opacity: 0, x: -10 }}
+                                                                        animate={{
+                                                                            opacity: 1,
+                                                                            x: 0,
+                                                                            transition: { delay: 0.3 + (index * 0.1) }
+                                                                        }}
+                                                                        whileHover={{
+                                                                            scale: 1.02,
+                                                                            transition: { duration: 0.2 }
+                                                                        }}
+                                                                    >
+                                                                        {/* Fondo animado en hover */}
+                                                                        <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                                                        <div className="min-w-7 h-7 flex items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 mr-3 mt-0.5 relative z-10">
+                                                                            <span className="text-green-600 dark:text-green-400 text-xs font-bold">
+                                                                                {index + 1}
+                                                                            </span>
+                                                                        </div>
+                                                                        <span className="text-gray-800 dark:text-gray-200 relative z-10">
+                                                                            {feature}
+                                                                        </span>
+                                                                    </motion.div>
+                                                                ))}
                                                             </div>
-                                                            <span className="text-gray-800 dark:text-gray-200">
-                                                                {feature}
-                                                            </span>
-                                                        </motion.div>
-                                                    ))}
-                                                </div>
-                                            </motion.div>
-                                        )}
+
+                                                            {/* Segunda columna */}
+                                                            <div className="w-1/2 space-y-4">
+                                                                {secondColFeatures.map((feature, index) => (
+                                                                    <motion.div
+                                                                        key={index}
+                                                                        className="flex items-start bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden group"
+                                                                        initial={{ opacity: 0, x: 10 }}
+                                                                        animate={{
+                                                                            opacity: 1,
+                                                                            x: 0,
+                                                                            transition: { delay: 0.3 + (index * 0.1) }
+                                                                        }}
+                                                                        whileHover={{
+                                                                            scale: 1.02,
+                                                                            transition: { duration: 0.2 }
+                                                                        }}
+                                                                    >
+                                                                        {/* Fondo animado en hover */}
+                                                                        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                                                        <div className="min-w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30 mr-3 mt-0.5 relative z-10">
+                                                                            <span className="text-blue-600 dark:text-blue-400 text-xs font-bold">
+                                                                                {firstColFeatures.length + index + 1}
+                                                                            </span>
+                                                                        </div>
+                                                                        <span className="text-gray-800 dark:text-gray-200 relative z-10">
+                                                                            {feature}
+                                                                        </span>
+                                                                    </motion.div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Versión para móvil: una columna */}
+                                                    <div className="md:hidden space-y-4">
+                                                        {project.features.map((feature, index) => (
+                                                            <motion.div
+                                                                key={index}
+                                                                className="flex items-start bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden"
+                                                                initial={{ opacity: 0, y: 10 }}
+                                                                animate={{
+                                                                    opacity: 1,
+                                                                    y: 0,
+                                                                    transition: { delay: 0.3 + (index * 0.1) }
+                                                                }}
+                                                            >
+                                                                <div className="min-w-7 h-7 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-green-500 mr-3 mt-0.5">
+                                                                    <span className="text-white text-xs font-bold">
+                                                                        {index + 1}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="text-gray-800 dark:text-gray-200">
+                                                                    {feature}
+                                                                </span>
+                                                            </motion.div>
+                                                        ))}
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </div>
                                 </div>
 
@@ -346,7 +467,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                 >
                                     <Button
                                         onClick={onClose}
-                                        variant="close"  // Cambia de "outline" a "close"
+                                        variant="close"
                                         size="sm"
                                         className="shadow-sm hover:shadow-md"
                                     >
