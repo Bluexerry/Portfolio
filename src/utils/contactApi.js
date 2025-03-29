@@ -2,15 +2,15 @@
  * Servicio para enviar mensajes del formulario de contacto
  */
 
-// Corregir acceso a la variable de entorno
 const API_URL = import.meta.env.VITE_MAILER_URL || 'http://localhost:3000';
 
 export const sendContactForm = async (formData) => {
     try {
-        console.log('Usando API URL:', API_URL); // Debugear la URL
+        console.log('Usando API URL:', API_URL);
         console.log('Enviando formulario:', formData);
 
-        const response = await fetch(`${API_URL}/.netlify/functions/api/contact`, {
+        // Usar directamente la ruta de la nueva función
+        const response = await fetch(`${API_URL}/.netlify/functions/contact`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,7 +20,6 @@ export const sendContactForm = async (formData) => {
 
         console.log('Respuesta del servidor:', response.status);
 
-        // Verificar si la respuesta es JSON
         const contentType = response.headers.get('content-type');
         const isJson = contentType && contentType.includes('application/json');
 
