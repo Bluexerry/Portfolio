@@ -10,7 +10,7 @@ export const sendContactForm = async (formData) => {
         console.log('Usando API URL:', API_URL); // Debugear la URL
         console.log('Enviando formulario:', formData);
 
-        const response = await fetch(`${API_URL}/api/contact`, {
+        const response = await fetch(`${API_URL}/.netlify/functions/api/contact`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

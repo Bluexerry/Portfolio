@@ -193,7 +193,7 @@ const Contact = () => {
             }, 4500);
         } catch (error) {
             console.error('Error submitting form:', error);
-            toast.error('No se pudo enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
+            toast.error(`No se pudo enviar el mensaje: ${error.message || 'Error desconocido'}`);
         } finally {
             setIsSubmitting(false);
         }
