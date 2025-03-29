@@ -2,12 +2,13 @@
  * Servicio para enviar mensajes del formulario de contacto
  */
 
-// Usar la variable de entorno para la URL de la API en producción
-const API_URL = import.meta.env.MAILER_URL;
+// Corregir acceso a la variable de entorno
+const API_URL = import.meta.env.VITE_MAILER_URL || 'http://localhost:3000';
 
 export const sendContactForm = async (formData) => {
     try {
-        console.log('Enviando formulario:', formData); // Log para depuración
+        console.log('Usando API URL:', API_URL); // Debugear la URL
+        console.log('Enviando formulario:', formData);
 
         const response = await fetch(`${API_URL}/api/contact`, {
             method: 'POST',
@@ -17,18 +18,29 @@ export const sendContactForm = async (formData) => {
             body: JSON.stringify(formData),
         });
 
-        console.log('Respuesta del servidor:', response.status); // Log para depuración
+        console.log('Respuesta del servidor:', response.status);
 
-        const data = await response.json();
+        // Verificar si la respuesta es JSON
+        const contentType = response.headers.get('content-type');
+        const isJson = contentType && contentType.includes('application/json');
+
+        let data;
+        if (isJson) {
+            data = await response.json();
+        } else {
+            const text = await response.text();
+            console.warn('Respuesta no JSON:', text);
+            data = { message: text };
+        }
 
         if (!response.ok) {
-            console.error('Error del servidor:', data); // Log para depuración
+            console.error('Error del servidor:', data);
             throw new Error(data.error || 'Error al enviar el mensaje');
         }
 
         return data;
     } catch (error) {
-        console.error('Error en solicitud:', error.message); // Log para depuración
+        console.error('Error en solicitud:', error.message);
         throw error;
     }
 };
