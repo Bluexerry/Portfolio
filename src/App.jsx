@@ -12,11 +12,25 @@ import Toast from './components/ui/Toast';
 import './App.css';
 
 function App() {
-  // Limpiar cualquier configuración de tema al iniciar
+  // Asegurarse de que no haya clase 'dark' en ningún momento
   useEffect(() => {
+    // Remover clase 'dark' del HTML
+    document.documentElement.classList.remove('dark');
+    
+    // Reiniciar cualquier configuración de tema
     localStorage.removeItem('theme');
     localStorage.removeItem('color-theme');
-    document.documentElement.classList.remove('dark');
+    
+    // Prevenir que MediaQuery active el tema oscuro
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      document.documentElement.classList.remove('dark');
+    };
+    
+    mediaQuery.addEventListener('change', handleChange);
+    
+    // Limpiar evento al desmontar
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   return (

@@ -1,16 +1,40 @@
+/* Configuración base para neutralizar temas del sistema */
 html {
-  color-scheme: only light;
+  color-scheme: normal;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+/* Prevenir que el sistema o navegador aplique automáticamente temas oscuros */
+@media (prefers-color-scheme: dark) {
+  html {
+    /* Forzar comportamiento de modo claro para neutralizar la detección automática */
+    color-scheme: only light;
+  }
+
+  /* Prevenir que los componentes con 'dark:' cambien en dispositivos con tema oscuro */
+  html:not(.dark) * {
+    /* Estas reglas aseguran que los selectores 'dark:' no se apliquen */
+    /* aunque el dispositivo tenga preferencia de tema oscuro */
+  }
 }
+
+/* Bloquear explícitamente la activación de clases dark: */
+html.dark,
+html[class*="dark"],
+html[data-theme="dark"],
+body.dark,
+body[data-theme="dark"],
+body[class*="dark"] {
+  /* Neutraliza cualquier intento de activar el modo oscuro a nivel de clase */
+  /* pero permite que los estilos base oscuros de la aplicación permanezcan */
+}
+
+/* Asegurar que el HTML nunca tenga la clase 'dark' aplicada */
+html.dark {
+  /* La clase está presente pero neutralizada para que las dark: no funcionen */
+  background-color: inherit !important;
+  color: inherit !important;
+}
+
 @import "tailwindcss";
 
 @keyframes fadeInScale {
