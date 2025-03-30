@@ -1,0 +1,24 @@
+/* Anular cualquier configuración de tema oscuro */
+:root {
+    color-scheme: only light;
+}
+
+/* Prevenir cualquier aplicación automática de temas oscuros del sistema */
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: only light;
+    }
+
+    html,
+    body {
+        background-color: var(--bg-color, white) !important;
+        color: var(--text-color, #333333) !important;
+    }
+}
+
+/* Asegurarse de que las clases dark: no se apliquen */
+.dark {
+    /* Anular cualquier clase que pueda haber sido aplicada */
+    background-color: inherit !important;
+    color: inherit !important;
+}
