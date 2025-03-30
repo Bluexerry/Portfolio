@@ -20,14 +20,37 @@ import {
 } from 'lucide-react';
 
 const MobileMenu = ({ isOpen, setIsOpen, navItems, activeSection }) => {
+    // Referencia para el menú
+    const menuRef = useRef(null);
+
     // Estado para el dropdown del CV
     const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
     const cvDropdownRef = useRef(null);
+
     // Capturar la altura inicial una sola vez al montar el componente
     const [initialHeight] = useState(window.innerHeight);
 
-    // Eliminamos el efecto que actualiza la altura durante el uso
-    // y solo usamos la altura inicial
+    // Nueva funcionalidad para cerrar al hacer clic fuera del menú
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleClickOutside = (event) => {
+            // Si el clic fue fuera del menú (y no en un elemento del menú), cerramos
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        // Añadimos el listener con un pequeño retraso para evitar cierres inmediatos
+        const timer = setTimeout(() => {
+            document.addEventListener('mousedown', handleClickOutside);
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen, setIsOpen]);
 
     // Cerrar CV dropdown al hacer click fuera
     useEffect(() => {
@@ -134,20 +157,20 @@ const MobileMenu = ({ isOpen, setIsOpen, navItems, activeSection }) => {
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Overlay de fondo */}
+                    {/* Overlay de fondo - eliminamos el onClick de aquí */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
                         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-                        onClick={() => setIsOpen(false)}
                     />
 
                     {/* Contenedor principal que actúa como espacio para centrar */}
                     <div className="fixed inset-0 flex items-center justify-end z-50 pr-4">
                         {/* Contenedor del menú con bordes redondeados */}
                         <motion.div
+                            ref={menuRef} // Añadimos la referencia aquí
                             initial={{ x: '100%', opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: '100%', opacity: 0 }}

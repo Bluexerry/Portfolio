@@ -1,6 +1,7 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
-    darkMode: 'class', // Asegúrate de que esta línea exista
+    // Eliminar o comentar la línea darkMode
+    // darkMode: 'class',
     theme: {
         extend: {
             animation: {
