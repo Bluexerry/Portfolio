@@ -12,25 +12,50 @@ import Toast from './components/ui/Toast';
 import './App.css';
 
 function App() {
-  // Asegurarse de que no haya clase 'dark' en ningún momento
+  // Solución agresiva para prevenir temas oscuros
   useEffect(() => {
-    // Remover clase 'dark' del HTML
-    document.documentElement.classList.remove('dark');
-    
-    // Reiniciar cualquier configuración de tema
-    localStorage.removeItem('theme');
-    localStorage.removeItem('color-theme');
-    
-    // Prevenir que MediaQuery active el tema oscuro
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => {
+    // Función para limpiar y forzar tema claro
+    const forceLightTheme = () => {
+      // Limpiar localStorage
+      localStorage.removeItem('theme');
+      localStorage.removeItem('color-theme');
+      localStorage.removeItem('darkMode');
+
+      // Establecer explícitamente tema claro
+      localStorage.setItem('theme', 'light');
+
+      // Remover clase 'dark' del HTML
       document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
     };
-    
+
+    // Ejecutar inmediatamente
+    forceLightTheme();
+
+    // Configurar intervalo para verificar constantemente
+    const intervalId = setInterval(forceLightTheme, 1000);
+
+    // Escuchar cambios en media query
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => forceLightTheme();
     mediaQuery.addEventListener('change', handleChange);
-    
-    // Limpiar evento al desmontar
-    return () => mediaQuery.removeEventListener('change', handleChange);
+
+    // Interceptar cambios en classList
+    const originalAdd = DOMTokenList.prototype.add;
+    DOMTokenList.prototype.add = function (...tokens) {
+      // Si intentan añadir clase 'dark', ignorarlo
+      const filteredTokens = tokens.filter(token => token !== 'dark');
+      if (filteredTokens.length > 0) {
+        return originalAdd.apply(this, filteredTokens);
+      }
+    };
+
+    // Limpiar al desmontar
+    return () => {
+      clearInterval(intervalId);
+      mediaQuery.removeEventListener('change', handleChange);
+      DOMTokenList.prototype.add = originalAdd;
+    };
   }, []);
 
   return (

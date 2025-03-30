@@ -2,6 +2,34 @@
 <html lang="en">
 
 <head>
+
+  <!-- Agregar este script al inicio del head -->
+  <script>
+    (function () {
+      // Limpiar completamente localStorage relacionado con temas
+      localStorage.removeItem('theme');
+      localStorage.removeItem('color-theme');
+      localStorage.removeItem('darkMode');
+
+      // Forzar tema claro explícitamente
+      localStorage.setItem('theme', 'light');
+
+      // Interceptar intentos de modificar el localStorage relacionado con temas
+      const originalSetItem = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (key, value) {
+        if (key === 'theme' || key === 'color-theme' || key === 'darkMode') {
+          // No permitir establecer tema oscuro
+          if (value === 'dark') {
+            return originalSetItem.call(this, key, 'light');
+          }
+        }
+        return originalSetItem.call(this, key, value);
+      };
+
+      // Asegurarse de que no haya clase 'dark' en el HTML
+      document.documentElement.classList.remove('dark');
+    })();
+  </script>
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon/favicon.ico" sizes="any">

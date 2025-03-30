@@ -1,24 +1,37 @@
-/* Anular cualquier configuración de tema oscuro */
+/* Protecciones adicionales contra temas oscuros */
+
+/* 1. Forzar esquema de colores claro */
 :root {
-    color-scheme: only light;
+    color-scheme: only light !important;
+    forced-color-adjust: none !important;
 }
 
-/* Prevenir cualquier aplicación automática de temas oscuros del sistema */
+/* 2. Anular explícitamente media queries de tema oscuro */
 @media (prefers-color-scheme: dark) {
-    :root {
-        color-scheme: only light;
+
+    :root,
+    html,
+    body,
+    #root {
+        color-scheme: only light !important;
+        forced-color-adjust: none !important;
     }
 
-    html,
-    body {
-        background-color: var(--bg-color, white) !important;
-        color: var(--text-color, #333333) !important;
+    * {
+        /* Intentar neutralizar cualquier estilo dark mode del navegador */
+        background-color: unset !important;
+        color: unset !important;
     }
 }
 
-/* Asegurarse de que las clases dark: no se apliquen */
-.dark {
-    /* Anular cualquier clase que pueda haber sido aplicada */
-    background-color: inherit !important;
-    color: inherit !important;
+/* 3. Anular cualquier clase 'dark' que se añada accidentalmente */
+html.dark,
+html[class*="dark"],
+body.dark,
+body[class*="dark"],
+[data-theme="dark"],
+[data-color-mode="dark"] {
+    /* Neutralizar */
+    color-scheme: only light !important;
+    forced-color-adjust: none !important;
 }

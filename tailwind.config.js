@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
- darkMode: 'class',
+    // Usar 'media' para que el modo oscuro solo se active mediante CSS
+    // y no la clase 'dark' que estamos previniendo explícitamente
+    darkMode: 'media',
     theme: {
         extend: {
             animation: {
