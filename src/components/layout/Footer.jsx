@@ -28,7 +28,7 @@ const Footer = () => {
     ];
 
     return (
-        <footer className="bg-gray-100 dark:bg-gray-800 pt-16 pb-8">
+        <footer className="bg-gray-800 pt-16 pb-8">
             <Container>
                 <motion.div
                     initial="hidden"
@@ -42,7 +42,7 @@ const Footer = () => {
                         <a href="#home">
                             <ByteVoltLogo textClass="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400" />
                         </a>
-                        <p className="text-gray-600 dark:text-gray-400 text-sm max-w-xs">
+                        <p className="text-gray-400 text-sm max-w-xs">
                             Desarrollando experiencias web creativas y funcionales con tecnologías modernas.
                         </p>
                         <div className="pt-4">
@@ -52,7 +52,7 @@ const Footer = () => {
 
                     {/* Columna 2: Enlaces rápidos */}
                     <motion.div variants={fadeInUp} className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        <h3 className="text-lg font-semibold text-gray-200">
                             Enlaces rápidos
                         </h3>
                         <ul className="space-y-2">
@@ -60,7 +60,7 @@ const Footer = () => {
                                 <li key={link.name}>
                                     <a
                                         href={link.href}
-                                        className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-blue-400 transition-colors"
+                                        className="text-gray-400 hover:text-blue-400 transition-colors"
                                     >
                                         {link.name}
                                     </a>
@@ -71,7 +71,7 @@ const Footer = () => {
 
                     {/* Columna 3: Recursos */}
                     <motion.div variants={fadeInUp} className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        <h3 className="text-lg font-semibold text-gray-200">
                             Recursos
                         </h3>
                         <ul className="space-y-2">
@@ -83,7 +83,7 @@ const Footer = () => {
                                     href={getSocialLink("GitHub")}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-blue-400 transition-colors flex items-center"
+                                    className="text-gray-400 hover:text-blue-400 transition-colors flex items-center"
                                 >
                                     <span>GitHub</span>
                                     <ExternalLink size={14} className="ml-1" />
@@ -94,7 +94,7 @@ const Footer = () => {
                                     href={getSocialLink("LinkedIn")}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-blue-400 transition-colors flex items-center"
+                                    className="text-gray-400 hover:text-blue-400 transition-colors flex items-center"
                                 >
                                     <span>LinkedIn</span>
                                     <ExternalLink size={14} className="ml-1" />
@@ -105,41 +105,41 @@ const Footer = () => {
 
                     {/* Columna 4: Contacto */}
                     <motion.div variants={fadeInUp} className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        <h3 className="text-lg font-semibold text-gray-200">
                             Contacto
                         </h3>
-                        <p className="text-gray-600 dark:text-gray-400 flex items-center">
+                        <p className="text-gray-400 flex items-center">
                             <Mail size={16} className="mr-2" />
-                            <a href={getSocialLink("Email")} className="hover:text-purple-600 dark:hover:text-blue-400">
+                            <a href={getSocialLink("Email")} className="hover:text-blue-400">
                                 {contactInfo.email}
                             </a>
                         </p>
-                        <p className="text-gray-600 dark:text-gray-400">
+                        <p className="text-gray-400">
                             {contactInfo.location}
                         </p>
                     </motion.div>
                 </motion.div>
 
                 {/* Separador */}
-                <div className="h-px bg-gray-200 dark:bg-gray-700 my-8" />
+                <div className="h-px bg-gray-700 my-8" />
 
                 {/* Footer Bottom */}
                 <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                     <div className="text-center md:text-left">
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-sm text-gray-400">
                             &copy; {currentYear} Jesús Manuel Vázquez Herrera. Todos los derechos reservados.
                         </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-500 mt-1 flex items-center justify-center md:justify-start">
+                        <p className="text-xs text-gray-500 mt-1 flex items-center justify-center md:justify-start">
                             Hecho con <Heart size={14} className="inline mx-1 text-red-500" /> usando React + Tailwind + Framer Motion
                         </p>
                     </div>
 
                     <button
                         onClick={scrollToTop}
-                        className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500"
+                        className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
                         aria-label="Volver arriba"
                     >
-                        <ArrowUp size={18} className="text-gray-700 dark:text-gray-300" />
+                        <ArrowUp size={18} className="text-gray-300" />
                     </button>
                 </div>
             </Container>

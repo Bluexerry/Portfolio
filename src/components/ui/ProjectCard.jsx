@@ -6,7 +6,7 @@ import { techColorMap } from '../../utils/techColorMap';
 // Función para determinar el color de borde principal basado en la tecnología dominante
 const getBorderColor = (tags) => {
     const mainTag = tags[0];
-    const color = techColorMap[mainTag] || 'border-gray-200 dark:border-gray-700';
+    const color = techColorMap[mainTag] || 'border-gray-700';
     return color.replace('bg-', 'border-');
 };
 
@@ -36,13 +36,13 @@ const ProjectCard = ({ project, index, onClick }) => {
                     ease: [0.25, 0.1, 0.25, 1.0]
                 }
             }}
-            className={`group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md 
+            className={`group relative bg-gray-800 rounded-xl overflow-hidden shadow-md 
                 border-l-4 ${borderColor} flex flex-col h-full transition-all duration-300`}
         >
             {/* Efectos de fondo */}
             <div className="absolute inset-0 z-0">
                 {/* Fondo de cuadrícula técnica refinada */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 dark:group-hover:opacity-5 transition-opacity duration-700"
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-700"
                     style={{
                         backgroundImage: `
                             linear-gradient(to right, #f0f0f0 1px, transparent 1px),
@@ -65,7 +65,7 @@ const ProjectCard = ({ project, index, onClick }) => {
 
                 {/* Degradado sutil mejorado */}
                 <div className={`absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-700 bg-gradient-to-br 
-                    from-${colorName}-200/10 to-${colorName}-400/5 dark:from-${colorName}-900/10 dark:to-${colorName}-700/5`}
+                    from-${colorName}-900/10 to-${colorName}-700/5`}
                 />
 
                 {/* Elemento decorativo adicional */}
@@ -79,7 +79,7 @@ const ProjectCard = ({ project, index, onClick }) => {
             {/* Contenido */}
             <div className="p-6 flex-grow relative z-10">
                 <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 relative">
+                    <h3 className="text-xl font-bold text-gray-200 relative">
                         {title}
                         <div className={`h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-${colorName}-500 to-${colorName}-300 
                             transition-all duration-700 mt-1 opacity-70`} />
@@ -95,12 +95,11 @@ const ProjectCard = ({ project, index, onClick }) => {
                                 className="relative p-1.5 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300"
                             >
                                 <span className={`absolute inset-0 opacity-0 group-hover:opacity-20 
-                                    bg-gradient-to-br from-${colorName}-100 to-${colorName}-200 dark:from-${colorName}-900 dark:to-${colorName}-800 
+                                    bg-gradient-to-br from-${colorName}-900 to-${colorName}-800 
                                     rounded-full scale-0 group-hover:scale-100 transition-all duration-300`} />
                                 <Github
                                     size={18}
-                                    className={`relative z-10 text-gray-600 dark:text-gray-400 group-hover:text-${colorName}-500
-                                        dark:group-hover:text-${colorName}-400 transition-colors duration-300`}
+                                    className={`relative z-10 text-gray-400 group-hover:text-${colorName}-400 transition-colors duration-300`}
                                 />
                             </a>
                         )}
@@ -114,25 +113,24 @@ const ProjectCard = ({ project, index, onClick }) => {
                                 className="relative p-1.5 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300"
                             >
                                 <span className={`absolute inset-0 opacity-0 group-hover:opacity-20 
-                                    bg-gradient-to-br from-${colorName}-100 to-${colorName}-200 dark:from-${colorName}-900 dark:to-${colorName}-800
+                                    bg-gradient-to-br from-${colorName}-900 to-${colorName}-800
                                     rounded-full scale-0 group-hover:scale-100 transition-all duration-300`} />
                                 <ExternalLink
                                     size={18}
-                                    className={`relative z-10 text-gray-600 dark:text-gray-400 group-hover:text-${colorName}-500
-                                        dark:group-hover:text-${colorName}-400 transition-colors duration-300`}
+                                    className={`relative z-10 text-gray-400 group-hover:text-${colorName}-400 transition-colors duration-300`}
                                 />
                             </a>
                         )}
                     </div>
                 </div>
 
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300">
+                <p className="text-gray-400 text-sm mb-4 line-clamp-3 group-hover:text-gray-300 transition-colors duration-300">
                     {description}
                 </p>
 
                 <div className="flex flex-wrap gap-1.5">
                     {tags.map((tag, i) => {
-                        const bgColor = techColorMap[tag] || 'bg-gray-200 dark:bg-gray-700';
+                        const bgColor = techColorMap[tag] || 'bg-gray-700';
                         return (
                             <motion.span
                                 key={tag}
@@ -162,8 +160,8 @@ const ProjectCard = ({ project, index, onClick }) => {
             {/* Botón de detalle - SIGNIFICATIVAMENTE MEJORADO */}
             <div
                 onClick={onClick}
-                className={`group-button group-even:bg-gray-50 group-odd:bg-white dark:group-even:bg-gray-800/50 dark:group-odd:bg-gray-800 
-                    mt-auto px-6 py-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center 
+                className={`group-button group-even:bg-gray-800/50 group-odd:bg-gray-800 
+                    mt-auto px-6 py-3 border-t border-gray-700 flex justify-between items-center 
                     cursor-pointer relative overflow-hidden`}
             >
                 {/* Línea animada que conecta el texto con la flecha */}
@@ -171,8 +169,7 @@ const ProjectCard = ({ project, index, onClick }) => {
                     translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500`} />
 
                 {/* Efecto de iluminación al hover mejorado */}
-                <div className={`absolute inset-0 bg-gradient-to-r from-${colorName}-50/50 to-white/30 
-                    dark:from-${colorName}-900/30 dark:to-gray-800/30 opacity-0 group-hover:opacity-100 
+                <div className={`absolute inset-0 bg-gradient-to-r from-${colorName}-900/30 to-gray-800/30 opacity-0 group-hover:opacity-100 
                     transition-opacity duration-500`} />
 
                 {/* Efecto de rastro al hover */}
@@ -184,8 +181,7 @@ const ProjectCard = ({ project, index, onClick }) => {
 
                 {/* Texto con animación */}
                 <div className="flex items-center relative z-10 overflow-hidden">
-                    <span className={`text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-${colorName}-600 
-                        dark:group-hover:text-${colorName}-400 transition-colors duration-300 relative`}>
+                    <span className={`text-sm font-medium text-gray-400 group-hover:text-${colorName}-400 transition-colors duration-300 relative`}>
                         Ver detalles
 
                         {/* Línea de subrayado animada */}
@@ -209,12 +205,10 @@ const ProjectCard = ({ project, index, onClick }) => {
                         x: 5,
                         transition: { duration: 0.2, ease: "easeOut", repeat: 1, repeatType: "reverse" }
                     }}
-                    className={`text-gray-400 dark:text-gray-500 group-hover:text-${colorName}-500 
-                    dark:group-hover:text-${colorName}-400 relative z-10
+                    className={`text-gray-500 group-hover:text-${colorName}-400 relative z-10
                     translate-x-0 group-hover:translate-x-1 transition-all duration-300`}
                 >
-                    <div className={`absolute inset-0 rounded-full bg-${colorName}-100/0 group-hover:bg-${colorName}-100/50 
-                        dark:group-hover:bg-${colorName}-900/30 scale-0 group-hover:scale-100 transition-transform duration-300`} />
+                    <div className={`absolute inset-0 rounded-full bg-${colorName}-900/30 scale-0 group-hover:scale-100 transition-transform duration-300`} />
                     <ArrowRight size={18} className="relative z-10" />
                 </motion.div>
             </div>
@@ -229,7 +223,7 @@ const ProjectCard = ({ project, index, onClick }) => {
 
             {/* Contorno sutil en hover */}
             <div className={`absolute inset-0 rounded-xl border border-${colorName}-500/0 
-                group-hover:border-${colorName}-500/20 dark:group-hover:border-${colorName}-500/10 
+                group-hover:border-${colorName}-500/10 
                 transition-colors duration-500 pointer-events-none`} />
         </motion.div>
     );

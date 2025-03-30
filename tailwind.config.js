@@ -1,11 +1,16 @@
-/** @type {import('tailwindcss').Config} */
 export default {
     content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
-    // Usar 'media' para que el modo oscuro solo se active mediante CSS
-    // y no la clase 'dark' que estamos previniendo explícitamente
-    darkMode: 'media',
+    // Modo oscuro desactivado ya que usamos un tema oscuro fijo
+    darkMode: false, // cambiar de 'class' a false
     theme: {
         extend: {
+            colors: {
+                // Opcional: definir colores personalizados para un tema oscuro coherente
+                gray: {
+                    750: '#263040', // Variante entre gray-700 y gray-800
+                    850: '#162030', // Variante entre gray-800 y gray-900
+                }
+            },
             animation: {
                 fadeInUp: "fadeInUp 0.7s ease-out forwards",
                 'shimmer': 'shimmer 2s infinite',

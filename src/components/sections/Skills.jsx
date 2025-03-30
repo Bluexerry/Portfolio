@@ -90,12 +90,12 @@ const Skills = () => {
     }, [inView, hasAnimated, animateRandomCard]); // Añadida la dependencia faltante
 
     return (
-        <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+        <section id="skills" className="py-20 bg-gray-900 relative overflow-hidden">
             {/* Elementos decorativos de fondo */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-70 dark:opacity-30">
-                <div className="absolute -top-[10%] -left-[5%] w-[400px] h-[400px] rounded-full bg-gradient-radial from-blue-100/40 via-transparent to-transparent dark:from-blue-900/20" />
-                <div className="absolute top-[30%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-radial from-purple-100/40 via-transparent to-transparent dark:from-purple-900/20" />
-                <div className="absolute -bottom-[10%] left-[20%] w-[600px] h-[600px] rounded-full bg-gradient-radial from-green-100/40 via-transparent to-transparent dark:from-green-900/20" />
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+                <div className="absolute -top-[10%] -left-[5%] w-[400px] h-[400px] rounded-full bg-gradient-radial from-blue-900/20 via-transparent to-transparent" />
+                <div className="absolute top-[30%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-radial from-purple-900/20 via-transparent to-transparent" />
+                <div className="absolute -bottom-[10%] left-[20%] w-[600px] h-[600px] rounded-full bg-gradient-radial from-green-900/20 via-transparent to-transparent" />
 
                 {/* Líneas técnicas decorativas */}
                 <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -104,7 +104,7 @@ const Skills = () => {
                         stroke="currentColor"
                         strokeWidth="0.1"
                         strokeDasharray="1,2"
-                        className="text-blue-300/30 dark:text-blue-500/10"
+                        className="text-blue-500/10"
                         fill="none"
                         initial={{ pathLength: 0 }}
                         animate={inView ? { pathLength: 1 } : { pathLength: 0 }}
@@ -115,7 +115,7 @@ const Skills = () => {
                         stroke="currentColor"
                         strokeWidth="0.1"
                         strokeDasharray="1,2"
-                        className="text-purple-300/30 dark:text-purple-500/10"
+                        className="text-purple-500/10"
                         fill="none"
                         initial={{ pathLength: 0 }}
                         animate={inView ? { pathLength: 1 } : { pathLength: 0 }}
@@ -126,7 +126,7 @@ const Skills = () => {
                         stroke="currentColor"
                         strokeWidth="0.1"
                         strokeDasharray="0.5,1.5"
-                        className="text-gray-400/20 dark:text-gray-500/10"
+                        className="text-gray-500/10"
                         fill="none"
                         initial={{ pathLength: 0 }}
                         animate={inView ? { pathLength: 1 } : { pathLength: 0 }}
@@ -144,13 +144,13 @@ const Skills = () => {
                         animate={inView ? "visible" : "hidden"}
                     >
                         <motion.h2
-                            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white relative inline-block"
+                            className="text-3xl md:text-4xl font-bold text-white relative inline-block"
                             variants={fadeInUp}
                         >
                             Habilidades
                         </motion.h2>
                         <motion.p
-                            className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+                            className="text-gray-400 max-w-2xl mx-auto"
                             variants={fadeInUp}
                         >
                             Las tecnologías y herramientas con las que trabajo para crear experiencias web excepcionales
@@ -186,11 +186,11 @@ const Skills = () => {
                                     className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform"
                                 >
                                     {/* Gradiente de fondo */}
-                                    <div className="absolute inset-0 bg-white dark:bg-gray-800 transition-opacity duration-300 group-hover:opacity-95 opacity-100" />
+                                    <div className="absolute inset-0 bg-gray-800 transition-opacity duration-300 group-hover:opacity-95 opacity-100" />
 
                                     {/* Borde brillante animado */}
                                     <div className="absolute inset-0 p-0.5 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                        <div className={`absolute inset-0 ${getCategoryClass(icon, 'bg')} dark:bg-opacity-30 blur-sm`} />
+                                        <div className={`absolute inset-0 ${getCategoryClass(icon, 'bg')} bg-opacity-30 blur-sm`} />
                                     </div>
 
                                     <div className="p-6 md:p-8 relative">
@@ -258,7 +258,7 @@ const Skills = () => {
                                         </div>
 
                                         {/* Descripción con animación */}
-                                        <p className="mb-5 text-gray-600 dark:text-gray-400 text-sm">
+                                        <p className="mb-5 text-gray-400 text-sm">
                                             {skillGroup.description}
                                         </p>
 

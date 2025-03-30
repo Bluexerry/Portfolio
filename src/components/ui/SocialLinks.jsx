@@ -23,7 +23,7 @@ const SocialLinks = ({ className = '' }) => {
                         rel="noopener noreferrer"
                         aria-label={link.name}
                         whileHover={{ y: -3 }}
-                        className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-blue-400 transition-colors"
+                        className="p-2 bg-gray-800 rounded-full text-gray-300 hover:text-blue-400 transition-colors"
                     >
                         <IconComponent size={20} />
                     </motion.a>

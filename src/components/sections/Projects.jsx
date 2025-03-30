@@ -85,7 +85,7 @@ const Projects = () => {
                         className="text-center"
                     >
                         <h2 className="text-3xl md:text-4xl font-bold mb-3">Proyectos</h2>
-                        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        <p className="text-gray-400 max-w-2xl mx-auto">
                             Explora mi portfolio de proyectos en diversas áreas y tecnologías, donde aplico diferentes enfoques para resolver desafíos de manera eficiente.
                         </p>
                     </motion.div>
@@ -105,14 +105,14 @@ const Projects = () => {
                                         onClick={() => setFilter(category)}
                                         className={`px-4 py-2 rounded-full capitalize transition-colors ${filter === category
                                             ? 'bg-blue-600 text-white shadow-md'
-                                            : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                                            : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                                             }`}
                                         whileHover={{ y: -2 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         {category}
                                         {category !== 'Todos' && (
-                                            <span className="ml-1.5 bg-white dark:bg-gray-700 text-xs py-0.5 px-1.5 rounded-full text-blue-600 dark:text-blue-400">
+                                            <span className="ml-1.5 bg-gray-700 text-xs py-0.5 px-1.5 rounded-full text-blue-400">
                                                 {categoryCounts[category] || 0}
                                             </span>
                                         )}
@@ -159,7 +159,7 @@ const Projects = () => {
                                             animate={{ opacity: 1, y: 0 }}
                                             className="col-span-full text-center py-16"
                                         >
-                                            <p className="text-gray-500 dark:text-gray-400 text-lg">
+                                            <p className="text-gray-400 text-lg">
                                                 No se encontraron proyectos en esta categoría.
                                             </p>
                                         </motion.div>

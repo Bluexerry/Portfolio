@@ -1,4 +1,3 @@
-// Modificar main.jsx para eliminar ThemeProvider
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

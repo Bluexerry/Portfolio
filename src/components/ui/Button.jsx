@@ -23,13 +23,13 @@ const Button = ({
 
     // Variantes mejoradas de botones con mejor contraste y efectos visuales
     const variants = {
-        primary: "bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-600 dark:to-violet-600 text-white shadow-md hover:shadow-lg hover:translate-y-[-1px] border-0",
-        secondary: "border-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-sm",
-        outline: "border border-gray-400 dark:border-gray-500 bg-white dark:bg-gray-800 hover:border-blue-400 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700",
-        text: "bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400",
+        primary: "bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-md hover:shadow-lg hover:translate-y-[-1px] border-0",
+        secondary: "border-2 border-blue-500 text-blue-400 hover:bg-blue-900/20 hover:shadow-sm",
+        outline: "border border-gray-500 bg-gray-800 hover:border-blue-400 text-gray-300 hover:bg-gray-700",
+        text: "bg-transparent hover:bg-gray-800 text-blue-400",
         danger: "bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg",
         // Nueva variante para el botón de cierre del modal que no se camufla con el fondo
-        close: "border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 shadow-sm hover:shadow",
+        close: "border border-gray-600 bg-gray-700 hover:bg-gray-600 text-gray-300 shadow-sm hover:shadow",
     };
 
     // Tamaños de botones con mejor espaciado para los iconos

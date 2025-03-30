@@ -213,7 +213,7 @@ const Contact = () => {
     }));
 
     return (
-        <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900">
+        <section id="contact" className="py-20 bg-gray-900">
             <Container>
                 <motion.div
                     ref={ref}
@@ -226,7 +226,7 @@ const Contact = () => {
                         className="text-center mb-12"
                     >
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">Contacto</h2>
-                        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        <p className="text-gray-400 max-w-2xl mx-auto">
                             ¿Tienes alguna pregunta o quieres trabajar juntos?
                             No dudes en ponerte en contacto conmigo.
                         </p>
@@ -236,22 +236,22 @@ const Contact = () => {
                         {/* Información de contacto */}
                         <motion.div
                             variants={fadeInUp}
-                            className="md:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md"
+                            className="md:col-span-2 bg-gray-800 p-6 rounded-xl shadow-md"
                         >
-                            <h3 className="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200">
+                            <h3 className="text-xl font-semibold mb-6 text-gray-200">
                                 Información de contacto
                             </h3>
 
                             <div className="space-y-6">
                                 <div className="flex items-start">
-                                    <div className="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full mr-4">
-                                        <Mail className="text-purple-600 dark:text-purple-400" size={18} />
+                                    <div className="bg-purple-900/30 p-3 rounded-full mr-4">
+                                        <Mail className="text-purple-400" size={18} />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
+                                        <p className="text-sm text-gray-400">Email</p>
                                         <a
                                             href={getSocialLink("Email")}
-                                            className="text-gray-800 dark:text-gray-200 hover:text-purple-600 dark:hover:text-blue-400"
+                                            className="text-gray-200 hover:text-blue-400"
                                         >
                                             {contactInfo.email}
                                         </a>
@@ -259,48 +259,48 @@ const Contact = () => {
                                 </div>
 
                                 <div className="flex items-start">
-                                    <div className="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full mr-4">
-                                        <MapPin className="text-purple-600 dark:text-purple-400" size={18} />
+                                    <div className="bg-purple-900/30 p-3 rounded-full mr-4">
+                                        <MapPin className="text-purple-400" size={18} />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Ubicación</p>
-                                        <p className="text-gray-800 dark:text-gray-200">{contactInfo.location}</p>
+                                        <p className="text-sm text-gray-400">Ubicación</p>
+                                        <p className="text-gray-200">{contactInfo.location}</p>
                                     </div>
                                 </div>
 
                                 <div className="flex items-start">
-                                    <div className="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full mr-4">
-                                        <Phone className="text-purple-600 dark:text-purple-400" size={18} />
+                                    <div className="bg-purple-900/30 p-3 rounded-full mr-4">
+                                        <Phone className="text-purple-400" size={18} />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Teléfono</p>
-                                        <p className="text-gray-800 dark:text-gray-200">{contactInfo.phone}</p>
+                                        <p className="text-sm text-gray-400">Teléfono</p>
+                                        <p className="text-gray-200">{contactInfo.phone}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="mt-8 bg-purple-50 dark:bg-purple-900/10 p-4 rounded-lg">
+                            <div className="mt-8 bg-purple-900/10 p-4 rounded-lg">
                                 <div className="flex items-center mb-3">
-                                    <Clock className="w-5 h-5 text-purple-600 dark:text-purple-400 mr-2" />
-                                    <h4 className="font-medium text-gray-800 dark:text-gray-200">
+                                    <Clock className="w-5 h-5 text-purple-400 mr-2" />
+                                    <h4 className="font-medium text-gray-200">
                                         Disponibilidad
                                     </h4>
                                 </div>
-                                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                                <ul className="space-y-2 text-gray-400">
                                     <li className="flex items-start text-sm">
-                                        <span className="min-w-[4px] h-4 bg-purple-400 dark:bg-purple-500 rounded-full mr-2 mt-1"></span>
+                                        <span className="min-w-[4px] h-4 bg-purple-500 rounded-full mr-2 mt-1"></span>
                                         <span>Respuesta garantizada en menos de 48 horas</span>
                                     </li>
                                     <li className="flex items-start text-sm">
-                                        <span className="min-w-[4px] h-4 bg-purple-400 dark:bg-purple-500 rounded-full mr-2 mt-1"></span>
+                                        <span className="min-w-[4px] h-4 bg-purple-500 rounded-full mr-2 mt-1"></span>
                                         <span>Disponible para nuevos proyectos a partir de Junio 2025</span>
                                     </li>
                                     <li className="flex items-start text-sm">
-                                        <span className="min-w-[4px] h-4 bg-purple-400 dark:bg-purple-500 rounded-full mr-2 mt-1"></span>
+                                        <span className="min-w-[4px] h-4 bg-purple-500 rounded-full mr-2 mt-1"></span>
                                         <span>Consultas iniciales sin compromiso</span>
                                     </li>
                                     <li className="flex items-start text-sm">
-                                        <span className="min-w-[4px] h-4 bg-purple-400 dark:bg-purple-500 rounded-full mr-2 mt-1"></span>
+                                        <span className="min-w-[4px] h-4 bg-purple-500 rounded-full mr-2 mt-1"></span>
                                         <span>Abierto a colaboraciones y proyectos remotos</span>
                                     </li>
                                 </ul>
@@ -312,7 +312,7 @@ const Contact = () => {
                             variants={fadeInUp}
                             className="md:col-span-3"
                         >
-                            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md relative overflow-hidden" style={{ minHeight: '506px' }}>
+                            <div className="bg-gray-800 rounded-xl shadow-md relative overflow-hidden" style={{ minHeight: '506px' }}>
                                 <AnimatePresence mode="wait">
                                     {formSubmitted ? (
                                         <motion.div
@@ -325,7 +325,7 @@ const Contact = () => {
                                                 damping: 20,
                                                 stiffness: 100
                                             }}
-                                            className="p-6 absolute inset-0 flex flex-col items-center justify-center" // Cambiar esta línea
+                                            className="p-6 absolute inset-0 flex flex-col items-center justify-center"
                                         >
                                             {/* Efecto de confeti */}
                                             {showConfetti && (
@@ -358,7 +358,7 @@ const Contact = () => {
 
                                             {/* Círculo verde con animación */}
                                             <motion.div
-                                                className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-50 dark:bg-green-900/20 mb-6"
+                                                className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-900/20 mb-6"
                                                 initial={{ scale: 0.5, opacity: 0 }}
                                                 animate={{ scale: 1, opacity: 1 }}
                                                 transition={{
@@ -404,7 +404,7 @@ const Contact = () => {
                                             </motion.div>
 
                                             <motion.h3
-                                                className="text-2xl font-semibold mb-3 text-gray-800 dark:text-gray-200"
+                                                className="text-2xl font-semibold mb-3 text-gray-200"
                                                 initial={{ y: 20, opacity: 0 }}
                                                 animate={{ y: 0, opacity: 1 }}
                                                 transition={{ delay: 0.5 }}
@@ -413,7 +413,7 @@ const Contact = () => {
                                             </motion.h3>
 
                                             <motion.p
-                                                className="text-gray-600 dark:text-gray-400 text-center max-w-md"
+                                                className="text-gray-400 text-center max-w-md"
                                                 initial={{ y: 20, opacity: 0 }}
                                                 animate={{ y: 0, opacity: 1 }}
                                                 transition={{ delay: 0.7 }}
@@ -423,7 +423,7 @@ const Contact = () => {
                                             </motion.p>
 
                                             <motion.div
-                                                className="mt-8 text-sm text-gray-500 dark:text-gray-400 flex items-center"
+                                                className="mt-8 text-sm text-gray-400 flex items-center"
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 transition={{ delay: 1.2 }}
@@ -444,7 +444,7 @@ const Contact = () => {
                                         >
                                             <div className="grid grid-cols-2 gap-5">
                                                 <div>
-                                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                                                         Nombre completo
                                                     </label>
                                                     <motion.input
@@ -455,15 +455,15 @@ const Contact = () => {
                                                         value={formData.name}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
-                                                        className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.name && errors.name
-                                                            ? 'border-red-500 dark:border-red-500'
-                                                            : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
-                                                            } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
+                                                        className={`w-full px-4 py-3 rounded-lg bg-gray-800 border ${touched.name && errors.name
+                                                            ? 'border-red-500'
+                                                            : 'border-gray-700 focus:border-blue-500'
+                                                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                                         placeholder="Juan Pérez"
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
                                                         Email
                                                     </label>
                                                     <motion.input
@@ -474,16 +474,16 @@ const Contact = () => {
                                                         value={formData.email}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
-                                                        className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.email && errors.email
-                                                            ? 'border-red-500 dark:border-red-500'
-                                                            : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
-                                                            } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
+                                                        className={`w-full px-4 py-3 rounded-lg bg-gray-800 border ${touched.email && errors.email
+                                                            ? 'border-red-500'
+                                                            : 'border-gray-700 focus:border-blue-500'
+                                                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                                         placeholder="juan@ejemplo.com"
                                                     />
                                                 </div>
                                             </div>
                                             <div>
-                                                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-1">
                                                     Asunto
                                                 </label>
                                                 <motion.input
@@ -494,15 +494,15 @@ const Contact = () => {
                                                     value={formData.subject}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.subject && errors.subject
-                                                        ? 'border-red-500 dark:border-red-500'
-                                                        : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
-                                                        } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
+                                                    className={`w-full px-4 py-3 rounded-lg bg-gray-800 border ${touched.subject && errors.subject
+                                                        ? 'border-red-500'
+                                                        : 'border-gray-700 focus:border-blue-500'
+                                                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                                     placeholder="Asunto del mensaje"
                                                 />
                                             </div>
                                             <div>
-                                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
                                                     Mensaje
                                                 </label>
                                                 <motion.textarea
@@ -513,10 +513,10 @@ const Contact = () => {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                     rows={5}
-                                                    className={`w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border ${touched.message && errors.message
-                                                        ? 'border-red-500 dark:border-red-500'
-                                                        : 'border-gray-300 dark:border-gray-700 focus:border-purple-500 dark:focus:border-blue-500'
-                                                        } focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-blue-500`}
+                                                    className={`w-full px-4 py-3 rounded-lg bg-gray-800 border ${touched.message && errors.message
+                                                        ? 'border-red-500'
+                                                        : 'border-gray-700 focus:border-blue-500'
+                                                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                                     placeholder="Tu mensaje..."
                                                 />
                                             </div>

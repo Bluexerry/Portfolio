@@ -1,37 +1,38 @@
-/* Protecciones adicionales contra temas oscuros */
+/* Protecciones para mantener un tema oscuro consistente */
 
-/* 1. Forzar esquema de colores claro */
+/* 1. Forzar esquema de colores oscuro */
 :root {
-    color-scheme: only light !important;
+    color-scheme: dark !important;
     forced-color-adjust: none !important;
 }
 
-/* 2. Anular explícitamente media queries de tema oscuro */
-@media (prefers-color-scheme: dark) {
+/* 2. Asegurar que el tema oscuro permanezca incluso si el sistema usa tema claro */
+@media (prefers-color-scheme: light) {
 
     :root,
     html,
     body,
     #root {
-        color-scheme: only light !important;
+        color-scheme: dark !important;
         forced-color-adjust: none !important;
-    }
-
-    * {
-        /* Intentar neutralizar cualquier estilo dark mode del navegador */
-        background-color: unset !important;
-        color: unset !important;
     }
 }
 
-/* 3. Anular cualquier clase 'dark' que se añada accidentalmente */
-html.dark,
-html[class*="dark"],
-body.dark,
-body[class*="dark"],
-[data-theme="dark"],
-[data-color-mode="dark"] {
-    /* Neutralizar */
-    color-scheme: only light !important;
-    forced-color-adjust: none !important;
+/* 3. Garantizar que no se aplique ninguna sobreescritura de tema claro */
+html:not(.dark),
+body:not(.dark),
+[data-theme="light"],
+[data-color-mode="light"] {
+    /* Mantener todo en modo oscuro */
+    background-color: #111827 !important;
+    color-scheme: dark !important;
+}
+
+/* 4. Asegurar compatibilidad con tecnologías de asistencia */
+@media (forced-colors: active) {
+
+    /* Ajustes para lectores de pantalla y modos de alto contraste que respetan el tema oscuro */
+    :root {
+        forced-color-adjust: none !important;
+    }
 }

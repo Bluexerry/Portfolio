@@ -100,7 +100,7 @@ const CVSelector = ({ className = '', buttonVariant = 'outline', buttonSize = 'm
 
     // Determinamos las clases para el botón principal según la variante
     const buttonClasses = {
-        outline: "border border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-400 text-gray-800 dark:text-gray-200",
+        outline: "border border-gray-600 hover:border-blue-400 text-gray-200",
         primary: "bg-gradient-to-r from-blue-600 to-teal-600 text-white shadow-md hover:shadow-lg border-0",
     };
 
@@ -140,15 +140,15 @@ const CVSelector = ({ className = '', buttonVariant = 'outline', buttonSize = 'm
                                 width: `${dropdownPosition.width}px`,
                                 zIndex: 9999,
                             }}
-                            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 border border-gray-200 dark:border-gray-700"
+                            className="bg-gray-800 rounded-lg shadow-lg py-2 border border-gray-700"
                         >
                             {cvOptions.map((option) => (
                                 <motion.a
                                     key={option.name}
                                     href={option.file}
                                     download={`CV_JesusManuelVazquez_${option.name}.pdf`}
-                                    className="flex items-center px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                                    whileHover={{ backgroundColor: "rgba(243, 244, 246, 1)" }}
+                                    className="flex items-center px-4 py-2 text-gray-200 hover:bg-gray-700 transition-colors"
+                                    whileHover={{ backgroundColor: "rgba(55, 65, 81, 1)" }}
                                 >
                                     <span className="mr-2">{option.icon}</span>
                                     <span>{option.name}</span>

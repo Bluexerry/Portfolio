@@ -62,7 +62,7 @@ export const techColorMap = {
 
 // Función para convertir colores de fondo a colores de borde
 export const getBorderColor = (tag) => {
-    const bgColor = techColorMap[tag] || 'bg-gradient-to-r from-gray-300 to-gray-200 dark:from-gray-700 dark:to-gray-600';
+    const bgColor = techColorMap[tag] || 'bg-gradient-to-r from-gray-700 to-gray-600';
 
     // Extraer el primer color del gradiente para el borde
     const fromColorMatch = bgColor.match(/from-([a-z]+-[0-9]+)/);
@@ -70,5 +70,5 @@ export const getBorderColor = (tag) => {
         return `border-${fromColorMatch[1]}`;
     }
 
-    return 'border-gray-300 dark:border-gray-600';
+    return 'border-gray-600';
 };

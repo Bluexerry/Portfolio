@@ -118,7 +118,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
                             {/* Modal container */}
                             <motion.div
-                                className="w-full max-w-4xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden z-10"
+                                className="w-full max-w-4xl bg-gray-800 rounded-2xl shadow-2xl overflow-hidden z-10"
                                 variants={modalVariants}
                                 initial="hidden"
                                 animate="visible"
@@ -200,20 +200,35 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                 </div>
 
                                 {/* Pestañas de navegación */}
-                                <div className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
+                                <div className="bg-gray-900/50 border-b border-gray-700">
                                     <div className="flex overflow-x-auto scrollbar-hide">
+                                        <button
+                                            onClick={() => setActiveTab('about')}
+                                            className={`px-6 py-3 text-sm font-medium relative ${activeTab === 'about'
+                                                ? 'text-blue-400'
+                                                : 'text-gray-400 hover:text-gray-200'
+                                                }`}
+                                        >
+                                            Acerca de
+                                            {activeTab === 'about' && (
+                                                <motion.div
+                                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400"
+                                                    layoutId="activeTab"
+                                                />
+                                            )}
+                                        </button>
                                         {project.features && project.features.length > 0 && (
                                             <button
                                                 onClick={() => setActiveTab('features')}
                                                 className={`px-6 py-3 text-sm font-medium relative ${activeTab === 'features'
-                                                    ? 'text-blue-600 dark:text-blue-400'
-                                                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+                                                    ? 'text-blue-400'
+                                                    : 'text-gray-400 hover:text-gray-200'
                                                     }`}
                                             >
                                                 Características
                                                 {activeTab === 'features' && (
                                                     <motion.div
-                                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400"
+                                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400"
                                                         layoutId="activeTab"
                                                     />
                                                 )}
@@ -227,7 +242,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                     <div className="px-8 py-6">
                                         {/* Meta información: año y duración */}
                                         <motion.div
-                                            className="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600 dark:text-gray-400"
+                                            className="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-400"
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                             transition={{ delay: 0.25 }}
@@ -286,8 +301,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                             transition={{ delay: 0.4 }}
                                         >
                                             {project.tags?.map((tag, i) => {
-                                                const bgColor = techColorMap[tag] || 'bg-gray-200 dark:bg-gray-600';
-                                                // Eliminar esta línea: const baseColor = bgColor.replace('bg-', '');
+                                                const bgColor = techColorMap[tag] || 'bg-gray-600';
 
                                                 return (
                                                     <motion.div
@@ -325,20 +339,20 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                     animate={{ opacity: 1, y: 0 }}
                                                     exit={{ opacity: 0, y: -10 }}
                                                     transition={{ duration: 0.3 }}
-                                                    className="prose dark:prose-invert max-w-none mb-10"
+                                                    className="prose prose-invert max-w-none mb-10"
                                                 >
-                                                    <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100 flex items-center">
+                                                    <h3 className="text-xl font-semibold mb-4 text-gray-100 flex items-center">
                                                         <span className="inline-block w-2 h-8 bg-blue-500 rounded-full mr-3"></span>
                                                         Acerca del proyecto
                                                     </h3>
 
-                                                    <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800/30 mb-6 relative overflow-hidden">
+                                                    <div className="p-6 bg-blue-900/20 rounded-lg border border-blue-800/30 mb-6 relative overflow-hidden">
                                                         {/* Patrón decorativo */}
                                                         <div className="absolute top-0 right-0 w-24 h-24 opacity-20 pointer-events-none">
                                                             <Code className="w-full h-full text-blue-500" />
                                                         </div>
 
-                                                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed relative z-10">
+                                                        <p className="text-gray-300 leading-relaxed relative z-10">
                                                             {project.longDescription || project.description}
                                                         </p>
                                                     </div>
@@ -354,7 +368,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                     transition={{ duration: 0.3 }}
                                                     className="mb-8"
                                                 >
-                                                    <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100 flex items-center">
+                                                    <h3 className="text-xl font-semibold mb-4 text-gray-100 flex items-center">
                                                         <span className="inline-block w-2 h-8 bg-green-500 rounded-full mr-3"></span>
                                                         Características principales
                                                     </h3>
@@ -367,7 +381,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                                 {firstColFeatures.map((feature, index) => (
                                                                     <motion.div
                                                                         key={index}
-                                                                        className="flex items-start bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden group"
+                                                                        className="flex items-start bg-gray-750 p-4 rounded-lg border border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden group"
                                                                         initial={{ opacity: 0, x: -10 }}
                                                                         animate={{
                                                                             opacity: 1,
@@ -380,14 +394,14 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                                         }}
                                                                     >
                                                                         {/* Fondo animado en hover */}
-                                                                        <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                                                        <div className="absolute inset-0 bg-gradient-to-r from-green-900/10 to-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                                                                        <div className="min-w-7 h-7 flex items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 mr-3 mt-0.5 relative z-10">
-                                                                            <span className="text-green-600 dark:text-green-400 text-xs font-bold">
+                                                                        <div className="min-w-7 h-7 flex items-center justify-center rounded-full bg-green-900/30 mr-3 mt-0.5 relative z-10">
+                                                                            <span className="text-green-400 text-xs font-bold">
                                                                                 {index + 1}
                                                                             </span>
                                                                         </div>
-                                                                        <span className="text-gray-800 dark:text-gray-200 relative z-10">
+                                                                        <span className="text-gray-200 relative z-10">
                                                                             {feature}
                                                                         </span>
                                                                     </motion.div>
@@ -399,7 +413,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                                 {secondColFeatures.map((feature, index) => (
                                                                     <motion.div
                                                                         key={index}
-                                                                        className="flex items-start bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden group"
+                                                                        className="flex items-start bg-gray-750 p-4 rounded-lg border border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden group"
                                                                         initial={{ opacity: 0, x: 10 }}
                                                                         animate={{
                                                                             opacity: 1,
@@ -412,14 +426,14 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                                         }}
                                                                     >
                                                                         {/* Fondo animado en hover */}
-                                                                        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                                                        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-purple-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                                                                        <div className="min-w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30 mr-3 mt-0.5 relative z-10">
-                                                                            <span className="text-blue-600 dark:text-blue-400 text-xs font-bold">
+                                                                        <div className="min-w-7 h-7 flex items-center justify-center rounded-full bg-blue-900/30 mr-3 mt-0.5 relative z-10">
+                                                                            <span className="text-blue-400 text-xs font-bold">
                                                                                 {firstColFeatures.length + index + 1}
                                                                             </span>
                                                                         </div>
-                                                                        <span className="text-gray-800 dark:text-gray-200 relative z-10">
+                                                                        <span className="text-gray-200 relative z-10">
                                                                             {feature}
                                                                         </span>
                                                                     </motion.div>
@@ -433,7 +447,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                         {project.features.map((feature, index) => (
                                                             <motion.div
                                                                 key={index}
-                                                                className="flex items-start bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden"
+                                                                className="flex items-start bg-gray-750 p-4 rounded-lg border border-gray-700 shadow-sm relative overflow-hidden"
                                                                 initial={{ opacity: 0, y: 10 }}
                                                                 animate={{
                                                                     opacity: 1,
@@ -446,7 +460,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                                                                         {index + 1}
                                                                     </span>
                                                                 </div>
-                                                                <span className="text-gray-800 dark:text-gray-200">
+                                                                <span className="text-gray-200">
                                                                     {feature}
                                                                 </span>
                                                             </motion.div>
@@ -460,7 +474,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
                                 {/* Footer mejorado */}
                                 <motion.div
-                                    className="px-8 py-4 dark:bg-gray-750 border-t border-gray-200 dark:border-gray-700 flex justify-end bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-750"
+                                    className="px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-750 border-t border-gray-700 flex justify-end"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.7 }}

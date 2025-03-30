@@ -58,8 +58,8 @@ const Hero = () => {
         <section id="home" className="relative min-h-screen flex items-center pt-16">
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-purple-500/10 dark:bg-blue-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-pink-500/10 dark:bg-teal-500/10 rounded-full blur-3xl" />
+                <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
+                <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />
             </div>
 
             <Container className="relative z-10 py-16">
@@ -72,7 +72,7 @@ const Hero = () => {
                         variants={staggerChildren(0.2)}
                     >
                         <motion.p
-                            className="text-purple-600 dark:text-blue-400 font-medium mb-4"
+                            className="text-blue-400 font-medium mb-4"
                             variants={fadeInUp}
                         >
                             ¡Hola! Mi nombre es
@@ -82,28 +82,29 @@ const Hero = () => {
                             className="text-5xl md:text-6xl font-bold mb-4"
                             variants={fadeInUp}
                         >
-                            <span className="text-gray-900 dark:text-white">Jesús Manuel Vázquez Herrera</span>
+                            <span className="text-white">Jesús Manuel Vázquez Herrera</span>
                         </motion.h1>
 
                         <motion.div
                             className="flex items-end h-16 mb-6"
                             variants={fadeInUp}
                         >
-                            <h2 className="text-3xl md:text-4xl font-semibold text-purple-600 dark:text-blue-400">
+                            <h2 className="text-3xl md:text-4xl font-semibold text-blue-400">
                                 {typedText}
                             </h2>
                             <motion.span
-                                className="inline-block w-[5px] h-[30px] bg-purple-600 dark:bg-blue-400 ml-1"
+                                className="inline-block w-[5px] h-[30px] bg-blue-400 ml-1"
                                 variants={cursorVariants}
                                 animate="blinking"
                             />
                         </motion.div>
 
                         <motion.p
-                            className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg"
+                            className="text-lg text-gray-300 mb-8 max-w-lg"
                             variants={fadeInUp}
                         >
-                            Desarrollador Full Stack especializado en crear aplicaciones web modernas y eficientes con React, Node.js y tecnologías JavaScript avanzadas. Me apasiona construir interfaces intuitivas y arquitecturas backend robustas, siempre buscando el equilibrio perfecto entre rendimiento, escalabilidad y experiencia de usuario excepcional.                        </motion.p>
+                            Desarrollador Full Stack especializado en crear aplicaciones web modernas y eficientes con React, Node.js y tecnologías JavaScript avanzadas. Me apasiona construir interfaces intuitivas y arquitecturas backend robustas, siempre buscando el equilibrio perfecto entre rendimiento, escalabilidad y experiencia de usuario excepcional.
+                        </motion.p>
 
                         <motion.div
                             className="flex flex-wrap gap-4 mb-10"
@@ -146,10 +147,10 @@ const Hero = () => {
                     >
                         <div className="relative">
                             {/* Circle decoration behind the avatar */}
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-blue-900/30 dark:to-teal-900/30 -z-10 scale-[1.15]" />
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-900/30 to-teal-900/30 -z-10 scale-[1.15]" />
 
                             {/* Avatar image */}
-                            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
+                            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-800 shadow-xl">
                                 <img
                                     src="/assets/Jesus.jpg"
                                     alt="Profile"
@@ -163,12 +164,12 @@ const Hero = () => {
 
                             {/* Experience badge */}
                             <motion.div
-                                className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 rounded-full py-2 px-4 shadow-lg border border-gray-100 dark:border-gray-700"
+                                className="absolute -bottom-4 -right-4 bg-gray-800 rounded-full py-2 px-4 shadow-lg border border-gray-700"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.6 }}
                             >
-                                <span className="text-gray-900 dark:text-white font-bold">2+ años</span> <span className="text-purple-600 dark:text-blue-400">experiencia</span>
+                                <span className="text-white font-bold">2+ años</span> <span className="text-blue-400">experiencia</span>
                             </motion.div>
                         </div>
                     </motion.div>
@@ -188,9 +189,9 @@ const Hero = () => {
                     <a
                         href="#about"
                         aria-label="Scroll to About section"
-                        className="flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow"
+                        className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 shadow-md hover:shadow-lg transition-shadow"
                     >
-                        <ChevronDown className="text-purple-600 dark:text-blue-400" size={20} />
+                        <ChevronDown className="text-blue-400" size={20} />
                     </a>
                 </motion.div>
             </motion.div>

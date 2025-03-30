@@ -59,8 +59,8 @@ const ServiceCard = ({
             initial={{ opacity: 0, y: 30 }}
             animate={controls}
             className={`
-                bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md 
-                border border-transparent hover:border-purple-200 dark:hover:border-blue-900
+                bg-gray-800 rounded-xl p-8 shadow-md 
+                border border-transparent hover:border-blue-900
                 transition-all duration-300 relative overflow-hidden
             `}
         >
@@ -81,7 +81,7 @@ const ServiceCard = ({
                     }}
                 >
                     <motion.div
-                        className="absolute w-20 h-full bg-gradient-to-r from-transparent via-white dark:via-blue-400 to-transparent opacity-30 blur-md"
+                        className="absolute w-20 h-full bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30 blur-md"
                         style={{
                             transform: "skewX(-30deg)"
                         }}
@@ -103,7 +103,7 @@ const ServiceCard = ({
                         {[...Array(6)].map((_, i) => (
                             <motion.div
                                 key={`particle-${i}`}
-                                className="absolute w-1 h-1 rounded-full bg-blue-400 dark:bg-blue-300"
+                                className="absolute w-1 h-1 rounded-full bg-blue-300"
                                 style={{
                                     left: `${20 + Math.random() * 60}%`,
                                     top: `${20 + Math.random() * 60}%`,
@@ -138,24 +138,24 @@ const ServiceCard = ({
             <div className="relative z-10">
                 <div className={`
                     inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6
-                    bg-gray-100 dark:bg-gray-700 ${iconColor} text-2xl
+                    bg-gray-700 ${iconColor} text-2xl
                     transition-transform duration-300 ${isActive ? 'scale-110' : ''}
                 `}>
                     {icon}
                 </div>
 
-                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+                <h3 className="text-xl font-bold mb-3 text-gray-200 transition-colors duration-300">
                     {title}
                 </h3>
 
-                <p className={`text-gray-600 dark:text-gray-400 transition-colors duration-300 ${isActive ? 'text-white dark:text-white' : ''}`}>
+                <p className={`text-gray-400 transition-colors duration-300 ${isActive ? 'text-white' : ''}`}>
                     {description}
                 </p>
 
                 <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: isActive ? "100%" : 0 }}
-                    className="h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 dark:from-blue-500 dark:to-teal-500 mt-4"
+                    className="h-0.5 bg-gradient-to-r from-blue-500 to-teal-500 mt-4"
                     transition={{ duration: 0.5 }}
                 />
             </div>

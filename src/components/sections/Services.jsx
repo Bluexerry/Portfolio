@@ -42,7 +42,7 @@ const Services = () => {
     if (isMobileOrTablet === null) return null;
 
     return (
-        <section id="services" className="py-20 bg-gray-50 dark:bg-gray-900">
+        <section id="services" className="py-20 bg-gray-900">
             <Container>
                 <motion.div
                     initial="hidden"
@@ -58,7 +58,7 @@ const Services = () => {
                         Servicios
                     </motion.h2>
                     <motion.p
-                        className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+                        className="text-gray-400 max-w-2xl mx-auto"
                         variants={headingAnimation}
                     >
                         Brindo soluciones digitales completas, desde el diseño hasta la implementación,
@@ -93,8 +93,8 @@ const Services = () => {
                                 onHoverStart={() => setHoveredIndex(index)}
                                 onHoverEnd={() => setHoveredIndex(null)}
                                 className={`
-                                    bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md 
-                                    border border-transparent hover:border-purple-200 dark:hover:border-blue-900
+                                    bg-gray-800 rounded-xl p-8 shadow-md 
+                                    border border-transparent hover:border-blue-900
                                     transition-all duration-300 relative overflow-hidden
                                 `}
                             >
@@ -111,23 +111,23 @@ const Services = () => {
                                 <div className="relative z-10">
                                     <div className={`
                                         inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6
-                                        bg-gray-100 dark:bg-gray-700 ${service.iconColor} text-2xl
+                                        bg-gray-700 ${service.iconColor} text-2xl
                                     `}>
                                         {iconComponents[service.iconName]}
                                     </div>
 
-                                    <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">
+                                    <h3 className="text-xl font-bold mb-3 text-gray-200">
                                         {service.title}
                                     </h3>
 
-                                    <p className="text-gray-600 dark:text-gray-400">
+                                    <p className="text-gray-400">
                                         {service.description}
                                     </p>
 
                                     <motion.div
                                         initial={{ width: 0 }}
                                         animate={{ width: hoveredIndex === index ? "100%" : 0 }}
-                                        className="h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 dark:from-blue-500 dark:to-teal-500 mt-4"
+                                        className="h-0.5 bg-gradient-to-r from-blue-500 to-teal-500 mt-4"
                                         transition={{ duration: 0.3 }}
                                     />
                                 </div>

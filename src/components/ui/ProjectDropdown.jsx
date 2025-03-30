@@ -44,8 +44,8 @@ const DropdownProjects = ({
             {/* Botón del dropdown */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 
-                    text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-750 
+                className="px-4 py-2 rounded-full border border-gray-600 
+                    text-gray-400 hover:bg-gray-750 
                     transition-colors flex items-center gap-2"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -78,7 +78,7 @@ const DropdownProjects = ({
                             transition: { duration: 0.2 }
                         }}
                         className="absolute left-1/2 transform -translate-x-1/2 mt-2 p-3 
-                            bg-white dark:bg-gray-800 rounded-xl shadow-xl z-50 
+                            bg-gray-800 rounded-xl shadow-xl z-50 
                             overflow-hidden"
                         style={{
                             minWidth: maxWidth,
@@ -120,14 +120,14 @@ const DropdownProjects = ({
                                             flex items-center justify-between text-base
                                             ${selectedItem === item
                                                 ? 'bg-blue-600 text-white'
-                                                : 'text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                                                : 'text-gray-300 hover:bg-gray-700'
                                             }`}
                                     >
                                         <span className="truncate mr-2">{item}</span>
                                         {countMap[item] !== undefined && (
                                             <span className={`flex-shrink-0 ${selectedItem === item
                                                 ? 'bg-blue-500/30 text-white'
-                                                : 'bg-white/80 dark:bg-gray-700 text-blue-600 dark:text-blue-400'
+                                                : 'bg-gray-700 text-blue-400'
                                                 } text-xs py-0.5 px-1.5 rounded-full`}
                                             >
                                                 {countMap[item]}
