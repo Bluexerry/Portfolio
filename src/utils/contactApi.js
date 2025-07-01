@@ -3,12 +3,13 @@
  */
 
 // URL para entorno local
-const API_URL = import.meta.env.VITE_MAILER_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_MAILER_URL;
+
+console.log('API URL:', API_URL); // Para depuración
 
 export const sendContactForm = async (formData) => {
     try {
-        console.log('Usando API URL:', API_URL);
-        console.log('Enviando formulario:', formData);
+        console.log('Enviando formulario a:', API_URL);
 
         const response = await fetch(`${API_URL}/api/contact`, {
             method: 'POST',
