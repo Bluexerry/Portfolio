@@ -3,7 +3,7 @@
  */
 
 // URL para entorno local
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_MAILER_URL || 'http://localhost:3000';
 
 export const sendContactForm = async (formData) => {
     try {
